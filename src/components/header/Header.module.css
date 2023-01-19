@@ -1,0 +1,59 @@
+header {
+    background-color: #F2AF81;    
+    color: #29528B;  
+    top: 0; 
+    position: relative;
+    padding: 10px;
+    width: 100%;
+    overflow: hidden;      
+}
+
+header h1 {
+    display: inline-block;    
+    
+}
+
+.softuni-library:hover {
+    color: #5992B7;
+    cursor: pointer;
+}
+
+header nav {    
+    float: right;    
+    margin: 27px; 
+    font-size: larger;
+    position: absolute;
+    right: 0;
+    bottom: 8px;
+    font-weight: bolder;          
+}
+
+header nav>* {
+    float: left;
+}
+
+nav a {
+    margin: 0 0.5em;
+}
+
+nav a:hover {
+    cursor: pointer; 
+    color: #5992B7;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:active {
+    text-decoration: none;
+}
+
