@@ -15,15 +15,27 @@ const Login = () => {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        const {email, password} = Object.fromEntries(new FormData(e.target));
+        //const {email, password} = Object.fromEntries(new FormData(e.target));
+        const formData = new FormData(e.target);
+        const email = formData.get('email').trim();
+        const password = formData.get('password').trim();
+
+        if (email === '' || password === '') {
+            return alert('All fields are required!');
+        }
         
         authService.login(email, password)
-            .then(authdata => {
-                
-                userLogin(authdata);
+            .then(result => {
+                const authData = {
+                    _id: result._id,
+                    email: result.email,
+                    accessToken: result.accessToken
+                };
+
+                userLogin(authData);
                 navigate('/');
             })
-            .catch(() => {
+            .catch((err) => {                
                 navigate('/404');
             });
     }; 

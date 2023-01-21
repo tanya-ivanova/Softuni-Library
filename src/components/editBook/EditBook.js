@@ -19,10 +19,28 @@ const EditBook = () => {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        const bookData = Object.fromEntries(new FormData(e.target));
+        //const bookData = Object.fromEntries(new FormData(e.target));
+
+        const formData = new FormData(e.target);
+
+        const bookData = {
+            title: formData.get('title'),
+            author: formData.get('author'),
+            genre: formData.get('genre'),
+            imageUrl: formData.get('imageUrl'),
+            year: formData.get('year'),
+            price: formData.get('price'),
+            summary: formData.get('summary'),
+        };
+
+        if (bookData.title === '' || bookData.author === '' || bookData.genre === '' || bookData.imageUrl === ''
+         || bookData.year === '' || bookData.price === '' || bookData.summary === '') {
+            return alert('All fields are required!');
+        }
 
         bookService.edit(bookId, bookData)
-            .then(result => {                               
+            .then(() => {
+                e.target.reset();                               
                 navigate(`/catalog/${bookId}/details`);
             });        
     };

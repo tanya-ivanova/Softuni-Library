@@ -16,17 +16,27 @@ const Register = () => {
         e.preventDefault();
 
         const formData = new FormData(e.target);
-        const email = formData.get('email');
-        const password = formData.get('password');
-        const confirmPassword = formData.get('confirm-password');
+        const email = formData.get('email').trim();
+        const password = formData.get('password').trim();
+        const confirmPassword = formData.get('confirm-password').trim();
 
-        if(password !== confirmPassword) {
-            return;
+        if (email === '' || password === '' || confirmPassword === '') {            
+            return alert('All fields are required!');
+        }
+
+        if (password !== confirmPassword) {            
+            return alert('Passwords don\'t match!');
         }
         
         authService.register(email, password)
-            .then(authdata => {                
-                userLogin(authdata);
+            .then(result => {
+                const authData = {
+                    _id: result._id,
+                    email: result.email,
+                    accessToken: result.accessToken
+                };
+
+                userLogin(authData);
                 navigate('/');
             })
             .catch(() => {

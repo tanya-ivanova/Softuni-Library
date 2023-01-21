@@ -1,7 +1,7 @@
 const request = async (method, url, data) => {
     try {
         const user = localStorage.getItem('auth');
-        const auth = JSON.parse(user || '{}');
+        const auth = JSON.parse(user || '{}');        
 
         let headers = {};
 
@@ -21,16 +21,32 @@ const request = async (method, url, data) => {
                     'Content-type': 'application/json'
                 },
                 body: JSON.stringify(data)
-            })
+            });
         }
 
         const response = await buildRequest;
-        
-        const result = await response.json();
-        return result;
 
-    } catch (error) {
-        console.log(error);
+        if (response.ok === false) {
+
+            if (response.status === 403) {
+                localStorage.removeItem('auth');;
+            }
+
+            const error = await response.json();
+            throw new Error(error.message);
+        }
+
+        if (response.status === 204) {
+            return response;
+        } else {
+            const result = await response.json();
+            return result;            
+        }
+        
+
+    } catch (err) {
+        alert(err.message);
+        throw err;
     }
 };
 
