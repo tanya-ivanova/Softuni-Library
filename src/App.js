@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import { AuthProvider } from './contexts/AuthContext';
 
+import PrivateRoute from './components/common/PrivateRoute';
 import Header from './components/header/Header';
 import Home from './components/home/Home';
 import Footer from './components/footer/Footer';
@@ -28,12 +29,15 @@ function App() {
                         <Route path="/" element={<Home />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/login" element={<Login />} />
-                        <Route path='/logout' element={<Logout />} />
-                        <Route path="/create" element={<AddBook />} />
                         <Route path="/catalog" element={<Catalog />} />
-                        <Route path="/profile" element={<Profile />} />
                         <Route path="/catalog/:bookId/details" element={<BookDetails />} />
-                        <Route path="/catalog/:bookId/edit" element={<EditBook />} />
+
+                        <Route element={<PrivateRoute />}>
+                            <Route path='/logout' element={<Logout />} />
+                            <Route path="/create" element={<AddBook />} />
+                            <Route path="/profile" element={<Profile />} />
+                            <Route path="/catalog/:bookId/edit" element={<EditBook />} />
+                        </Route>
                     </Routes>
                 </main>
 

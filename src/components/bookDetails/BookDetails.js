@@ -36,6 +36,9 @@ const BookDetails = () => {
                 <h3>{currentBook.genre}, {currentBook.year}</h3>                
                 <h3>Price: {currentBook.price}$</h3>
                 <p>Summary: {currentBook.summary}</p>
+                <div className="fa fa-thumbs-up">
+                    <p>Likes: 0</p>
+                </div>
                 <Link className={styles["btn-edit"]} to={`/catalog/${currentBook._id}/edit`}>Edit</Link>
                 <button onClick={bookDeleteHandler} className={styles["btn-delete"]}>Delete</button>                
                 <Link className={styles["btn-like"]} to={`/catalog/${currentBook._id}/like`}>Like</Link>                              
