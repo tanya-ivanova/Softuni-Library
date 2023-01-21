@@ -21,7 +21,8 @@
     margin-bottom: 40px;
 }
 
-.details-wrapper a {
+.details-wrapper a,
+.btn-delete {
     color: #5992B7;
     font-weight: bolder;    
     background-color: white;    
@@ -31,10 +32,13 @@
     border-width: 2px;
     border-color: #895D67;
     border-radius: 10px;
-    margin: 20px 20px 20px 20px;    
+    margin: 20px 20px 20px 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 16px;    
 }
 
-.details-wrapper a:hover {
+.details-wrapper a:hover,
+.btn-delete:hover {
     cursor: pointer;
     color: #29528B;
     background-color: #F2AF81;

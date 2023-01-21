@@ -1,11 +1,23 @@
+import * as bookService from '../../services/bookService';
 import styles from './AddBook.module.css';
 
 
 const AddBook = () => {
-    return (
+    const onSubmit = (e) => {
+        e.preventDefault();
+
+        const gameData = Object.fromEntries(new FormData(e.target));
+
+        bookService.create(gameData)
+            .then(result => {                
+                console.log(result);
+            });        
+    };
+
+    return (        
         <section className={styles["add-book-page"]}>
             <div className={styles["add-book-wrapper"]}>
-                <form className={styles["add-book-form"]} >
+                <form className={styles["add-book-form"]} onSubmit={onSubmit} >
 
                     <h1>Add Book</h1>
                     <label htmlFor="leg-title">Title</label>

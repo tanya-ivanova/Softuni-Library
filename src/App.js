@@ -9,8 +9,9 @@ import Register from './components/register/Register';
 import Login from './components/login/Login';
 import Logout from './components/logout/Logout';
 import AddBook from './components/addBook/AddBook';
-import BookItem from './components/catalog/bookItem/BookItem';
+import Catalog from './components/catalog/Catalog';
 import BookDetails from './components/bookDetails/BookDetails';
+
 
 import './App.css';
 
@@ -27,6 +28,8 @@ function App() {
                         <Route path="/login" element={<Login />} />
                         <Route path='/logout' element={<Logout />} />
                         <Route path="/create" element={<AddBook />} />
+                        <Route path="/catalog" element={<Catalog />} />
+                        <Route path="/catalog/:bookId/details" element={<BookDetails />} />
                     </Routes>
                 </main>
 

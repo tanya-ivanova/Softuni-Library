@@ -1,11 +1,3 @@
-.catalog-page {
-    background-color: antiquewhite;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    text-align: center;    
-}
-
 .book-item-wrapper {
     margin: 100px;
     display: inline-block;
