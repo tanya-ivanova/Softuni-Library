@@ -22,7 +22,8 @@
 }
 
 .details-wrapper a,
-.btn-delete {
+.btn-delete,
+.btn-like {
     color: #5992B7;
     font-weight: bolder;    
     background-color: white;    
@@ -38,7 +39,8 @@
 }
 
 .details-wrapper a:hover,
-.btn-delete:hover {
+.btn-delete:hover,
+.btn-like:hover {
     cursor: pointer;
     color: #29528B;
     background-color: #F2AF81;

@@ -2,7 +2,7 @@ import * as request from "./requester";
 
 const baseUrl = 'http://localhost:3030/data/books';
 
-export const getAll = () => request.get(baseUrl);
+export const getAll = () => request.get(`${baseUrl}?sortBy=_createdOn%20desc`);
 
 export const getOne = (bookId) => request.get(`${baseUrl}/${bookId}`);
 
