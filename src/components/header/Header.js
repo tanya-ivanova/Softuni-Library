@@ -16,13 +16,13 @@ const Header = () => {
                 </h1>
 
                 <nav>
-                    {user.email && <Link to="/my-books" className={styles.greeting}>Welcome, {user.email}</Link>}
+                    {user.email && <Link to="/profile" className={styles.greeting}>Welcome, {user.email}</Link>}
 
                     <Link to="/catalog">All books</Link>
 
                     {user.accessToken
                         ? <div id="user">
-                            <Link to="/my-books">My books</Link>
+                            <Link to="/profile">My books</Link>
                             <Link to="/create">Add book</Link>
                             <Link to="/logout">Logout</Link>
                         </div>

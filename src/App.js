@@ -10,6 +10,7 @@ import Login from './components/login/Login';
 import Logout from './components/logout/Logout';
 import AddBook from './components/addBook/AddBook';
 import Catalog from './components/catalog/Catalog';
+import Profile from './components/profile/Profile';
 import BookDetails from './components/bookDetails/BookDetails';
 import EditBook from './components/editBook/EditBook';
 
@@ -30,6 +31,7 @@ function App() {
                         <Route path='/logout' element={<Logout />} />
                         <Route path="/create" element={<AddBook />} />
                         <Route path="/catalog" element={<Catalog />} />
+                        <Route path="/profile" element={<Profile />} />
                         <Route path="/catalog/:bookId/details" element={<BookDetails />} />
                         <Route path="/catalog/:bookId/edit" element={<EditBook />} />
                     </Routes>
