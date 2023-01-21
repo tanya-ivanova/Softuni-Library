@@ -8,6 +8,8 @@ import styles from './BookDetails.module.css';
 
 
 const BookDetails = () => {
+    const likesStyle = `${styles.likes} fa fa-thumbs-up`;
+
     const { user } = useContext(AuthContext);
     const { bookId } = useParams();
     const navigate = useNavigate();
@@ -72,58 +74,66 @@ const BookDetails = () => {
             });
     };
 
+
     return (
         <section className={styles["details-page"]}>
             <div className={styles["details-wrapper"]}>
-                <img src={currentBook.imageUrl} />
-                <h1>{currentBook.title}</h1>
-                <h2>{currentBook.author}</h2>
-                <h3>{currentBook.genre}, {currentBook.year}</h3>
-                <h3>Price: {currentBook.price}$</h3>
-                <p>Summary: {currentBook.summary}</p>
-                <div className="fa fa-thumbs-up">
-                    <p>Likes: {totalLikes}</p>
-                </div>
+                <div className={styles["details-part"]}>
+                    <img className={styles.image} src={currentBook.imageUrl} />
+                    <h1>{currentBook.title}</h1>
+                    <h2>{currentBook.author}</h2>
+                    <h3>{currentBook.genre}, {currentBook.year}</h3>
+                    <h3>Price: {currentBook.price}$</h3>
+                    <p>Summary: {currentBook.summary}</p>
+                    <div className={likesStyle}>
+                        <p>Likes: {totalLikes}</p>
+                        {isLiked
+                            ?   <p>You already liked this book!</p>
+                            : <></>
+                        }
+                    </div>
 
-                {isOwner
-                    ? <>
-                        <Link className={styles["btn-edit"]} to={`/catalog/${currentBook._id}/edit`}>Edit</Link>
-                        <button onClick={bookDeleteHandler} className={styles["btn-delete"]}>Delete</button>
-                    </>
-                    : <></>
-                }
+                    {isOwner
+                        ? <div className={styles.buttons}>
+                            <Link className={styles["btn-edit"]} to={`/catalog/${currentBook._id}/edit`}>Edit</Link>
+                            <button onClick={bookDeleteHandler} className={styles["btn-delete"]}>Delete</button>
+                        </div>
+                        : <></>
+                    }
 
-                {showLikeButton                    
-                    ? <button onClick={bookLikeHandler} className={styles["btn-like"]}>Like</button>
-                    : <></>
-                }
-
-                <div >
-                    <h2>Comments:</h2>
-                    <ul>
-                        {comments?.map(x =>
-                            <li key={x._id} >
-                                <p>{x.text}</p>
-                                <p>by {x.user.email}</p>
-                            </li>
-                        )}
-                    </ul>
-
-                    {!comments.length &&
-                        <p >No comments.</p>
+                    {showLikeButton
+                        ? <div className={styles.buttons}>
+                            <button onClick={bookLikeHandler} className={styles["btn-like"]}>Like</button>
+                        </div>
+                        : <></>
                     }
                 </div>
 
-                {!isOwner
-                    ? <div >
-                        <label>Add new comment:</label>
-                        <form onSubmit={addCommentHandler}>
+                <div className={styles["comments-part"]}>
+                    <div className={styles.comments}>
+                        <h1>Comments:</h1>                        
+                            {comments?.map(x =>
+                                <div key={x._id} className={styles["comment-item"]} >
+                                    <p className={styles["comment-text"]}>{x.text}</p>
+                                    <p className={styles["comment-userEmail"]}>by {x.user.email}</p>
+                                </div>
+                            )}                       
 
-                            <textarea name="comment" placeholder="Please write your comment here" />
-                            <input type="submit" value="Add Comment" />
-                        </form>
+                        {!comments.length &&
+                            <p >No comments.</p>
+                        }
                     </div>
-                    : <></>}
+
+                    {!isOwner
+                        ? <div className={styles["add-comment"]}>
+                            <h2>Add new comment:</h2>
+                            <form onSubmit={addCommentHandler}>
+                                <textarea name="comment" placeholder="Please write your comment here" />
+                                <input className={styles["btn-add-comment"]} type="submit" value="Add Comment" />
+                            </form>
+                        </div>
+                        : <></>}
+                </div>
             </div>
         </section>
     );

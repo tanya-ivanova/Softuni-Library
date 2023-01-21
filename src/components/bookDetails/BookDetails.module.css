@@ -8,7 +8,7 @@
 }
 
 .details-wrapper {
-    width: 600px;
+    width: 960px;
     color: #A52D2D;
 }
 
@@ -23,7 +23,8 @@
 
 .details-wrapper a,
 .btn-delete,
-.btn-like {
+.btn-like,
+.btn-add-comment {
     color: #5992B7;
     font-weight: bolder;    
     background-color: white;    
@@ -40,9 +41,68 @@
 
 .details-wrapper a:hover,
 .btn-delete:hover,
-.btn-like:hover {
+.btn-like:hover,
+.btn-add-comment:hover {
     cursor: pointer;
     color: #29528B;
     background-color: #F2AF81;
     border-color: #203973;
 }
+
+.image {
+    float: left;
+    margin-right: 30px;
+}
+
+.likes {
+    display: block;
+    font-size: 28px;       
+}
+
+.likes p {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.add-comment textarea {
+    display: block;
+    width: 35%;
+    min-height: 100px; 
+}
+
+.add-comment input {
+    display: block;
+}
+
+.add-comment form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;   
+}
+
+.comment-item {
+    border-style: double;
+    border-color: #895D67;
+    margin: auto;
+    margin-bottom: 5px;
+    width: 50%; 
+}
+
+.comment-item p:first-child {
+    margin-bottom: 10px;
+}
+
+.comment-item p:last-child {
+    margin-bottom: 10px;
+    color: #203973;
+}
+
+.comments-part {
+    margin-top: 50px;
+}
+
+
+
+
+
