@@ -11,6 +11,7 @@ import Logout from './components/logout/Logout';
 import AddBook from './components/addBook/AddBook';
 import Catalog from './components/catalog/Catalog';
 import BookDetails from './components/bookDetails/BookDetails';
+import EditBook from './components/editBook/EditBook';
 
 
 import './App.css';
@@ -30,6 +31,7 @@ function App() {
                         <Route path="/create" element={<AddBook />} />
                         <Route path="/catalog" element={<Catalog />} />
                         <Route path="/catalog/:bookId/details" element={<BookDetails />} />
+                        <Route path="/catalog/:bookId/edit" element={<EditBook />} />
                     </Routes>
                 </main>
 

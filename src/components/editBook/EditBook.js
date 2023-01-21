@@ -1,33 +1,44 @@
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from 'react-router-dom';
 import * as bookService from '../../services/bookService';
-import styles from './AddBook.module.css';
+import styles from './EditBook.module.css';
 
-
-const AddBook = () => {
+const EditBook = () => {   
+    const {bookId} = useParams();
     const navigate = useNavigate();
+
+    const [currentBook, setCurrentBook] = useState([]);
+
+    useEffect(() => {
+        bookService.getOne(bookId)
+            .then(result => {                
+                setCurrentBook(result);                
+            });
+    }, []);
 
     const onSubmit = (e) => {
         e.preventDefault();
 
         const bookData = Object.fromEntries(new FormData(e.target));
 
-        bookService.create(bookData)
-            .then(() => {                
-                navigate(`/catalog`);
+        bookService.edit(bookId, bookData)
+            .then(result => {                               
+                navigate(`/catalog/${bookId}/details`);
             });        
     };
 
     return (        
-        <section className={styles["add-book-page"]}>
-            <div className={styles["add-book-wrapper"]}>
-                <form className={styles["add-book-form"]} onSubmit={onSubmit} >
+        <section className={styles["edit-book-page"]}>
+            <div className={styles["edit-book-wrapper"]}>
+                <form className={styles["edit-book-form"]} onSubmit={onSubmit} >
 
-                    <h1>Add Book</h1>
+                    <h1>Edit Book</h1>
                     <label htmlFor="leg-title">Title</label>
                     <input
                         type="text"
                         id="title"
                         name="title"
+                        defaultValue={currentBook.title}
                     />
 
                     <label htmlFor="author">Author</label>
@@ -35,6 +46,7 @@ const AddBook = () => {
                         type="text"
                         id="author"
                         name="author"
+                        defaultValue={currentBook.author}
                     />
 
                     <label htmlFor="genre">Genre</label>
@@ -42,6 +54,7 @@ const AddBook = () => {
                         type="text"
                         id="genre"
                         name="genre"
+                        defaultValue={currentBook.genre}
                     />
 
                     <label htmlFor="imageUrl">Image URL</label>
@@ -49,6 +62,7 @@ const AddBook = () => {
                         type="text"
                         id="imageUrl"
                         name="imageUrl"
+                        defaultValue={currentBook.imageUrl}
                     />
 
                     <label htmlFor="year">Year</label>
@@ -56,6 +70,7 @@ const AddBook = () => {
                         type="number"
                         id="year"
                         name="year"
+                        defaultValue={currentBook.year}
                     />
 
                     <label htmlFor="price">Price</label>
@@ -63,13 +78,14 @@ const AddBook = () => {
                         type="number"
                         id="price"
                         name="price"
+                        defaultValue={currentBook.price}
                     />
 
                     <label htmlFor="summary">Summary</label>
-                    <textarea name="summary" id="summary" defaultValue={""} />
+                    <textarea name="summary" id="summary" defaultValue={currentBook.summary} />
 
-                    <div className={styles["btn-add-book"]}>
-                        <input type="submit" value="Add Book" />
+                    <div className={styles["btn-edit-book"]}>
+                        <input type="submit" value="Edit Book" />
                     </div>
 
                 </form>
@@ -78,4 +94,4 @@ const AddBook = () => {
     );
 };
 
-export default AddBook;
+export default EditBook;
