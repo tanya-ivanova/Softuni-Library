@@ -34,44 +34,43 @@ const AddBook = () => {
     };
 
     const isPositive = (e) => {
-        let number = Number(e.target.value);
-
+        let number = Number(e.target.value);    
+        
         setErrors(state => ({
             ...state,
-            [e.target.name]: number < 0
-        }));        
+            [e.target.name]: number < 0 || isNaN(number)
+        }));
     };
 
     const IMAGE_URL_PATTERN = /^https?:\/\/.+$/i;
 
-    const isValidUrl = (e) => {                
+    const isValidUrl = (e) => {
         setErrors(state => ({
             ...state,
             [e.target.name]: !IMAGE_URL_PATTERN.test(e.target.value)
-        }));        
+        }));
     };
 
     const isFormValid = !Object.values(errors).some(x => x);
 
+
     const onSubmit = (e) => {
-        e.preventDefault();
-
-        //const bookData = Object.fromEntries(new FormData(e.target));
-
-        const formData = new FormData(e.target);
+        e.preventDefault();        
 
         const bookData = {
-            title: formData.get('title'),
-            author: formData.get('author'),
-            genre: formData.get('genre'),
-            imageUrl: formData.get('imageUrl'),
-            year: formData.get('year'),
-            price: formData.get('price'),
-            summary: formData.get('summary'),
+            title: values.title,
+            author: values.author,
+            genre: values.genre,
+            imageUrl: values.imageUrl,
+            year: values.year,
+            price: values.price,
+            summary: values.summary,
         };
+
 
         if (bookData.title === '' || bookData.author === '' || bookData.genre === '' || bookData.imageUrl === ''
             || bookData.year === '' || bookData.price === '' || bookData.summary === '') {
+
             return alert('All fields are required!');
         }
 
@@ -153,7 +152,7 @@ const AddBook = () => {
 
                     <label htmlFor="year">Year</label>
                     <input
-                        type="number"
+                        type="text"
                         id="year"
                         name="year"
                         value={values.year}
@@ -169,7 +168,7 @@ const AddBook = () => {
 
                     <label htmlFor="price">Price</label>
                     <input
-                        type="number"
+                        type="text"
                         id="price"
                         name="price"
                         value={values.price}
@@ -197,6 +196,7 @@ const AddBook = () => {
                             Summary should be at least 10 characters long!
                         </p>
                     }
+                    
 
                     <div className={styles["btn-add-book"]}>
                         <button type="submit" disabled={!isFormValid} >Add Book</button>

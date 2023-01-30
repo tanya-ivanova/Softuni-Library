@@ -25,7 +25,7 @@
     font-size: 32px;
 }
 
-.login p {
+.account-message {
     font-size: 18px;
     color: #A52D2D;
 }
@@ -78,3 +78,4 @@
     align-items: center;
     text-align: center;
 }
+

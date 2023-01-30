@@ -8,7 +8,7 @@ import * as authService from "../../services/authService";
 
 
 const Login = () => {
-    const {userLogin} = useContext(AuthContext);
+    const { userLogin } = useContext(AuthContext);    
 
     const navigate = useNavigate();
 
@@ -23,7 +23,7 @@ const Login = () => {
         if (email === '' || password === '') {
             return alert('All fields are required!');
         }
-        
+
         authService.login(email, password)
             .then(result => {
                 const authData = {
@@ -35,10 +35,10 @@ const Login = () => {
                 userLogin(authData);
                 navigate('/');
             })
-            .catch((err) => {                
+            .catch((err) => {
                 navigate('/404');
             });
-    }; 
+    };
 
     return (
         <section className={styles.login}>
@@ -48,15 +48,23 @@ const Login = () => {
                     <h1>Login</h1>
 
                     <label htmlFor="login-email">Email</label>
-                    <input type="email" id="login-email" name="email" />
+                    <input
+                        type="email"
+                        id="login-email"
+                        name="email"                        
+                    />                    
 
                     <label htmlFor="login-password">Password</label>
-                    <input type="password" name="password" id="login-password" />
+                    <input
+                        type="password"
+                        name="password"
+                        id="login-password"                        
+                    />                    
 
                     <div className={styles["btn-login"]}>
                         <input type="submit" value="Login" />
                     </div>
-                    <p>If you don't have an account click <Link to="/register">here</Link></p>
+                    <p className={styles["account-message"]}>If you don't have an account click <Link to="/register">here</Link></p>
 
                 </form>
             </div>
