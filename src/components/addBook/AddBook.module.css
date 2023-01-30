@@ -90,3 +90,12 @@ button:hover {
     border: 1px solid red;    
     padding: 8px;
 }
+
+.button-disabled {
+    background-color: #ABABAB;
+}
+
+.button-disabled:hover {
+    background-color: #ABABAB;
+    color: #5992B7;
+}

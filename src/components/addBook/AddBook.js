@@ -81,6 +81,18 @@ const AddBook = () => {
             });
     };
 
+    const onCancel = (e) => {
+        setValues({
+            title: '',
+            author: '',
+            genre: '',
+            imageUrl: '',
+            year: '',
+            price: '',
+            summary: ''
+        });
+    }
+
     return (
         <section className={styles["add-book-page"]}>
             <div className={styles["add-book-wrapper"]}>
@@ -195,12 +207,11 @@ const AddBook = () => {
                         <p className={styles.error}>
                             Summary should be at least 10 characters long!
                         </p>
-                    }
-                    
+                    }                    
 
                     <div className={styles["btn-add-book"]}>
-                        <button type="submit" disabled={!isFormValid} >Add Book</button>
-                        <button id="action-cancel" className="btn" type="button" >Cancel</button>
+                        <button type="submit" disabled={!isFormValid} className={styles[`${!isFormValid ? 'button-disabled' : ''}`]} >Add Book</button>
+                        <button type="button" onClick={onCancel} >Cancel</button>
                     </div>
 
                 </form>

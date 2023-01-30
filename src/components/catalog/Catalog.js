@@ -19,7 +19,7 @@ const Catalog = () => {
            
             {books.length > 0
                 ? books.map(x => <BookItem key={x._id} book={x} />)
-                : <h3>No books yet</h3>
+                : <h3 className="message-when-no-data">No books yet</h3>
             }           
             
         </section>

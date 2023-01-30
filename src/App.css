@@ -6,3 +6,8 @@ body {
 .site-wrapper {
     font-family: Georgia, 'Times New Roman', Times, serif;     
 }
+
+.message-when-no-data {
+    color: #A52D2D;
+    padding-left: 30px;
+}

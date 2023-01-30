@@ -3,49 +3,114 @@ import { useParams, useNavigate } from 'react-router-dom';
 import * as bookService from '../../services/bookService';
 import styles from './EditBook.module.css';
 
-const EditBook = () => {   
-    const {bookId} = useParams();
+const EditBook = () => {
+    const { bookId } = useParams();
     const navigate = useNavigate();
 
     const [currentBook, setCurrentBook] = useState([]);
 
+    const [errors, setErrors] = useState({});
+
+    const [values, setValues] = useState({
+        title: '',
+        author: '',
+        genre: '',
+        imageUrl: '',
+        year: '',
+        price: '',
+        summary: ''
+    });
+
     useEffect(() => {
         bookService.getOne(bookId)
-            .then(result => {                
-                setCurrentBook(result);                
+            .then(result => {
+                setCurrentBook(result);
+                setValues({
+                    title: result.title,
+                    author: result.author,
+                    genre: result.genre,
+                    imageUrl: result.imageUrl,
+                    year: result.year,
+                    price: result.price,
+                    summary: result.summary
+                });
             });
     }, []);
+
+
+    const changeValueHandler = (e) => {
+        setValues(state => ({
+            ...state,
+            [e.target.name]: e.target.value
+        }))
+    };
+
+    const minLength = (e, bound) => {
+        setErrors(state => ({
+            ...state,
+            [e.target.name]: values[e.target.name].length < bound
+        }));
+    };
+
+    const isPositive = (e) => {
+        let number = Number(e.target.value);
+
+        setErrors(state => ({
+            ...state,
+            [e.target.name]: number < 0 || isNaN(number)
+        }));
+    };
+
+    const IMAGE_URL_PATTERN = /^https?:\/\/.+$/i;
+
+    const isValidUrl = (e) => {
+        setErrors(state => ({
+            ...state,
+            [e.target.name]: !IMAGE_URL_PATTERN.test(e.target.value)
+        }));
+    };
+
+    const isFormValid = !Object.values(errors).some(x => x);
+
 
     const onSubmit = (e) => {
         e.preventDefault();
 
-        //const bookData = Object.fromEntries(new FormData(e.target));
-
-        const formData = new FormData(e.target);
-
         const bookData = {
-            title: formData.get('title'),
-            author: formData.get('author'),
-            genre: formData.get('genre'),
-            imageUrl: formData.get('imageUrl'),
-            year: formData.get('year'),
-            price: formData.get('price'),
-            summary: formData.get('summary'),
+            title: values.title,
+            author: values.author,
+            genre: values.genre,
+            imageUrl: values.imageUrl,
+            year: values.year,
+            price: values.price,
+            summary: values.summary,
         };
 
         if (bookData.title === '' || bookData.author === '' || bookData.genre === '' || bookData.imageUrl === ''
-         || bookData.year === '' || bookData.price === '' || bookData.summary === '') {
+            || bookData.year === '' || bookData.price === '' || bookData.summary === '') {
             return alert('All fields are required!');
         }
 
         bookService.edit(bookId, bookData)
             .then(() => {
-                e.target.reset();                               
+                e.target.reset();
                 navigate(`/catalog/${bookId}/details`);
-            });        
+            });
     };
 
-    return (        
+    const onCancel = (e) => {
+        setValues({
+            title: '',
+            author: '',
+            genre: '',
+            imageUrl: '',
+            year: '',
+            price: '',
+            summary: ''
+        });
+    }
+
+    return (
         <section className={styles["edit-book-page"]}>
             <div className={styles["edit-book-wrapper"]}>
                 <form className={styles["edit-book-form"]} onSubmit={onSubmit} >
@@ -56,54 +121,115 @@ const EditBook = () => {
                         type="text"
                         id="title"
                         name="title"
-                        defaultValue={currentBook.title}
+                        value={values.title}
+                        onChange={changeValueHandler}
+                        onBlur={(e) => minLength(e, 3)}
                     />
+
+                    {errors.title &&
+                        <p className={styles.error}>
+                            Title should be at least 3 characters long!
+                        </p>
+                    }
 
                     <label htmlFor="author">Author</label>
                     <input
                         type="text"
                         id="author"
                         name="author"
-                        defaultValue={currentBook.author}
+                        value={values.author}
+                        onChange={changeValueHandler}
+                        onBlur={(e) => minLength(e, 3)}
                     />
+
+                    {errors.author &&
+                        <p className={styles.error}>
+                            Author should be at least 3 characters long!
+                        </p>
+                    }
 
                     <label htmlFor="genre">Genre</label>
                     <input
                         type="text"
                         id="genre"
                         name="genre"
-                        defaultValue={currentBook.genre}
+                        value={values.genre}
+                        onChange={changeValueHandler}
+                        onBlur={(e) => minLength(e, 3)}
                     />
+
+                    {errors.genre &&
+                        <p className={styles.error}>
+                            Genre should be at least 3 characters long!
+                        </p>
+                    }
 
                     <label htmlFor="imageUrl">Image URL</label>
                     <input
                         type="text"
                         id="imageUrl"
                         name="imageUrl"
-                        defaultValue={currentBook.imageUrl}
+                        value={values.imageUrl}
+                        onChange={changeValueHandler}
+                        onBlur={isValidUrl}
                     />
+
+                    {errors.imageUrl &&
+                        <p className={styles.error}>
+                            Invalid image url!
+                        </p>
+                    }
 
                     <label htmlFor="year">Year</label>
                     <input
-                        type="number"
+                        type="text"
                         id="year"
                         name="year"
-                        defaultValue={currentBook.year}
+                        value={values.year}
+                        onChange={changeValueHandler}
+                        onBlur={isPositive}
                     />
+
+                    {errors.year &&
+                        <p className={styles.error}>
+                            Year must be a positive number!
+                        </p>
+                    }
 
                     <label htmlFor="price">Price</label>
                     <input
-                        type="number"
+                        type="text"
                         id="price"
                         name="price"
-                        defaultValue={currentBook.price}
+                        value={values.price}
+                        onChange={changeValueHandler}
+                        onBlur={isPositive}
                     />
 
-                    <label htmlFor="summary">Summary</label>
-                    <textarea name="summary" id="summary" defaultValue={currentBook.summary} />
+                    {errors.price &&
+                        <p className={styles.error}>
+                            Price must be a positive number!
+                        </p>
+                    }
 
-                    <div className={styles["btn-edit-book"]}>
-                        <input type="submit" value="Edit Book" />
+                    <label htmlFor="summary">Summary</label>
+                    <textarea
+                        name="summary"
+                        id="summary"
+                        value={values.summary}
+                        onChange={changeValueHandler}
+                        onBlur={(e) => minLength(e, 10)}
+                    />
+
+                    {errors.summary &&
+                        <p className={styles.error}>
+                            Summary should be at least 10 characters long!
+                        </p>
+                    }
+
+                    <div className={styles["btn-edit-book"]}>                        
+                        <button type="submit" disabled={!isFormValid} className={styles[`${!isFormValid ? 'button-disabled' : ''}`]} >Edit Book</button>
+                        <button type="button" onClick={onCancel} >Cancel</button>
                     </div>
 
                 </form>

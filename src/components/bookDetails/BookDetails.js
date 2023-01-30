@@ -7,8 +7,7 @@ import * as commentService from '../../services/commentService';
 import styles from './BookDetails.module.css';
 
 
-const BookDetails = () => {
-    const likesStyle = `${styles.likes} fa fa-thumbs-up`;
+const BookDetails = () => {   
 
     const { user } = useContext(AuthContext);
     const { bookId } = useParams();
@@ -19,12 +18,8 @@ const BookDetails = () => {
     const [isLiked, setIsLiked] = useState();
     const [comments, setComments] = useState([]);
 
-    // useEffect(() => {
-    //     bookService.getOne(bookId)
-    //         .then(result => {                
-    //             setCurrentBook(result);                
-    //         });
-    // }, []);
+    const likesStyle = `${styles.likes} fa fa-thumbs-up`;
+
 
     useEffect(() => {
         Promise.all([
@@ -36,12 +31,11 @@ const BookDetails = () => {
             setCurrentBook(values[0]);
             setTotalLikes(values[1]);
             setIsLiked(values[2]);
-            setComments(values[3]);
-            console.log(values);
+            setComments(values[3]);            
         });
     }, []);
 
-    const isOwner = user._id && user._id === currentBook._ownerId;
+    const isOwner = user._id && user._id === currentBook._ownerId;  
     const showLikeButton = user._id != undefined && isOwner == false && isLiked == false;
 
     const bookDeleteHandler = () => {
