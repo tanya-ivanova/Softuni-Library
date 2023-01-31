@@ -11,3 +11,7 @@ body {
     color: #A52D2D;
     padding-left: 30px;
 }
+
+.spinner {
+    background-color: #FBE0B4;       
+}

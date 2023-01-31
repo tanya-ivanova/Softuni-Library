@@ -6,9 +6,7 @@ import styles from './EditBook.module.css';
 const EditBook = () => {
     const { bookId } = useParams();
     const navigate = useNavigate();
-
-    const [currentBook, setCurrentBook] = useState([]);
-
+    
     const [errors, setErrors] = useState({});
 
     const [values, setValues] = useState({
@@ -23,8 +21,7 @@ const EditBook = () => {
 
     useEffect(() => {
         bookService.getOne(bookId)
-            .then(result => {
-                setCurrentBook(result);
+            .then(result => {                
                 setValues({
                     title: result.title,
                     author: result.author,
@@ -33,10 +30,9 @@ const EditBook = () => {
                     year: result.year,
                     price: result.price,
                     summary: result.summary
-                });
+                });                
             });
-    }, []);
-
+    }, []);    
 
     const changeValueHandler = (e) => {
         setValues(state => ({
