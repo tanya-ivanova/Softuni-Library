@@ -39,10 +39,11 @@ function App() {
                             <Route element={<PrivateRoute />}>
                                 <Route path='/logout' element={<Logout />} />
                                 <Route path="/create" element={<AddBook />} />
-                                <Route path="/profile" element={<Profile />} />
-                                <Route path="/catalog/:bookId/edit" element={<EditBook />} />
+                                <Route path="/profile" element={<Profile />} />                                
                             </Route>
 
+                            <Route path="/catalog/:bookId/edit" element={<EditBook />} />
+                            
                             <Route path="*" element={<NotFound />} />
                         </Routes>
                     </main>

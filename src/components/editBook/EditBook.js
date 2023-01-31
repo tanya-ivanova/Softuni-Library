@@ -1,11 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
+import { AuthContext } from "../../contexts/AuthContext";
 import * as bookService from '../../services/bookService';
 import styles from './EditBook.module.css';
 
 const EditBook = () => {
     const { bookId } = useParams();
+    const { user } = useContext(AuthContext);
     const navigate = useNavigate();
+
+    const [isOwner, setIsOwner] = useState(true);
     
     const [errors, setErrors] = useState({});
 
@@ -30,9 +34,14 @@ const EditBook = () => {
                     year: result.year,
                     price: result.price,
                     summary: result.summary
-                });                
+                });
+                setIsOwner(user._id && user._id === result._ownerId);                
             });
-    }, []);    
+    }, []); 
+    
+    if(!isOwner) {
+        throw new Error('You are not authorized');
+    }
 
     const changeValueHandler = (e) => {
         setValues(state => ({
