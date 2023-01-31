@@ -2,12 +2,15 @@ import { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from "../../contexts/AuthContext";
 import * as bookService from '../../services/bookService';
+import Spinner from "../common/Spinner/Spinner";
 import styles from './EditBook.module.css';
 
 const EditBook = () => {
     const { bookId } = useParams();
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
+
+    const [isLoading, setIsLoading] = useState(true);
 
     const [isOwner, setIsOwner] = useState(true);
     
@@ -35,10 +38,19 @@ const EditBook = () => {
                     price: result.price,
                     summary: result.summary
                 });
-                setIsOwner(user._id && user._id === result._ownerId);                
+                setIsOwner(user._id && user._id === result._ownerId);
+                setIsLoading(false);                
             });
     }, []); 
     
+    if(isLoading) {
+        return (
+            <div className="spinner">
+                <Spinner />
+            </div>
+        )
+    }
+
     if(!isOwner) {
         throw new Error('You are not authorized');
     }

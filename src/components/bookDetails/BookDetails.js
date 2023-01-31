@@ -4,6 +4,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import * as bookService from '../../services/bookService';
 import * as likeService from '../../services/likeService';
 import * as commentService from '../../services/commentService';
+import Spinner from "../common/Spinner/Spinner";
 import styles from './BookDetails.module.css';
 
 
@@ -12,6 +13,8 @@ const BookDetails = () => {
     const { user } = useContext(AuthContext);
     const { bookId } = useParams();
     const navigate = useNavigate();
+
+    const [isLoading, setIsLoading] = useState(true);
 
     const [currentBook, setCurrentBook] = useState([]);
     const [totalLikes, setTotalLikes] = useState();
@@ -31,9 +34,19 @@ const BookDetails = () => {
             setCurrentBook(values[0]);
             setTotalLikes(values[1]);
             setIsLiked(values[2]);
-            setComments(values[3]);            
+            setComments(values[3]);
+            
+            setIsLoading(false);
         });
     }, []);
+
+    if(isLoading) {
+        return (
+            <div className="spinner">
+                <Spinner />
+            </div>
+        )
+    }
 
     const isOwner = user._id && user._id === currentBook._ownerId;  
     const showLikeButton = user._id != undefined && isOwner == false && isLiked == false;
