@@ -4,7 +4,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import * as bookService from '../../services/bookService';
 import * as likeService from '../../services/likeService';
 import * as commentService from '../../services/commentService';
-import Spinner from "../common/Spinner/Spinner";
+import Spinner from "../common/spinner/Spinner";
 import styles from './BookDetails.module.css';
 
 

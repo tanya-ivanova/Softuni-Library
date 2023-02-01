@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from "../../contexts/AuthContext";
 import * as bookService from '../../services/bookService';
-import Spinner from "../common/Spinner/Spinner";
+import Spinner from "../common/spinner/Spinner";
 import styles from './EditBook.module.css';
 
 const EditBook = () => {

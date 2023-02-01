@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import * as bookService from '../../services/bookService';
 import BookItem from "../catalog/bookItem/BookItem";
-import Spinner from "../common/Spinner/Spinner";
+import Spinner from "../common/spinner/Spinner";
 import styles from './Profile.module.css';
 
 const Profile = () => {

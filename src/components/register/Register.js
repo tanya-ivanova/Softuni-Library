@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import styles from './Register.module.css';
@@ -6,9 +6,16 @@ import styles from './Register.module.css';
 import { AuthContext } from "../../contexts/AuthContext";
 import * as authService from "../../services/authService";
 
+import Notification from "../common/notification/Notification";
+
 
 const Register = () => {
     const { userLogin } = useContext(AuthContext);
+
+    const navigate = useNavigate();
+
+    const [showNotification, setShowNotification] = useState(true);
+    const [showPassNotification, setShowPassNotification] = useState(false);
 
     const [errors, setErrors] = useState({});
 
@@ -18,7 +25,22 @@ const Register = () => {
         confirmPassword: ''
     });
 
-    const navigate = useNavigate();
+    useEffect(() => {
+        if (values.email === '' || values.password === '' || values.confirmPassword === '') {
+            setShowNotification(true);
+        } else {
+            setShowNotification(false);
+        }
+      }, [values.email, values.password, values.confirmPassword])
+
+      useEffect(() => {
+        if (values.password !== values.confirmPassword) {
+            setShowPassNotification(true);
+        } else {
+            setShowPassNotification(false);
+        }
+      }, [values.password, values.confirmPassword])  
+
 
     const changeValueHandler = (e) => {
         setValues(state => ({
@@ -49,14 +71,13 @@ const Register = () => {
     const onSubmit = (e) => {
         e.preventDefault();
 
+        // if (values.email === '' || values.password === '' || values.confirmPassword === '') {
+        //     return alert('All fields are required!');
+        // }
 
-        if (values.email === '' || values.password === '' || values.confirmPassword === '') {
-            return alert('All fields are required!');
-        }
-
-        if (values.password !== values.confirmPassword) {
-            return alert('Passwords don\'t match!');
-        }
+        // if (values.password !== values.confirmPassword) {
+        //     return alert('Passwords don\'t match!');
+        // }
 
         authService.register(values.email, values.password)
             .then(result => {
@@ -74,8 +95,12 @@ const Register = () => {
             });
     };
 
-    return (
+    return (       
+
         <section className={styles.register}>
+            { showNotification ? <Notification message="All fields are required" /> : null }
+            { showPassNotification ? <Notification message="Passwords don't match!" /> : null }
+
             <div className={styles["register-wrapper"]}>
                 <form className={styles["register-form"]} onSubmit={onSubmit}>
 
@@ -123,7 +148,13 @@ const Register = () => {
                     />
 
                     <div className={styles["btn-register"]}>
-                        <input type="submit" value="Register" />
+                        <button 
+                            type="submit" 
+                            disabled={!isFormValid || showNotification || showPassNotification} 
+                            className={styles[`${!isFormValid || showNotification || showPassNotification ? 'button-disabled' : ''}`]} 
+                        >
+                            Register
+                        </button>
                     </div>
 
                     <p className={styles["account-message"]}>If you already have an account click <Link to="/login">here</Link></p>

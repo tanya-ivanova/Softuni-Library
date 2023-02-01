@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import styles from './Login.module.css';
@@ -6,25 +6,49 @@ import styles from './Login.module.css';
 import { AuthContext } from "../../contexts/AuthContext";
 import * as authService from "../../services/authService";
 
+import Notification from "../common/notification/Notification";
+
 
 const Login = () => {
-    const { userLogin } = useContext(AuthContext);    
+    const { userLogin } = useContext(AuthContext);
 
     const navigate = useNavigate();
+
+    const [showNotification, setShowNotification] = useState(true);
+
+    const [values, setValues] = useState({
+        email: '',
+        password: ''
+    });
+
+    useEffect(() => {
+        if (values.email === '' || values.password === '') {
+            setShowNotification(true);
+        } else {
+            setShowNotification(false);
+        }
+    }, [values.email, values.password])
+
+    const changeValueHandler = (e) => {
+        setValues(state => ({
+            ...state,
+            [e.target.name]: e.target.value
+        }))
+    };
 
     const onSubmit = (e) => {
         e.preventDefault();
 
         //const {email, password} = Object.fromEntries(new FormData(e.target));
-        const formData = new FormData(e.target);
-        const email = formData.get('email').trim();
-        const password = formData.get('password').trim();
+        // const formData = new FormData(e.target);
+        // const email = formData.get('email').trim();
+        // const password = formData.get('password').trim();
 
-        if (email === '' || password === '') {
-            return alert('All fields are required!');
-        }
+        // if (email === '' || password === '') {
+        //     return alert('All fields are required!');
+        // }
 
-        authService.login(email, password)
+        authService.login(values.email, values.password)
             .then(result => {
                 const authData = {
                     _id: result._id,
@@ -36,12 +60,14 @@ const Login = () => {
                 navigate('/');
             })
             .catch((err) => {
-                navigate('/404');
+                navigate('/login');
             });
     };
 
     return (
         <section className={styles.login}>
+            {showNotification ? <Notification message="All fields are required" /> : null}
+
             <div className={styles["login-wrapper"]}>
                 <form className={styles["login-form"]} onSubmit={onSubmit}>
 
@@ -51,18 +77,28 @@ const Login = () => {
                     <input
                         type="email"
                         id="login-email"
-                        name="email"                        
-                    />                    
+                        name="email"
+                        value={values.email}
+                        onChange={changeValueHandler}
+                    />
 
                     <label htmlFor="login-password">Password</label>
                     <input
                         type="password"
                         name="password"
-                        id="login-password"                        
-                    />                    
+                        id="login-password"
+                        value={values.password}
+                        onChange={changeValueHandler}
+                    />
 
                     <div className={styles["btn-login"]}>
-                        <input type="submit" value="Login" />
+                        <button
+                            type="submit"
+                            disabled={showNotification}
+                            className={styles[`${showNotification ? 'button-disabled' : ''}`]}
+                        >
+                            Login
+                        </button>
                     </div>
                     <p className={styles["account-message"]}>If you don't have an account click <Link to="/register">here</Link></p>
 

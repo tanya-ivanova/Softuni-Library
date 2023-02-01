@@ -1,14 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as bookService from '../../services/bookService';
+import Notification from "../common/notification/Notification";
 import styles from './AddBook.module.css';
 
 
 const AddBook = () => {
     const navigate = useNavigate();
 
-    const [errors, setErrors] = useState({});
+    const [showNotification, setShowNotification] = useState(true);
 
+    const [errors, setErrors] = useState({});
+    
     const [values, setValues] = useState({
         title: '',
         author: '',
@@ -18,6 +21,15 @@ const AddBook = () => {
         price: '',
         summary: ''
     });
+
+    useEffect(() => {
+        if (values.title === '' || values.author === '' || values.genre === '' || values.imageUrl === '' 
+        || values.year === '' || values.price === '' || values.summary === '') {
+            setShowNotification(true);
+        } else {
+            setShowNotification(false);
+        }
+    }, [values.title, values.author, values.genre, values.imageUrl, values.year, values.price, values.summary])
 
     const changeValueHandler = (e) => {
         setValues(state => ({
@@ -68,11 +80,11 @@ const AddBook = () => {
         };
 
 
-        if (bookData.title === '' || bookData.author === '' || bookData.genre === '' || bookData.imageUrl === ''
-            || bookData.year === '' || bookData.price === '' || bookData.summary === '') {
+        // if (bookData.title === '' || bookData.author === '' || bookData.genre === '' || bookData.imageUrl === ''
+        //     || bookData.year === '' || bookData.price === '' || bookData.summary === '') {
 
-            return alert('All fields are required!');
-        }
+        //     return alert('All fields are required!');
+        // }
 
         bookService.create(bookData)
             .then(() => {
@@ -95,6 +107,8 @@ const AddBook = () => {
 
     return (
         <section className={styles["add-book-page"]}>
+            { showNotification ? <Notification message="All fields are required" /> : null }
+
             <div className={styles["add-book-wrapper"]}>
                 <form className={styles["add-book-form"]} onSubmit={onSubmit} >
 
@@ -210,8 +224,20 @@ const AddBook = () => {
                     }                    
 
                     <div className={styles["btn-add-book"]}>
-                        <button type="submit" disabled={!isFormValid} className={styles[`${!isFormValid ? 'button-disabled' : ''}`]} >Add Book</button>
-                        <button type="button" onClick={onCancel} >Cancel</button>
+                        <button 
+                            type="submit" 
+                            disabled={!isFormValid || showNotification} 
+                            className={styles[`${!isFormValid || showNotification ? 'button-disabled' : ''}`]} 
+                        >
+                            Add Book
+                        </button>
+
+                        <button 
+                            type="button" 
+                            onClick={onCancel} 
+                        >
+                            Cancel
+                        </button>
                     </div>
 
                 </form>

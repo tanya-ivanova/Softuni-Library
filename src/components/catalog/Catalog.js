@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import * as bookService from '../../services/bookService';
-import Spinner from "../common/Spinner/Spinner";
+import Spinner from "../common/spinner/Spinner";
 
 import BookItem from "./bookItem/BookItem";
 import styles from './Catalog.module.css';

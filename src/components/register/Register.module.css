@@ -54,7 +54,7 @@
     color: #A52D2D;
 }
 
-.register input[type=submit] {
+button {
     color: #5992B7;
     font-weight: bolder;
     margin-top: 30px;
@@ -67,7 +67,7 @@
     border-radius: 10px;
 }
 
-.register input[type=submit]:hover {
+button:hover {
     cursor: pointer;
     color: #29528B;
     background-color: #F2AF81;
@@ -84,4 +84,13 @@
     color: red;
     border: 1px solid red;    
     padding: 8px;
+}
+
+.button-disabled {
+    background-color: #ABABAB;
+}
+
+.button-disabled:hover {
+    background-color: #ABABAB;
+    color: #5992B7;
 }
