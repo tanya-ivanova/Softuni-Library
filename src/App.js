@@ -15,6 +15,7 @@ import Catalog from './components/catalog/Catalog';
 import Profile from './components/profile/Profile';
 import BookDetails from './components/bookDetails/BookDetails';
 import EditBook from './components/editBook/EditBook';
+import Search from './components/search/Search';
 import NotFound from './components/notFound/NotFound';
 
 
@@ -39,11 +40,12 @@ function App() {
                             <Route element={<PrivateRoute />}>
                                 <Route path='/logout' element={<Logout />} />
                                 <Route path="/create" element={<AddBook />} />
-                                <Route path="/profile" element={<Profile />} />                                
+                                <Route path="/profile" element={<Profile />} />
+                                <Route path="/search" element={<Search />} />                                
                             </Route>
 
                             <Route path="/catalog/:bookId/edit" element={<EditBook />} />
-                            
+
                             <Route path="*" element={<NotFound />} />
                         </Routes>
                     </main>

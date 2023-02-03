@@ -24,6 +24,7 @@ const Header = () => {
                         ? <div id="user">
                             <Link to="/profile">My books</Link>
                             <Link to="/create">Add book</Link>
+                            <Link to="/search">Search</Link>
                             <Link to="/logout">Logout</Link>
                         </div>
                         : <div id="guest">

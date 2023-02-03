@@ -13,3 +13,6 @@ export const create = (bookData) => request.post(baseUrl, bookData);
 export const edit = (bookId, bookData) => request.put(`${baseUrl}/${bookId}`, bookData);
 
 export const remove = (bookId) => request.del(`${baseUrl}/${bookId}`);
+
+export const search = (criteria, query) => request.get(`${baseUrl}?where=${criteria}%20LIKE%20%22${query}%22`);
+
