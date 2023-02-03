@@ -15,3 +15,29 @@ body {
 .spinner {
     background-color: #FBE0B4;       
 }
+
+.pager {
+    background-color: antiquewhite;
+    padding-left: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 20px;
+    color: #A52D2D;      
+}
+
+.disabledCursor {
+    cursor: default;
+}
+
+.pageLink {
+    margin-right: 10px;
+}
+
+.pageLink:visited {
+    color: #29528B;
+}
+
+.pageLink:active {
+    color: #5992B7;    
+}
+

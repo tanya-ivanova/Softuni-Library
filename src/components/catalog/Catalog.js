@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import * as bookService from '../../services/bookService';
+import Pager from "../common/pager/Pager";
 import Spinner from "../common/spinner/Spinner";
 
 import BookItem from "./bookItem/BookItem";
@@ -9,20 +10,21 @@ import styles from './Catalog.module.css';
 const Catalog = () => {
     const [books, setBooks] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [pages, setPages] = useState(3);
+    const [pages, setPages] = useState();
 
     const location = useLocation();
 
     const page = Number(new URLSearchParams(location.search).get("page")) || 1;
-    
+
 
     useEffect(() => {
-        bookService.getAll()
-            .then(result => {
-                setBooks(result);
+        bookService.getAll(page)
+            .then(({ books, pages }) => {
+                setBooks(books);
+                setPages(pages);
                 setIsLoading(false);
             });
-    }, []);
+    }, [page]);
 
 
     if (isLoading) {
@@ -32,24 +34,23 @@ const Catalog = () => {
             </div>
         )
     }
-    const linkToPrev = page !== 1 ? `/catalog?page=${page - 1}` : null;
-    const linkToNext = page < pages ? `/catalog?page=${page + 1}` : null;
-    console.log(page);
+
 
     return (
-        <section className={styles["catalog-page"]}>
-            <div>
-                Page {page} of {pages}
-                {linkToPrev && <Link to={linkToPrev} >&lt;Prev</Link>}
-                {linkToNext && <Link to={linkToNext}>Next&gt;</Link>}
-            </div>
-
-            {books.length > 0
-                ? books.map(x => <BookItem key={x._id} book={x} />)
-                : <h2 className="message-when-no-data">No books yet</h2>
-            }
-
-        </section>
+        <>
+            <section className="pager">
+                <Pager page={page} pages={pages} />
+            </section>
+            <section className={styles["catalog-page"]}>
+                {books.length > 0
+                    ? books.map(x => <BookItem key={x._id} book={x} />)
+                    : <h2 className="message-when-no-data">No books yet</h2>
+                }
+            </section>
+            <section className="pager">
+                <Pager page={page} pages={pages} />
+            </section>
+        </>
     );
 };
 
