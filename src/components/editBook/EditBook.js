@@ -1,11 +1,15 @@
 import { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from "../../contexts/AuthContext";
+import { LanguageContext } from "../../contexts/LanguageContext";
+import {languages} from '../../languages/languages';
 import * as bookService from '../../services/bookService';
 import Spinner from "../common/spinner/Spinner";
 import styles from './EditBook.module.css';
 
 const EditBook = () => {
+    const {language} = useContext(LanguageContext);
+
     const { bookId } = useParams();
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -132,8 +136,8 @@ const EditBook = () => {
             <div className={styles["edit-book-wrapper"]}>
                 <form className={styles["edit-book-form"]} onSubmit={onSubmit} >
 
-                    <h1>Edit Book</h1>
-                    <label htmlFor="leg-title">Title</label>
+                    <h1>{languages.editBook[language]}</h1>
+                    <label htmlFor="leg-title">{languages.title[language]}</label>
                     <input
                         type="text"
                         id="title"
@@ -145,11 +149,11 @@ const EditBook = () => {
 
                     {errors.title &&
                         <p className={styles.error}>
-                            Title should be at least 3 characters long!
+                            {languages.titleErrorMessage[language]}
                         </p>
                     }
 
-                    <label htmlFor="author">Author</label>
+                    <label htmlFor="author">{languages.author[language]}</label>
                     <input
                         type="text"
                         id="author"
@@ -161,11 +165,11 @@ const EditBook = () => {
 
                     {errors.author &&
                         <p className={styles.error}>
-                            Author should be at least 3 characters long!
+                            {languages.authorErrorMessage[language]}
                         </p>
                     }
 
-                    <label htmlFor="genre">Genre</label>
+                    <label htmlFor="genre">{languages.genre[language]}</label>
                     <input
                         type="text"
                         id="genre"
@@ -177,11 +181,11 @@ const EditBook = () => {
 
                     {errors.genre &&
                         <p className={styles.error}>
-                            Genre should be at least 3 characters long!
+                            {languages.genreErrorMessage[language]}
                         </p>
                     }
 
-                    <label htmlFor="imageUrl">Image URL</label>
+                    <label htmlFor="imageUrl">{languages.imageUrl[language]}</label>
                     <input
                         type="text"
                         id="imageUrl"
@@ -193,11 +197,11 @@ const EditBook = () => {
 
                     {errors.imageUrl &&
                         <p className={styles.error}>
-                            Invalid image url!
+                            {languages.imageUrlErrorMessage[language]}
                         </p>
                     }
 
-                    <label htmlFor="year">Year</label>
+                    <label htmlFor="year">{languages.year[language]}</label>
                     <input
                         type="text"
                         id="year"
@@ -209,11 +213,11 @@ const EditBook = () => {
 
                     {errors.year &&
                         <p className={styles.error}>
-                            Year must be a positive number!
+                            {languages.yearErrorMessage[language]}
                         </p>
                     }
 
-                    <label htmlFor="price">Price</label>
+                    <label htmlFor="price">{languages.price[language]}</label>
                     <input
                         type="text"
                         id="price"
@@ -225,11 +229,11 @@ const EditBook = () => {
 
                     {errors.price &&
                         <p className={styles.error}>
-                            Price must be a positive number!
+                             {languages.priceErrorMessage[language]}
                         </p>
                     }
 
-                    <label htmlFor="summary">Summary</label>
+                    <label htmlFor="summary">{languages.summary[language]}</label>
                     <textarea
                         name="summary"
                         id="summary"
@@ -240,13 +244,13 @@ const EditBook = () => {
 
                     {errors.summary &&
                         <p className={styles.error}>
-                            Summary should be at least 10 characters long!
+                            {languages.summaryErrorMessage[language]}
                         </p>
                     }
 
                     <div className={styles["btn-edit-book"]}>                        
-                        <button type="submit" disabled={!isFormValid} className={styles[`${!isFormValid ? 'button-disabled' : ''}`]} >Edit Book</button>
-                        <button type="button" onClick={onCancel} >Cancel</button>
+                        <button type="submit" disabled={!isFormValid} className={styles[`${!isFormValid ? 'button-disabled' : ''}`]} >{languages.editBook[language]}</button>
+                        <button type="button" onClick={onCancel} >{languages.cancel[language]}</button>
                     </div>
 
                 </form>

@@ -5,11 +5,15 @@ import styles from './Register.module.css';
 
 import { AuthContext } from "../../contexts/AuthContext";
 import * as authService from "../../services/authService";
+import { LanguageContext } from "../../contexts/LanguageContext";
+import {languages} from '../../languages/languages';
 
 import Notification from "../common/notification/Notification";
 
 
 const Register = () => {
+    const {language} = useContext(LanguageContext);
+    
     const { userLogin } = useContext(AuthContext);
 
     const navigate = useNavigate();
@@ -98,15 +102,15 @@ const Register = () => {
     return (       
 
         <section className={styles.register}>
-            { showNotification ? <Notification message="All fields are required" /> : null }
-            { showPassNotification ? <Notification message="Passwords don't match!" /> : null }
+            { showNotification ? <Notification message={languages.allFieldsRequired[language]} /> : null }
+            { showPassNotification ? <Notification message={languages.passwordsDontMatch[language]} /> : null }
 
             <div className={styles["register-wrapper"]}>
                 <form className={styles["register-form"]} onSubmit={onSubmit}>
 
-                    <h1>Register</h1>
+                    <h1>{languages.register[language]}</h1>
 
-                    <label htmlFor="register-email">Email</label>
+                    <label htmlFor="register-email">{languages.email[language]}</label>
                     <input
                         type="email"
                         id="register-email"
@@ -118,11 +122,11 @@ const Register = () => {
 
                     {errors.email &&
                         <p className={styles.error}>
-                            Invalid email!
+                            {languages.emailErrorMessage[language]}
                         </p>
                     }
 
-                    <label htmlFor="register-password">Password</label>
+                    <label htmlFor="register-password">{languages.password[language]}</label>
                     <input
                         type="password"
                         name="password"
@@ -134,11 +138,11 @@ const Register = () => {
 
                     {errors.password &&
                         <p className={styles.error}>
-                            Password should be at least 6 characters long!
+                            {languages.passwordErrorMessage[language]}
                         </p>
                     }
 
-                    <label htmlFor="confirm-register-password">Re-enter password</label>
+                    <label htmlFor="confirm-register-password">{languages.reEnterPassword[language]}</label>
                     <input 
                         type="password" 
                         name="confirmPassword" 
@@ -153,11 +157,11 @@ const Register = () => {
                             disabled={!isFormValid || showNotification || showPassNotification} 
                             className={styles[`${!isFormValid || showNotification || showPassNotification ? 'button-disabled' : ''}`]} 
                         >
-                            Register
+                            {languages.register[language]}
                         </button>
                     </div>
 
-                    <p className={styles["account-message"]}>If you already have an account click <Link to="/login">here</Link></p>
+                    <p className={styles["account-message"]}>{languages.alreadyHaveAccount[language]}<Link to="/login">{languages.here[language]}</Link></p>
 
                 </form>
             </div>

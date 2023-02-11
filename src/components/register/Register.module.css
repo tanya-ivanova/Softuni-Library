@@ -87,10 +87,10 @@ button:hover {
 }
 
 .button-disabled {
-    background-color: #ABABAB;
+    background-color: #d4d4d4;
 }
 
 .button-disabled:hover {
-    background-color: #ABABAB;
+    background-color: #d4d4d4;
     color: #5992B7;
 }

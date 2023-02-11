@@ -63,5 +63,23 @@ a:active {
     
 }
 
+.button-bg {
+    margin-right: 5px;
+}
+
+.button-bg:hover {
+    color: white;
+    background-color: #29528B;    
+}
+
+.button-en {
+    margin-left: 5px;
+}
+
+.button-en:hover {
+    color: white;
+    background-color: #29528B;    
+}
+
 
 

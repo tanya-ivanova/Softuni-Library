@@ -1,8 +1,13 @@
+import { useContext } from "react";
 import { Link } from 'react-router-dom';
+import { LanguageContext } from "../../../contexts/LanguageContext";
+import {languages} from '../../../languages/languages';
 import styles from './Pager.module.css';
 
 
 const Pager = ({ page, pages }) => {
+    const {language} = useContext(LanguageContext);
+
     const linkToPrev = page !== 1 ? `/catalog?page=${page - 1}` : null;
     const linkToNext = page < pages ? `/catalog?page=${page + 1}` : null;
     
@@ -20,10 +25,10 @@ const Pager = ({ page, pages }) => {
 
     return (
         <div >
-            <div className={`${styles["position-right"]} ${styles.numberOfPages}`}>Page {page} of {pages}</div>
+            <div className={`${styles["position-right"]} ${styles.numberOfPages}`}>{languages.page[language]} {page} {languages.of[language]} {pages}</div>
             <div className={styles["position-right"]}>
-                <Link to={linkToPrev} onClick={onClickPrev} className={`pageLink ${!linkToPrev ? "disabledCursor" : ''}`} >&lt; Prev</Link>
-                <Link to={linkToNext} onClick={onClickNext} className={`pageLink ${!linkToNext ? "disabledCursor" : ''}`} >Next &gt;</Link>
+                <Link to={linkToPrev} onClick={onClickPrev} className={`pageLink ${!linkToPrev ? "disabledCursor" : ''}`} >&lt; {languages.prev[language]}</Link>
+                <Link to={linkToNext} onClick={onClickNext} className={`pageLink ${!linkToNext ? "disabledCursor" : ''}`} >{languages.next[language]} &gt;</Link>
             </div>
         </div>
     );

@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 
 import { AuthProvider } from './contexts/AuthContext';
+import { LanguageProvider } from './contexts/LanguageContext';
 import ErrorBoundary from './components/common/ErrorBoundary';
 
 import PrivateRoute from './components/common/PrivateRoute';
@@ -25,34 +26,36 @@ function App() {
     return (
 
         <AuthProvider>
-            <div className='site-wrapper'>
-                <Header />
+            <LanguageProvider>
+                <div className='site-wrapper'>
+                    <Header />
 
-                <ErrorBoundary>
-                    <main>
-                        <Routes>
-                            <Route path="/" element={<Home />} />
-                            <Route path="/register" element={<Register />} />
-                            <Route path="/login" element={<Login />} />
-                            <Route path="/catalog" element={<Catalog />} />
-                            <Route path="/catalog/:bookId/details" element={<BookDetails />} />
+                    <ErrorBoundary>
+                        <main>
+                            <Routes>
+                                <Route path="/" element={<Home />} />
+                                <Route path="/register" element={<Register />} />
+                                <Route path="/login" element={<Login />} />
+                                <Route path="/catalog" element={<Catalog />} />
+                                <Route path="/catalog/:bookId/details" element={<BookDetails />} />
 
-                            <Route element={<PrivateRoute />}>
-                                <Route path='/logout' element={<Logout />} />
-                                <Route path="/create" element={<AddBook />} />
-                                <Route path="/profile" element={<Profile />} />
-                                <Route path="/search" element={<Search />} />                                
-                            </Route>
+                                <Route element={<PrivateRoute />}>
+                                    <Route path='/logout' element={<Logout />} />
+                                    <Route path="/create" element={<AddBook />} />
+                                    <Route path="/profile" element={<Profile />} />
+                                    <Route path="/search" element={<Search />} />
+                                </Route>
 
-                            <Route path="/catalog/:bookId/edit" element={<EditBook />} />
+                                <Route path="/catalog/:bookId/edit" element={<EditBook />} />
 
-                            <Route path="*" element={<NotFound />} />
-                        </Routes>
-                    </main>
-                </ErrorBoundary>
+                                <Route path="*" element={<NotFound />} />
+                            </Routes>
+                        </main>
+                    </ErrorBoundary>
 
-                <Footer />
-            </div>
+                    <Footer />
+                </div>
+            </LanguageProvider>
         </AuthProvider>
 
     );

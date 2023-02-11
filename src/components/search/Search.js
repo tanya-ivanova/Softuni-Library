@@ -1,11 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
+import { LanguageContext } from "../../contexts/LanguageContext";
+import {languages} from '../../languages/languages';
 import * as bookService from '../../services/bookService';
 import BookItem from "../catalog/bookItem/BookItem";
 import Notification from "../common/notification/Notification";
 import styles from './Search.module.css';
 
 const Search = () => {
+    const {language} = useContext(LanguageContext);
+
     const [search, setSearch] = useState("");
     const navigate = useNavigate();
 
@@ -56,17 +60,17 @@ const Search = () => {
 
     return (
         <section className={styles["search-page"]}>
-            {showNotification ? <Notification message="Select criteria and type in the search field" /> : null}
+            {showNotification ? <Notification message={languages.selectCriteriaAndType[language]} /> : null}
 
             <div className={styles["form-wrapper"]}>
                 <form onSubmit={onSearch} className={styles["search-form"]}>
                     <div className={styles["criteria-wrapper"]}>
-                        <span>Search by: </span>
+                        <span>{languages.searchBy[language]}: </span>
                         <select name="criteria" onChange={onSearchCriteriaChange} >
-                            <option value="">Please select</option>
-                            <option value="title">Title</option>
-                            <option value="author">Author</option>
-                            <option value="genre">Genre</option>
+                            <option value="">{languages.pleaseSelect[language]}</option>
+                            <option value="title">{languages.title[language]}</option>
+                            <option value="author">{languages.author[language]}</option>
+                            <option value="genre">{languages.genre[language]}</option>
                         </select>
                     </div>
 
@@ -74,7 +78,7 @@ const Search = () => {
                         <input
                             type="text"
                             name="search"
-                            placeholder='What you are looking for?'
+                            placeholder={languages.lookingFor[language]}
                             value={search}
                             onChange={changeValueHandler}
                         />
@@ -84,7 +88,7 @@ const Search = () => {
                             disabled={showNotification}
                             className={styles[`${showNotification ? 'button-disabled' : ''}`]}
                         >
-                            Search <i class="fa-solid fa-magnifying-glass"></i>
+                            {languages.search[language]} <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
                     </div>
                 </form>
@@ -93,7 +97,7 @@ const Search = () => {
             <div className={styles["results-wrapper"]}>
                 {searchResults.length > 0
                     ? searchResults.map(x => <BookItem key={x._id} book={x} />)
-                    : <h2 className="message-when-no-data">No results</h2>
+                    : <h2 className="message-when-no-data">{languages.noResults[language]}</h2>
                 }
             </div>
         </section>

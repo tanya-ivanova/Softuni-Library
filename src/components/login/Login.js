@@ -4,12 +4,16 @@ import { Link } from 'react-router-dom';
 import styles from './Login.module.css';
 
 import { AuthContext } from "../../contexts/AuthContext";
+import { LanguageContext } from "../../contexts/LanguageContext";
+import {languages} from '../../languages/languages';
 import * as authService from "../../services/authService";
 
 import Notification from "../common/notification/Notification";
 
 
 const Login = () => {
+    const {language} = useContext(LanguageContext);
+
     const { userLogin } = useContext(AuthContext);
 
     const navigate = useNavigate();
@@ -66,14 +70,14 @@ const Login = () => {
 
     return (
         <section className={styles.login}>
-            {showNotification ? <Notification message="All fields are required" /> : null}
+            {showNotification ? <Notification message={languages.allFieldsRequired[language]} /> : null}
 
             <div className={styles["login-wrapper"]}>
                 <form className={styles["login-form"]} onSubmit={onSubmit}>
 
-                    <h1>Login</h1>
+                    <h1>{languages.login[language]}</h1>
 
-                    <label htmlFor="login-email">Email</label>
+                    <label htmlFor="login-email">{languages.email[language]}</label>
                     <input
                         type="email"
                         id="login-email"
@@ -82,7 +86,7 @@ const Login = () => {
                         onChange={changeValueHandler}
                     />
 
-                    <label htmlFor="login-password">Password</label>
+                    <label htmlFor="login-password">{languages.password[language]}</label>
                     <input
                         type="password"
                         name="password"
@@ -97,10 +101,10 @@ const Login = () => {
                             disabled={showNotification}
                             className={styles[`${showNotification ? 'button-disabled' : ''}`]}
                         >
-                            Login
+                            {languages.login[language]}
                         </button>
                     </div>
-                    <p className={styles["account-message"]}>If you don't have an account click <Link to="/register">here</Link></p>
+                    <p className={styles["account-message"]}>{languages.dontHaveAccount[language]}<Link to="/register">{languages.here[language]}</Link></p>
 
                 </form>
             </div>

@@ -1,6 +1,8 @@
 import { useState, useEffect, useContext } from "react";
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from "../../contexts/AuthContext";
+import { LanguageContext } from "../../contexts/LanguageContext";
+import {languages} from '../../languages/languages';
 import * as bookService from '../../services/bookService';
 import * as likeService from '../../services/likeService';
 import * as commentService from '../../services/commentService';
@@ -9,6 +11,7 @@ import styles from './BookDetails.module.css';
 
 
 const BookDetails = () => {   
+    const {language} = useContext(LanguageContext);
 
     const { user } = useContext(AuthContext);
     const { bookId } = useParams();
@@ -49,7 +52,7 @@ const BookDetails = () => {
     }
 
     const isOwner = user._id && user._id === currentBook._ownerId;  
-    const showLikeButton = user._id != undefined && isOwner == false && isLiked == false;
+    const showLikeButton = user._id !== undefined && isOwner === false && isLiked === false;
 
     const bookDeleteHandler = () => {
         const confirmation = window.confirm('Are you sure you want to delete this book?');
@@ -90,27 +93,27 @@ const BookDetails = () => {
                     <h1>{currentBook.title}</h1>
                     <h2>{currentBook.author}</h2>
                     <h3>{currentBook.genre}, {currentBook.year}</h3>
-                    <h3>Price: {currentBook.price}$</h3>
-                    <p>Summary: {currentBook.summary}</p>
+                    <h3>{languages.price[language]}: {currentBook.price}$</h3>
+                    <p>{languages.summary[language]}: {currentBook.summary}</p>
                     <div className={likesStyle}>
-                        <p>Likes: {totalLikes}</p>
+                        <p>{languages.likes[language]}: {totalLikes}</p>
                         {isLiked
-                            ?   <p>You already liked this book!</p>
+                            ?   <p>{languages.alreadyLikedBook[language]}</p>
                             : <></>
                         }
                     </div>
 
                     {isOwner
                         ? <div className={styles.buttons}>
-                            <Link className={styles["btn-edit"]} to={`/catalog/${currentBook._id}/edit`}>Edit</Link>
-                            <button onClick={bookDeleteHandler} className={styles["btn-delete"]}>Delete</button>
+                            <Link className={styles["btn-edit"]} to={`/catalog/${currentBook._id}/edit`}>{languages.edit[language]}</Link>
+                            <button onClick={bookDeleteHandler} className={styles["btn-delete"]}>{languages.delete[language]}</button>
                         </div>
                         : <></>
                     }
 
                     {showLikeButton
                         ? <div className={styles.buttons}>
-                            <button onClick={bookLikeHandler} className={styles["btn-like"]}>Like</button>
+                            <button onClick={bookLikeHandler} className={styles["btn-like"]}>{languages.like[language]}</button>
                         </div>
                         : <></>
                     }
@@ -118,7 +121,7 @@ const BookDetails = () => {
 
                 <div className={styles["comments-part"]}>
                     <div className={styles.comments}>
-                        <h1>Comments:</h1>                        
+                        <h1>{languages.comments[language]}:</h1>                        
                             {comments?.map(x =>
                                 <div key={x._id} className={styles["comment-item"]} >
                                     <p className={styles["comment-text"]}>{x.text}</p>
@@ -127,16 +130,16 @@ const BookDetails = () => {
                             )}                       
 
                         {!comments.length &&
-                            <p >No comments.</p>
+                            <p >{languages.noComments[language]}</p>
                         }
                     </div>
 
-                    {!isOwner
+                    {!isOwner && user._id
                         ? <div className={styles["add-comment"]}>
-                            <h2>Add new comment:</h2>
+                            <h2>{languages.addComment[language]}:</h2>
                             <form onSubmit={addCommentHandler}>
                                 <textarea name="comment" placeholder="Please write your comment here" />
-                                <input className={styles["btn-add-comment"]} type="submit" value="Add Comment" />
+                                <input className={styles["btn-add-comment"]} type="submit" value={languages.addComment[language]} />
                             </form>
                         </div>
                         : <></>}
