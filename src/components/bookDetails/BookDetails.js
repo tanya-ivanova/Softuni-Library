@@ -7,6 +7,8 @@ import * as bookService from '../../services/bookService';
 import * as likeService from '../../services/likeService';
 import * as commentService from '../../services/commentService';
 import Spinner from "../common/spinner/Spinner";
+import Backdrop from "../common/backdrop/Backdrop";
+import Modal from "../common/modal/Modal";
 import styles from './BookDetails.module.css';
 
 
@@ -19,13 +21,12 @@ const BookDetails = () => {
 
     const [isLoading, setIsLoading] = useState(true);
 
+    const [showModal, setShowModal] = useState();
+
     const [currentBook, setCurrentBook] = useState([]);
     const [totalLikes, setTotalLikes] = useState();
     const [isLiked, setIsLiked] = useState();
     const [comments, setComments] = useState([]);
-
-    const likesStyle = `${styles.likes} fa fa-thumbs-up`;
-
 
     useEffect(() => {
         Promise.all([
@@ -54,14 +55,21 @@ const BookDetails = () => {
     const isOwner = user._id && user._id === currentBook._ownerId;  
     const showLikeButton = user._id !== undefined && isOwner === false && isLiked === false;
 
-    const bookDeleteHandler = () => {
-        const confirmation = window.confirm('Are you sure you want to delete this book?');
-        if (confirmation) {
-            bookService.remove(bookId)
-                .then(() => {
-                    navigate('/catalog');
-                });
-        }
+    const likesStyle = `${styles.likes} fa fa-thumbs-up`;
+
+    const showModalHandler = () => {
+        setShowModal(true);
+    }
+    
+    const closeModalHandler = () => {
+        setShowModal(false);
+    }
+
+    const bookDeleteHandler = () => {        
+        bookService.remove(bookId)
+            .then(() => {
+                navigate('/catalog');
+            });        
     };
 
     const bookLikeHandler = () => {
@@ -106,7 +114,10 @@ const BookDetails = () => {
                     {isOwner
                         ? <div className={styles.buttons}>
                             <Link className={styles["btn-edit"]} to={`/catalog/${currentBook._id}/edit`}>{languages.edit[language]}</Link>
-                            <button onClick={bookDeleteHandler} className={styles["btn-delete"]}>{languages.delete[language]}</button>
+                            <button onClick={showModalHandler} className={styles["btn-delete"]}>{languages.delete[language]}</button>
+
+                            {showModal && <Backdrop onClick={closeModalHandler} />}
+                            {showModal && <Modal text={languages.areYouSure[language]} onClose={closeModalHandler} onConfirm={bookDeleteHandler} />}
                         </div>
                         : <></>
                     }

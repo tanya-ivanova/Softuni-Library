@@ -163,6 +163,10 @@ export const languages = {
         bulgarian: 'Отмени',
         english: 'Cancel'
     },
+    confirm: {
+        bulgarian: 'Потвърди',
+        english: 'Confirm'
+    },
     likes: {
         bulgarian: 'Харесвания',
         english: 'Likes'
@@ -267,4 +271,8 @@ export const languages = {
         bulgarian: 'Няма намерени резултати',
         english: 'No results'
     },
+    areYouSure: {
+        bulgarian: 'Сигурни ли сте, че искате да изтриете тази книга?',
+        english: 'Are you sure you want to delete this book?'
+    }
 }
