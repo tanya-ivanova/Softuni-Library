@@ -4,12 +4,40 @@
     color: #A52D2D;
 }
 
-.book-item-wrapper h1 {
+.book-item-wrapper-my-books {
+    color: #A52D2D;
+}
+
+.book-item-wrapper h1,
+.book-item-wrapper-my-books h1 {
     color: #29528B;
 }
 
 .book-item-wrapper h3 {
     margin: 30px;    
+}
+
+.book-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;    
+    padding: 0.5rem;
+    margin: 1rem 0;  
+}
+
+.book-details {
+    display: flex;
+    flex-direction: column;    
+    align-items: center;
+    justify-content: center;
+}
+
+.button {
+    display: flex;
+    flex-direction: column;    
+    align-items: flex-end;
+    flex-flow: column-reverse;
+    justify-content: flex-start;   
 }
 
 .btn-details {

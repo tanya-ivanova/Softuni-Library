@@ -7,6 +7,7 @@ import * as bookService from '../../services/bookService';
 import BookItem from "../catalog/bookItem/BookItem";
 import Spinner from "../common/spinner/Spinner";
 import Pager from "../common/pager/Pager";
+import Card from "../common/card/Card";
 import styles from './Profile.module.css';
 
 const Profile = () => {
@@ -47,10 +48,16 @@ const Profile = () => {
             </section>
             <section className={styles["profile-page"]}>
 
+                <Card className={styles.books}>
                 {books.length > 0
-                    ? books.map(x => <BookItem key={x._id} book={x} profile={true} />)
+                    ? books.map(x => (
+                        <Card className={styles.bookItem}>
+                            <BookItem key={x._id} book={x} profile={true} />
+                        </Card>
+                    ))
                     : <h2 className="message-when-no-data">{languages.noBooksYet[language]}</h2>
                 }
+                </Card>
 
             </section>
             <section className="pager">
