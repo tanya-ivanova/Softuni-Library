@@ -14,7 +14,7 @@ const Catalog = () => {
 
     const [books, setBooks] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [pages, setPages] = useState();
+    const [pages, setPages] = useState(1);
 
     const location = useLocation();
 

@@ -40,6 +40,7 @@ const Header = () => {
                             <Link to="/profile">{languages.myBooks[language]}</Link>
                             <Link to="/create">{languages.addBook[language]}</Link>
                             <Link to="/search">{languages.search[language]}</Link>
+                            <Link to="/searchInGoogle">SearchInGoogle</Link>
                             <Link to="/logout">{languages.logout[language]}</Link>
                         </div>
                         : <div id="guest">

@@ -274,5 +274,5 @@ export const languages = {
     areYouSure: {
         bulgarian: 'Сигурни ли сте, че искате да изтриете тази книга?',
         english: 'Are you sure you want to delete this book?'
-    }
+    },    
 }

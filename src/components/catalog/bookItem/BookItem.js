@@ -5,12 +5,13 @@ import {languages} from '../../../languages/languages';
 import styles from './BookItem.module.css';
 
 
-const BookItem = ({ book }) => {
+const BookItem = ({ book, profile }) => {
     const {language} = useContext(LanguageContext);
+    console.log(profile);
 
     return (
         <div className={styles["book-item-wrapper"]}>
-            <img src={book.imageUrl} />
+            {!profile && <img src={book.imageUrl} />}
             <h1>{book.title}</h1>
             <h2>{book.author}</h2>
             <h3>{book.genre}</h3>

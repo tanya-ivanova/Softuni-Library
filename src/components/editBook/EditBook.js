@@ -120,15 +120,16 @@ const EditBook = () => {
     };
 
     const onCancel = (e) => {
-        setValues({
-            title: '',
-            author: '',
-            genre: '',
-            imageUrl: '',
-            year: '',
-            price: '',
-            summary: ''
-        });
+        // setValues({
+        //     title: '',
+        //     author: '',
+        //     genre: '',
+        //     imageUrl: '',
+        //     year: '',
+        //     price: '',
+        //     summary: ''
+        // });
+        navigate(`/catalog/${bookId}/details`);
     }
 
     return (

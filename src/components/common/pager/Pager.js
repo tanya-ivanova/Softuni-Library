@@ -1,15 +1,27 @@
 import { useContext } from "react";
 import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { LanguageContext } from "../../../contexts/LanguageContext";
 import {languages} from '../../../languages/languages';
 import styles from './Pager.module.css';
 
 
-const Pager = ({ page, pages }) => {
+const Pager = ({ page, pages, query }) => {
     const {language} = useContext(LanguageContext);
 
-    const linkToPrev = page !== 1 ? `/catalog?page=${page - 1}` : null;
-    const linkToNext = page < pages ? `/catalog?page=${page + 1}` : null;
+    const location = useLocation();
+        
+    let linkToPrev;
+    let linkToNext;
+
+    if(query) {        
+        linkToPrev = page !== 1 ? `${location.pathname}?query=${query}?page=${page - 1}` : null;
+        linkToNext = page < pages ? `${location.pathname}?query=${query}?page=${page + 1}` : null;
+    } else {
+        linkToPrev = page !== 1 ? `${location.pathname}?page=${page - 1}` : null;
+        linkToNext = page < pages ? `${location.pathname}?page=${page + 1}` : null;
+    }
+    
     
     const onClickPrev = (e) => {        
         if(page === 1) {            

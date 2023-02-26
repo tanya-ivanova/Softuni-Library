@@ -17,6 +17,7 @@ import Profile from './components/profile/Profile';
 import BookDetails from './components/bookDetails/BookDetails';
 import EditBook from './components/editBook/EditBook';
 import Search from './components/search/Search';
+import SearchInGoogle from './components/searchInGoogle/SearchInGoogle';
 import NotFound from './components/notFound/NotFound';
 
 
@@ -44,6 +45,7 @@ function App() {
                                     <Route path="/create" element={<AddBook />} />
                                     <Route path="/profile" element={<Profile />} />
                                     <Route path="/search" element={<Search />} />
+                                    <Route path="/searchInGoogle" element={<SearchInGoogle />} />
                                 </Route>
 
                                 <Route path="/catalog/:bookId/edit" element={<EditBook />} />
