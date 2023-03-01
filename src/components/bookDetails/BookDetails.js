@@ -53,7 +53,7 @@ const BookDetails = () => {
     }
 
     const isOwner = user._id && user._id === currentBook._ownerId;  
-    const showLikeButton = user._id !== undefined && isOwner === false && isLiked === false;
+    const showLikeButton = user._id !== undefined && isOwner === false && isLiked === 0;
 
     const likesStyle = `${styles.likes} fa fa-thumbs-up`;
 
