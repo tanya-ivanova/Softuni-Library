@@ -6,7 +6,7 @@ import {languages} from '../../../languages/languages';
 import styles from './Pager.module.css';
 
 
-const Pager = ({ page, pages, query }) => {
+const Pager = ({ page, pages, query, searchBy }) => {
     const {language} = useContext(LanguageContext);
 
     const location = useLocation();
@@ -15,8 +15,8 @@ const Pager = ({ page, pages, query }) => {
     let linkToNext;
 
     if(query) {        
-        linkToPrev = page !== 1 ? `${location.pathname}?query=${query}?page=${page - 1}` : null;
-        linkToNext = page < pages ? `${location.pathname}?query=${query}?page=${page + 1}` : null;
+        linkToPrev = page !== 1 ? `${location.pathname}?query=${query}?searchBy=${searchBy}?page=${page - 1}` : null;
+        linkToNext = page < pages ? `${location.pathname}?query=${query}?searchBy=${searchBy}?page=${page + 1}` : null;
     } else {
         linkToPrev = page !== 1 ? `${location.pathname}?page=${page - 1}` : null;
         linkToNext = page < pages ? `${location.pathname}?page=${page + 1}` : null;

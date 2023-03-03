@@ -1,21 +1,27 @@
 import { useState, useEffect, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+
 import { LanguageContext } from "../../contexts/LanguageContext";
-import {languages} from '../../languages/languages';
+import { languages } from '../../languages/languages';
 import * as bookService from '../../services/bookService';
 import Notification from "../common/notification/Notification";
+
 import styles from './AddBook.module.css';
 
 
 const AddBook = () => {
     const navigate = useNavigate();
 
-    const {language} = useContext(LanguageContext);
+    const { language } = useContext(LanguageContext);
 
     const [showNotification, setShowNotification] = useState(true);
 
     const [errors, setErrors] = useState({});
-    
+
+    const { googleBookId } = useParams();
+
+    const [googleBook, setGoogleBook] = useState({});
+
     const [values, setValues] = useState({
         title: '',
         author: '',
@@ -27,8 +33,26 @@ const AddBook = () => {
     });
 
     useEffect(() => {
-        if (values.title === '' || values.author === '' || values.genre === '' || values.imageUrl === '' 
-        || values.year === '' || values.price === '' || values.summary === '') {
+        if (googleBookId) {
+            bookService.searchInGoogleGetOne(googleBookId)
+                .then(result => {                    
+                    setGoogleBook(result);
+                    setValues({
+                        title: result.volumeInfo.title,
+                        author: result.volumeInfo.authors?.join(', '),
+                        genre: result.volumeInfo.categories?.join(', '),
+                        imageUrl: result.volumeInfo.imageLinks?.thumbnail,
+                        year: result.volumeInfo.publishedDate,
+                        price: '',
+                        summary: result.volumeInfo.description
+                    });
+                });
+        }
+    }, [googleBookId]);
+
+    useEffect(() => {
+        if (values.title === '' || values.author === '' || values.genre === '' || values.imageUrl === ''
+            || values.year === '' || values.price === '' || values.summary === '') {
             setShowNotification(true);
         } else {
             setShowNotification(false);
@@ -50,8 +74,8 @@ const AddBook = () => {
     };
 
     const isPositive = (e) => {
-        let number = Number(e.target.value);    
-        
+        let number = Number(e.target.value);
+
         setErrors(state => ({
             ...state,
             [e.target.name]: number < 0 || isNaN(number)
@@ -71,7 +95,7 @@ const AddBook = () => {
 
 
     const onSubmit = (e) => {
-        e.preventDefault();        
+        e.preventDefault();
 
         const bookData = {
             title: values.title,
@@ -82,13 +106,6 @@ const AddBook = () => {
             price: values.price,
             summary: values.summary,
         };
-
-
-        // if (bookData.title === '' || bookData.author === '' || bookData.genre === '' || bookData.imageUrl === ''
-        //     || bookData.year === '' || bookData.price === '' || bookData.summary === '') {
-
-        //     return alert('All fields are required!');
-        // }
 
         bookService.create(bookData)
             .then(() => {
@@ -111,7 +128,7 @@ const AddBook = () => {
 
     return (
         <section className={styles["add-book-page"]}>
-            { showNotification ? <Notification message={languages.allFieldsRequired[language]} /> : null }
+            {showNotification ? <Notification message={languages.allFieldsRequired[language]} /> : null}
 
             <div className={styles["add-book-wrapper"]}>
                 <form className={styles["add-book-form"]} onSubmit={onSubmit} >
@@ -225,20 +242,20 @@ const AddBook = () => {
                         <p className={styles.error}>
                             {languages.summaryErrorMessage[language]}
                         </p>
-                    }                    
+                    }
 
                     <div className={styles["btn-add-book"]}>
-                        <button 
-                            type="submit" 
-                            disabled={!isFormValid || showNotification} 
-                            className={styles[`${!isFormValid || showNotification ? 'button-disabled' : ''}`]} 
+                        <button
+                            type="submit"
+                            disabled={!isFormValid || showNotification}
+                            className={styles[`${!isFormValid || showNotification ? 'button-disabled' : ''}`]}
                         >
                             {languages.addBook[language]}
                         </button>
 
-                        <button 
-                            type="button" 
-                            onClick={onCancel} 
+                        <button
+                            type="button"
+                            onClick={onCancel}
                         >
                             {languages.cancel[language]}
                         </button>

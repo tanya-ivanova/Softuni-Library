@@ -1,18 +1,28 @@
-const request = async (method, url, data) => {
+const request = async (method, url, data, mode) => {
     try {
         const user = localStorage.getItem('auth');
         const auth = JSON.parse(user || '{}');        
 
         let headers = {};
 
-        if(auth.accessToken) {
+        if(auth.accessToken && !mode) {
             headers['X-Authorization'] = auth.accessToken;        
+        }
+
+        if(mode) {            
+            headers['Content-type'] = 'application/json';
         }
 
         let buildRequest;
 
-        if(method === 'GET') {
+        if(method === 'GET' && !mode) {
             buildRequest = fetch(url, {headers});
+        } else if(method === 'GET' && mode) {
+            buildRequest = fetch(url, {
+                mode,
+                headers
+            });
+
         } else {
             buildRequest = fetch(url, {
                 method,

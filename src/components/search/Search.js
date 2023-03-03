@@ -4,7 +4,6 @@ import { LanguageContext } from "../../contexts/LanguageContext";
 import { languages } from '../../languages/languages';
 import * as bookService from '../../services/bookService';
 import BookItem from "../catalog/bookItem/BookItem";
-import Notification from "../common/notification/Notification";
 import Pager from "../common/pager/Pager";
 import Spinner from "../common/spinner/Spinner";
 import styles from './Search.module.css';
@@ -16,9 +15,7 @@ const Search = () => {
     const navigate = useNavigate();
 
     const [searchResults, setSearchResults] = useState([]);
-    const [criteria, setCriteria] = useState('');
-
-    const [showNotification, setShowNotification] = useState(true);
+    const [criteria, setCriteria] = useState('title');    
 
     const [isLoading, setIsLoading] = useState(false);
     const [pages, setPages] = useState(1);
@@ -28,37 +25,31 @@ const Search = () => {
     let queryAll = new URLSearchParams(location.search).get("query") || '';
     let page = 1;
     let query;
+    let searchBy;
 
     if (queryAll) {
 
         query = queryAll.split('?')[0];
 
-        if (queryAll.split('?')[1]) {
-            page = Number(queryAll.split('?')[1].split('=')[1]);
+        searchBy = queryAll.split('?')[1].split('=')[1];
+        
+        if (queryAll.split('?')[2]) {
+            page = Number(queryAll.split('?')[2].split('=')[1]);
         }
     }
 
 
     useEffect(() => {
-        if (query && criteria) {            
-            bookService.search(criteria, query, page)
+        if (query && searchBy) {            
+            bookService.search(searchBy, query, page)
                 .then(({ books, pages }) => {
                     setSearchResults(books);
                     setPages(pages);
                     setIsLoading(false);
                 });
         } 
-    }, [page, criteria, query]);
-
+    }, [page, searchBy, query]);   
     
-    useEffect(() => {
-        if (criteria === '' || search === '') {
-            setShowNotification(true);
-        } else {
-            setShowNotification(false);
-        }
-    }, [criteria, search]);
-
     if (isLoading) {
         return (
             <div className="spinner">
@@ -77,22 +68,20 @@ const Search = () => {
 
     const onSearch = (e) => {
         e.preventDefault();
-        navigate(`/search?query=${search}`);
+        navigate(`/search?query=${search}?searchBy=${criteria}`);
         setIsLoading(true);
     };
 
     return (
         <>
-            <section className={styles["search-page"]}>
-                {showNotification ? <Notification message={languages.selectCriteriaAndType[language]} /> : null}
+            <section className={styles["search-page"]}>                
 
                 <div className={styles["form-wrapper"]}>
 
                     <form onSubmit={onSearch} className={styles["search-form"]}>
                         <div className={styles["criteria-wrapper"]}>
                             <span>{languages.searchBy[language]}: </span>
-                            <select name="criteria" onChange={onSearchCriteriaChange} >
-                                <option value="">{languages.pleaseSelect[language]}</option>
+                            <select name="criteria" value={criteria} onChange={onSearchCriteriaChange} >                                
                                 <option value="title">{languages.title[language]}</option>
                                 <option value="author">{languages.author[language]}</option>
                                 <option value="genre">{languages.genre[language]}</option>
@@ -109,9 +98,7 @@ const Search = () => {
                             />
 
                             <button
-                                type='submit'
-                                disabled={showNotification}
-                                className={styles[`${showNotification ? 'button-disabled' : ''}`]}
+                                type='submit'                                
                             >
                                 {languages.search[language]} <i className="fa-solid fa-magnifying-glass"></i>
                             </button>

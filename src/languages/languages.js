@@ -251,9 +251,9 @@ export const languages = {
         bulgarian: 'Ако вече имате акаунт натиснете ',
         english: 'If you already have an account click '
     },
-    selectCriteriaAndType: {
-        bulgarian: 'Изберете критерий и пишете в полето за търсене',
-        english: 'Select criteria and type in the search field'
+    typeInSearchField: {
+        bulgarian: 'Пишете в полето за търсене',
+        english: 'Type in the search field'
     },
     searchBy: {
         bulgarian: 'Търсене по',
@@ -274,5 +274,9 @@ export const languages = {
     areYouSure: {
         bulgarian: 'Сигурни ли сте, че искате да изтриете тази книга?',
         english: 'Are you sure you want to delete this book?'
-    },    
+    },
+    googleSearch: {
+        bulgarian: 'Търсене в Google',
+        english: 'Search in Google'
+    }    
 }

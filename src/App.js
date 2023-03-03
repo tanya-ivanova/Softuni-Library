@@ -43,6 +43,7 @@ function App() {
                                 <Route element={<PrivateRoute />}>
                                     <Route path='/logout' element={<Logout />} />
                                     <Route path="/create" element={<AddBook />} />
+                                    <Route path="/:googleBookId/create" element={<AddBook />} />
                                     <Route path="/profile" element={<Profile />} />
                                     <Route path="/search" element={<Search />} />
                                     <Route path="/searchInGoogle" element={<SearchInGoogle />} />
