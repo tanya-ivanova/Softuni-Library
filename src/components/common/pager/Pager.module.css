@@ -1,7 +1,6 @@
 .position-right {
     display: flex;
-    justify-content: right;
-    
+    justify-content: right;    
 }
 
 .numberOfPages {

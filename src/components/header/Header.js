@@ -30,9 +30,10 @@ const Header = () => {
                 <button className={styles["button-bg"]} onClick={setBulgarianLanguage}>BG</button>
                 <button className={styles["button-en"]} onClick={setEnglishLanguage}>EN</button>             
 
+                {user.email && <Link className={styles.greeting}>{languages.welcome[language]} {user.email}</Link>}
+
                 <nav>
-                    <ul>
-                        {user.email && <Link className={styles.greeting}>{languages.welcome[language]} {user.email}</Link>}
+                    <ul>                        
                         <li><Link to="/catalog">{languages.allBooks[language]}</Link></li>
 
                         {user.accessToken

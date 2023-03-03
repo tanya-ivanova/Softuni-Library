@@ -134,6 +134,6 @@ ul li:hover ul li a {
 .greeting {
     color: #29528b;
     font-size: 18px;  
-    cursor: none;
+    cursor: default;
     margin-right: 10px;
 }
