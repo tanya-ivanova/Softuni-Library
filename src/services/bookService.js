@@ -68,4 +68,3 @@ export const searchInGoogleGetMany = async (criteria, query, page) => {
 export const searchInGoogleGetOne = (googleBookId) => {    
     return request.get(`https://www.googleapis.com/books/v1/volumes/${googleBookId}`, null, 'cors');     
 };
-
