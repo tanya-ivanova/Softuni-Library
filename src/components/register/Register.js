@@ -73,15 +73,7 @@ const Register = () => {
 
 
     const onSubmit = (e) => {
-        e.preventDefault();
-
-        // if (values.email === '' || values.password === '' || values.confirmPassword === '') {
-        //     return alert('All fields are required!');
-        // }
-
-        // if (values.password !== values.confirmPassword) {
-        //     return alert('Passwords don\'t match!');
-        // }
+        e.preventDefault();        
 
         authService.register(values.email, values.password.trim())
             .then(result => {

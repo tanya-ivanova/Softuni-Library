@@ -47,16 +47,7 @@ const EditBook = () => {
             })
             .catch(err => {
                 alert(err.message);
-                setValues({
-                    title: '',
-                    author: '',
-                    genre: '',
-                    imageUrl: '',
-                    year: '',
-                    price: '',
-                    summary: ''
-                });                
-                setIsLoading(false);
+                console.log(err); 
             });
     }, [bookId, user._id]); 
     
@@ -129,19 +120,14 @@ const EditBook = () => {
             .then(() => {
                 e.target.reset();
                 navigate(`/catalog/${bookId}/details`);
+            })
+            .catch(err => {
+                alert(err.message);
+                console.log(err); 
             });
     };
 
-    const onCancel = (e) => {
-        // setValues({
-        //     title: '',
-        //     author: '',
-        //     genre: '',
-        //     imageUrl: '',
-        //     year: '',
-        //     price: '',
-        //     summary: ''
-        // });
+    const onCancel = (e) => {        
         navigate(`/catalog/${bookId}/details`);
     }
 

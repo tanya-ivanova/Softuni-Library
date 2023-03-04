@@ -46,15 +46,7 @@ const AddBook = () => {
                 })
                 .catch(err => {
                     alert(err.message);
-                    setValues({
-                        title: '',
-                        author: '',
-                        genre: '',
-                        imageUrl: '',
-                        year: '',
-                        price: '',
-                        summary: ''
-                    });
+                    console.log(err);                    
                 });
         }
     }, [googleBookId]);
@@ -120,6 +112,10 @@ const AddBook = () => {
             .then(() => {
                 e.target.reset();
                 navigate(`/catalog`);
+            })
+            .catch(err => {
+                alert(err.message);
+                console.log(err);
             });
     };
 

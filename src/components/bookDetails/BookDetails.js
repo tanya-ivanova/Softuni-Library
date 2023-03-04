@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { Link, useParams, useNavigate } from 'react-router-dom';
+
 import { AuthContext } from "../../contexts/AuthContext";
 import { LanguageContext } from "../../contexts/LanguageContext";
 import { languages } from '../../languages/languages';
@@ -9,6 +10,7 @@ import * as commentService from '../../services/commentService';
 import Spinner from "../common/spinner/Spinner";
 import Backdrop from "../common/backdrop/Backdrop";
 import Modal from "../common/modal/Modal";
+
 import styles from './BookDetails.module.css';
 
 
@@ -44,11 +46,7 @@ const BookDetails = () => {
             })
             .catch(err => {
                 alert(err.message);
-                setCurrentBook({});
-                setTotalLikes(0);
-                setIsLiked(0);
-                setComments([]);
-                setIsLoading(false);
+                console.log(err);                
             });
     }, [bookId, user._id, user.accessToken]);
 
