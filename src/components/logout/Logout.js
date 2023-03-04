@@ -17,7 +17,7 @@ const Logout = () => {
             .catch(() => {
                 navigate('/');
             });
-    }, []);
+    }, [user.accessToken, navigate, userLogout]);
 
     return null;
 };
