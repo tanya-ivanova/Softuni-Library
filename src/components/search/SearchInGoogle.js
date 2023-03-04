@@ -89,6 +89,7 @@ const SearchInGoogle = () => {
                 onSearchCriteriaChange={onSearchCriteriaChange}
                 search={search}
                 changeValueHandler={changeValueHandler}
+                showOptionGenre={false}
             />
 
                 <section className="pager">

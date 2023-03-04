@@ -90,6 +90,7 @@ const Search = () => {
                     onSearchCriteriaChange={onSearchCriteriaChange}
                     search={search}
                     changeValueHandler={changeValueHandler}
+                    showOptionGenre={true}
                 />
 
                 <section className="pager">

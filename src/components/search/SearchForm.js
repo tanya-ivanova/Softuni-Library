@@ -10,7 +10,8 @@ const SearchForm = ({
     criteria,
     onSearchCriteriaChange,
     search,
-    changeValueHandler
+    changeValueHandler,
+    showOptionGenre
 }) => {
     const { language } = useContext(LanguageContext);
     return (
@@ -22,7 +23,7 @@ const SearchForm = ({
                     <select name="criteria" value={criteria} onChange={onSearchCriteriaChange} >
                         <option value="title">{languages.title[language]}</option>
                         <option value="author">{languages.author[language]}</option>
-                        <option value="genre">{languages.genre[language]}</option>
+                        {showOptionGenre && <option value="genre">{languages.genre[language]}</option>}
                     </select>
                 </div>
 
