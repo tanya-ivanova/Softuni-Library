@@ -9,13 +9,13 @@ const BookItem = ({ book, profile }) => {
     const { language } = useContext(LanguageContext);
 
     const classBookItem = profile ? styles["book-item"] : '';
-    const classBookDetails = profile ? styles["book-details"] : '';
+    const classBookDetails = profile ? styles["book-details-profile"] : styles["book-details"];
     const classButtonDetails = profile ? styles.button : '';
     const bookItemWrapper = !profile ? styles["book-item-wrapper"] : styles["book-item-wrapper-my-books"];
 
     return (
         <div className={bookItemWrapper}>
-            {!profile && <img src={book.imageUrl} />}
+            {!profile && <img width = "130" height = "180" src={book.imageUrl} alt={book.title} />}
             <div className={classBookItem}>
                 <div className={classBookDetails}>
                     <h1>{book.title}</h1>

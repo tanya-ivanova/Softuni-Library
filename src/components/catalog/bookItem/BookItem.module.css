@@ -1,5 +1,5 @@
 .book-item-wrapper {
-    margin: 80px;
+    margin: 50px;
     display: inline-block;
     color: #A52D2D;
 }
@@ -13,7 +13,7 @@
     color: #29528B;
 }
 
-.book-item-wrapper h3 {
+.book-item-wrapper h1, h2, h3, p {
     margin: 30px;    
 }
 
@@ -25,11 +25,15 @@
     margin: 1rem 0;  
 }
 
-.book-details {
+.book-details-profile {
     display: flex;
     flex-direction: column;    
     align-items: center;
     justify-content: center;
+}
+
+.book-details p, h1, h2, h3 {
+    width: 300px;
 }
 
 .button {
@@ -40,7 +44,8 @@
     justify-content: flex-start;   
 }
 
-.btn-details {
+.btn-details,
+.btn-add {
     color: #5992B7;
     font-weight: bolder;    
     background-color: white;    
@@ -52,7 +57,8 @@
     border-radius: 10px;    
 }
 
-.btn-details:hover {
+.btn-details:hover,
+.btn-add:hover {
     cursor: pointer;
     color: #29528B;
     background-color: #F2AF81;

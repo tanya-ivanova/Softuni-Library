@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from "../../contexts/AuthContext";
 import { LanguageContext } from "../../contexts/LanguageContext";
-import {languages} from '../../languages/languages';
+import { languages } from '../../languages/languages';
 import * as bookService from '../../services/bookService';
 import * as likeService from '../../services/likeService';
 import * as commentService from '../../services/commentService';
@@ -12,8 +12,8 @@ import Modal from "../common/modal/Modal";
 import styles from './BookDetails.module.css';
 
 
-const BookDetails = () => {   
-    const {language} = useContext(LanguageContext);
+const BookDetails = () => {
+    const { language } = useContext(LanguageContext);
 
     const { user } = useContext(AuthContext);
     const { bookId } = useParams();
@@ -35,24 +35,24 @@ const BookDetails = () => {
             user.accessToken ? likeService.getMyLikeByBookId(bookId, user._id) : 0,
             commentService.getByBookId(bookId)
         ])
-        .then((values) => {
-            setCurrentBook(values[0]);
-            setTotalLikes(values[1]);
-            setIsLiked(values[2]);
-            setComments(values[3]);            
-            setIsLoading(false);
-        })
-        .catch(err => {
-            alert(err.message);
-            setCurrentBook({});
-            setTotalLikes(0);
-            setIsLiked(0);
-            setComments([]);            
-            setIsLoading(false);
-        });
+            .then((values) => {
+                setCurrentBook(values[0]);
+                setTotalLikes(values[1]);
+                setIsLiked(values[2]);
+                setComments(values[3]);
+                setIsLoading(false);
+            })
+            .catch(err => {
+                alert(err.message);
+                setCurrentBook({});
+                setTotalLikes(0);
+                setIsLiked(0);
+                setComments([]);
+                setIsLoading(false);
+            });
     }, [bookId, user._id, user.accessToken]);
 
-    if(isLoading) {
+    if (isLoading) {
         return (
             <div className="spinner">
                 <Spinner />
@@ -60,7 +60,7 @@ const BookDetails = () => {
         )
     }
 
-    const isOwner = user._id && user._id === currentBook._ownerId;  
+    const isOwner = user._id && user._id === currentBook._ownerId;
     const showLikeButton = user._id !== undefined && isOwner === false && isLiked === 0;
 
     const likesStyle = `${styles.likes} fa fa-thumbs-up`;
@@ -68,16 +68,16 @@ const BookDetails = () => {
     const showModalHandler = () => {
         setShowModal(true);
     }
-    
+
     const closeModalHandler = () => {
         setShowModal(false);
     }
 
-    const bookDeleteHandler = () => {        
+    const bookDeleteHandler = () => {
         bookService.remove(bookId)
             .then(() => {
                 navigate('/catalog');
-            });        
+            });
     };
 
     const bookLikeHandler = () => {
@@ -105,16 +105,22 @@ const BookDetails = () => {
         <section className={styles["details-page"]}>
             <div className={styles["details-wrapper"]}>
                 <div className={styles["details-part"]}>
-                    <img className={styles.image} src={currentBook.imageUrl} />
-                    <h1>{currentBook.title}</h1>
-                    <h2>{currentBook.author}</h2>
-                    <h3>{currentBook.genre}, {currentBook.year}</h3>
-                    <h3>{languages.price[language]}: {currentBook.price}$</h3>
-                    <p>{languages.summary[language]}: {currentBook.summary}</p>
+                    <div className={styles.container}>
+                        <div>
+                            <img width="200" height="250" className={styles.image} src={currentBook.imageUrl} alt={currentBook.title} />
+                        </div>
+                        <div className={styles["book-details"]}>
+                            <h1>{currentBook.title}</h1>
+                            <h2>{currentBook.author}</h2>
+                            <h3>{currentBook.genre}, {currentBook.year}</h3>
+                            <h3>{languages.price[language]}: {currentBook.price}$</h3>
+                            <p>{languages.summary[language]}: {currentBook.summary}</p>
+                        </div>
+                    </div>
                     <div className={likesStyle}>
                         <p>{languages.likes[language]}: {totalLikes}</p>
                         {isLiked
-                            ?   <p>{languages.alreadyLikedBook[language]}</p>
+                            ? <p>{languages.alreadyLikedBook[language]}</p>
                             : <></>
                         }
                     </div>
@@ -140,13 +146,13 @@ const BookDetails = () => {
 
                 <div className={styles["comments-part"]}>
                     <div className={styles.comments}>
-                        <h1>{languages.comments[language]}:</h1>                        
-                            {comments?.map(x =>
-                                <div key={x._id} className={styles["comment-item"]} >
-                                    <p className={styles["comment-text"]}>{x.text}</p>
-                                    <p className={styles["comment-userEmail"]}>by {x.user.email}</p>
-                                </div>
-                            )}                       
+                        <h1>{languages.comments[language]}:</h1>
+                        {comments?.map(x =>
+                            <div key={x._id} className={styles["comment-item"]} >
+                                <p className={styles["comment-text"]}>{x.text}</p>
+                                <p className={styles["comment-userEmail"]}>by {x.user.email}</p>
+                            </div>
+                        )}
 
                         {!comments.length &&
                             <p >{languages.noComments[language]}</p>

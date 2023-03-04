@@ -9,7 +9,7 @@
 
 .details-wrapper {
     width: 960px;
-    color: #A52D2D;
+    color: #A52D2D;    
 }
 
 .details-wrapper h1 {
@@ -52,6 +52,12 @@
 .image {
     float: left;
     margin-right: 30px;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center
 }
 
 .likes {
