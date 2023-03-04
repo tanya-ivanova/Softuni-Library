@@ -4,10 +4,9 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { LanguageContext } from "../../contexts/LanguageContext";
 import { languages } from '../../languages/languages';
 import * as bookService from '../../services/bookService';
-import BookItemProfile from "../catalog/bookItem/BookItemProfile";
+import BookItem from "../catalog/bookItem/BookItem";
 import Spinner from "../common/spinner/Spinner";
 import Pager from "../common/pager/Pager";
-import Card from "../common/card/Card";
 import styles from './Profile.module.css';
 
 const Profile = () => {
@@ -54,17 +53,11 @@ const Profile = () => {
                 </section>
             }
 
-            <section className={styles["profile-page"]}>
-                <Card className={styles.books}>
+            <section className={styles["profile-page"]}>                
                 {books.length > 0
-                    ? books.map(x => (
-                        <Card className={styles.bookItem} key={x._id}>
-                            <BookItemProfile book={x} />
-                        </Card>
-                    ))
+                    ? books.map(x => <BookItem key={x._id} book={x} />)
                     : <h2 className="message-when-no-data">{languages.noBooksYet[language]}</h2>
-                }
-                </Card>
+                }                
             </section>
 
             {books.length > 0 &&
