@@ -38,7 +38,7 @@ const Register = () => {
       }, [values.email, values.password, values.confirmPassword])
 
       useEffect(() => {
-        if (values.password !== values.confirmPassword) {
+        if (values.password !== values.confirmPassword && values.confirmPassword) {
             setShowPassNotification(true);
         } else {
             setShowPassNotification(false);
