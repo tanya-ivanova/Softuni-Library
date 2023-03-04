@@ -1,26 +1,31 @@
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
+
 import { LanguageContext } from "../../contexts/LanguageContext";
 import { languages } from '../../languages/languages';
 import * as bookService from '../../services/bookService';
 import BookItem from "../catalog/bookItem/BookItem";
 import Pager from "../common/pager/Pager";
 import Spinner from "../common/spinner/Spinner";
+import SearchForm from './SearchForm';
+
 import styles from './Search.module.css';
 
 const Search = () => {
     const { language } = useContext(LanguageContext);
-
-    const [search, setSearch] = useState("");
+    
     const navigate = useNavigate();
 
     const [searchResults, setSearchResults] = useState([]);
-    const [criteria, setCriteria] = useState('title');    
 
-    const [isLoading, setIsLoading] = useState(false);
+    const [criteria, setCriteria] = useState('title');
+    const [search, setSearch] = useState("");    
+
     const [pages, setPages] = useState(1);
 
-    const location = useLocation();
+    const [isLoading, setIsLoading] = useState(false);
+
+    const location = useLocation();    
 
     let queryAll = new URLSearchParams(location.search).get("query") || '';
     let page = 1;
@@ -38,7 +43,6 @@ const Search = () => {
         }
     }
 
-
     useEffect(() => {
         if (query && searchBy) {            
             bookService.search(searchBy, query, page)
@@ -49,8 +53,7 @@ const Search = () => {
                 })
                 .catch(err => {
                     alert(err.message);                   
-                    setSearchResults([]);
-                    setIsLoading(false);
+                    console.log(err.message)
                 });
         } 
     }, [page, searchBy, query]);   
@@ -81,38 +84,16 @@ const Search = () => {
         <>
             <section className={styles["search-page"]}>                
 
-                <div className={styles["form-wrapper"]}>
-
-                    <form onSubmit={onSearch} className={styles["search-form"]}>
-                        <div className={styles["criteria-wrapper"]}>
-                            <span>{languages.searchBy[language]}: </span>
-                            <select name="criteria" value={criteria} onChange={onSearchCriteriaChange} >                                
-                                <option value="title">{languages.title[language]}</option>
-                                <option value="author">{languages.author[language]}</option>
-                                <option value="genre">{languages.genre[language]}</option>
-                            </select>
-                        </div>
-
-                        <div className={styles["input-wrapper"]}>
-                            <input
-                                type="text"
-                                name="search"
-                                placeholder={languages.lookingFor[language]}
-                                value={search}
-                                onChange={changeValueHandler}
-                            />
-
-                            <button
-                                type='submit'                                
-                            >
-                                {languages.search[language]} <i className="fa-solid fa-magnifying-glass"></i>
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                <SearchForm 
+                    onSearch={onSearch}
+                    criteria={criteria}
+                    onSearchCriteriaChange={onSearchCriteriaChange}
+                    search={search}
+                    changeValueHandler={changeValueHandler}
+                />
 
                 <section className="pager">
-                    <Pager page={page} pages={pages} query={query} />
+                    <Pager page={page} pages={pages} query={query} searchBy={searchBy} />
                 </section>
 
                 <div className={styles["results-wrapper"]}>
@@ -122,8 +103,9 @@ const Search = () => {
                     }
                 </div>
             </section>
+
             <section className="pager">
-                <Pager page={page} pages={pages} query={query} />
+                <Pager page={page} pages={pages} query={query} searchBy={searchBy} />
             </section>
         </>
     );

@@ -10,6 +10,8 @@ import * as commentService from '../../services/commentService';
 import Spinner from "../common/spinner/Spinner";
 import Backdrop from "../common/backdrop/Backdrop";
 import Modal from "../common/modal/Modal";
+import Like from "../like/Like";
+import Comment from "../comment/Comment";
 
 import styles from './BookDetails.module.css';
 
@@ -60,8 +62,7 @@ const BookDetails = () => {
 
     const isOwner = user._id && user._id === currentBook._ownerId;
     const showLikeButton = user._id !== undefined && isOwner === false && isLiked === 0;
-
-    const likesStyle = `${styles.likes} fa fa-thumbs-up`;
+   
 
     const showModalHandler = () => {
         setShowModal(true);
@@ -115,13 +116,8 @@ const BookDetails = () => {
                             <p>{languages.summary[language]}: {currentBook.summary}</p>
                         </div>
                     </div>
-                    <div className={likesStyle}>
-                        <p>{languages.likes[language]}: {totalLikes}</p>
-                        {isLiked
-                            ? <p>{languages.alreadyLikedBook[language]}</p>
-                            : <></>
-                        }
-                    </div>
+                    
+                    <Like totalLikes={totalLikes} isLiked={isLiked} />
 
                     {isOwner
                         ? <div className={styles.buttons}>
@@ -142,31 +138,11 @@ const BookDetails = () => {
                     }
                 </div>
 
-                <div className={styles["comments-part"]}>
-                    <div className={styles.comments}>
-                        <h1>{languages.comments[language]}:</h1>
-                        {comments?.map(x =>
-                            <div key={x._id} className={styles["comment-item"]} >
-                                <p className={styles["comment-text"]}>{x.text}</p>
-                                <p className={styles["comment-userEmail"]}>by {x.user.email}</p>
-                            </div>
-                        )}
-
-                        {!comments.length &&
-                            <p >{languages.noComments[language]}</p>
-                        }
-                    </div>
-
-                    {!isOwner && user._id
-                        ? <div className={styles["add-comment"]}>
-                            <h2>{languages.addComment[language]}:</h2>
-                            <form onSubmit={addCommentHandler}>
-                                <textarea name="comment" placeholder="Please write your comment here" />
-                                <input className={styles["btn-add-comment"]} type="submit" value={languages.addComment[language]} />
-                            </form>
-                        </div>
-                        : <></>}
-                </div>
+                <Comment 
+                    comments={comments}
+                    isOwner={isOwner}
+                    addCommentHandler={addCommentHandler} 
+                />
             </div>
         </section>
     );

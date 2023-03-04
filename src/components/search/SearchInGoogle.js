@@ -7,8 +7,9 @@ import * as bookService from '../../services/bookService';
 import BookItemGoogle from '../catalog/bookItem/BookItemGoogle';
 import Pager from "../common/pager/Pager";
 import Spinner from "../common/spinner/Spinner";
+import SearchForm from './SearchForm';
 
-import styles from './SearchInGoogle.module.css';
+import styles from './Search.module.css';
 
 const SearchInGoogle = () => {
     const { language } = useContext(LanguageContext);
@@ -51,8 +52,7 @@ const SearchInGoogle = () => {
                 })
                 .catch(err => { 
                     alert(err.message);                   
-                    setSearchResults([]);
-                    setIsLoading(false);
+                    console.log(err.message);
                 });
         }
     }, [searchBy, query, page]);
@@ -83,37 +83,18 @@ const SearchInGoogle = () => {
         <>
             <section className={styles["search-page"]}>
 
-                <div className={styles["form-wrapper"]}>
-                    <form onSubmit={onSearch} className={styles["search-form"]}>
-                        <div className={styles["criteria-wrapper"]}>
-                            <span>{languages.searchBy[language]}: </span>
-                            <select name="criteria" value={criteria} onChange={onSearchCriteriaChange} >
-                                <option value="title" >{languages.title[language]}</option>
-                                <option value="author">{languages.author[language]}</option>
-                            </select>
-                        </div>
-
-                        <div className={styles["input-wrapper"]}>
-                            <input
-                                type="text"
-                                name="search"
-                                placeholder={languages.lookingFor[language]}
-                                value={search}
-                                onChange={changeValueHandler}
-                            />
-
-                            <button
-                                type='submit'
-                            >
-                                {languages.search[language]} <i className="fa-solid fa-magnifying-glass"></i>
-                            </button>
-                        </div>
-                    </form>
-                </div>
+            <SearchForm 
+                onSearch={onSearch}
+                criteria={criteria}
+                onSearchCriteriaChange={onSearchCriteriaChange}
+                search={search}
+                changeValueHandler={changeValueHandler}
+            />
 
                 <section className="pager">
                     <Pager page={page} pages={pages} query={query} searchBy={searchBy} />
                 </section>
+
                 <div className={styles["results-wrapper"]}>
                     {searchResults.length > 0
                         ? searchResults.map(x => <BookItemGoogle key={x.id} book={x} />)
@@ -121,6 +102,7 @@ const SearchInGoogle = () => {
                     }
                 </div>
             </section>
+
             <section className="pager">
                 <Pager page={page} pages={pages} query={query} searchBy={searchBy} />
             </section>

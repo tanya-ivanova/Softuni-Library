@@ -17,7 +17,7 @@ import Profile from './components/profile/Profile';
 import BookDetails from './components/bookDetails/BookDetails';
 import EditBook from './components/editBook/EditBook';
 import Search from './components/search/Search';
-import SearchInGoogle from './components/searchInGoogle/SearchInGoogle';
+import SearchInGoogle from './components/search/SearchInGoogle';
 import NotFound from './components/notFound/NotFound';
 
 
