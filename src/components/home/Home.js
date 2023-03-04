@@ -4,8 +4,12 @@ import {languages} from '../../languages/languages';
 import styles from './Home.module.css';
 
 
-const Home = () => {
+const Home = ({error}) => {
     const {language} = useContext(LanguageContext);
+
+    if(error) {
+        window.location.reload(true);
+    }
 
     return (
         <section className={styles["home-page"]}>

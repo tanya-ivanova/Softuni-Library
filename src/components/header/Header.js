@@ -50,8 +50,8 @@ const Header = () => {
                                 <li><Link to="/logout">{languages.logout[language]}</Link></li>
                             </>
                             : <>
-                                <Link to="/login">{languages.login[language]}</Link>
-                                <Link to="/register">{languages.register[language]}</Link>
+                                <li><Link to="/login">{languages.login[language]}</Link></li>
+                                <li><Link to="/register">{languages.register[language]}</Link></li>
                             </>
                         }
 

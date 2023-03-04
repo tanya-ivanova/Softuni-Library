@@ -83,7 +83,7 @@ const Register = () => {
         //     return alert('Passwords don\'t match!');
         // }
 
-        authService.register(values.email, values.password)
+        authService.register(values.email, values.password.trim())
             .then(result => {
                 const authData = {
                     _id: result._id,
@@ -94,8 +94,14 @@ const Register = () => {
                 userLogin(authData);
                 navigate('/');
             })
-            .catch(() => {
-                navigate('/404');
+            .catch((err) => {
+                alert(err.message);
+                navigate('/register');
+                setValues({
+                    email: '',
+                    password: '',
+                    confirmPassword: ''
+                });
             });
     };
 

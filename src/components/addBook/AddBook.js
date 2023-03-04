@@ -18,9 +18,7 @@ const AddBook = () => {
 
     const [errors, setErrors] = useState({});
 
-    const { googleBookId } = useParams();
-
-    const [googleBook, setGoogleBook] = useState({});
+    const { googleBookId } = useParams();    
 
     const [values, setValues] = useState({
         title: '',
@@ -35,9 +33,8 @@ const AddBook = () => {
     useEffect(() => {
         if (googleBookId) {
             bookService.searchInGoogleGetOne(googleBookId)
-                .then(result => {                    
-                    setGoogleBook(result);
-                    setValues({
+                .then(result => {                
+                        setValues({
                         title: result.volumeInfo.title,
                         author: result.volumeInfo.authors?.join(', '),
                         genre: result.volumeInfo.categories?.join(', '),
@@ -45,6 +42,18 @@ const AddBook = () => {
                         year: result.volumeInfo.publishedDate,
                         price: '',
                         summary: result.volumeInfo.description
+                    });
+                })
+                .catch(err => {
+                    alert(err.message);
+                    setValues({
+                        title: '',
+                        author: '',
+                        genre: '',
+                        imageUrl: '',
+                        year: '',
+                        price: '',
+                        summary: ''
                     });
                 });
         }

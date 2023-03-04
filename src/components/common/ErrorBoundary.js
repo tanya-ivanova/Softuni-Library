@@ -1,7 +1,10 @@
 import { Component } from "react";
 import { Link } from 'react-router-dom';
+import Home from "../home/Home";
+import GetBackToHome from "./GetBackToHome";
 
-class ErrorBoundary extends Component {
+class ErrorBoundary extends Component {    
+
     constructor(props) {
         super(props);
 
@@ -15,16 +18,16 @@ class ErrorBoundary extends Component {
     }
 
     componentDidCatch(error, errorInfo) {
-        console.log('componentDidCatch');
+        console.log('componentDidCatch');      
     }
 
     render() {
-
         if (this.state.error) {
             return (
                 <div className="message-when-no-data">
-                    <h2>{this.state.error}</h2>
-                    <p>Get back to <Link to="/">Home</Link> page and then Refresh the page in order to continue</p>
+                    <h2>ERROR: {this.state.error}</h2>
+                    <h1>Returning back to Home page...</h1>
+                    <GetBackToHome error={this.state.error} />                   
                 </div>
             );
         }

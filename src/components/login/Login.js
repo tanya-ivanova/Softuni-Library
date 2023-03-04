@@ -41,19 +41,10 @@ const Login = () => {
     };
 
     const onSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault();        
 
-        //const {email, password} = Object.fromEntries(new FormData(e.target));
-        // const formData = new FormData(e.target);
-        // const email = formData.get('email').trim();
-        // const password = formData.get('password').trim();
-
-        // if (email === '' || password === '') {
-        //     return alert('All fields are required!');
-        // }
-
-        authService.login(values.email, values.password)
-            .then(result => {
+        authService.login(values.email, values.password.trim())
+            .then(result => {                
                 const authData = {
                     _id: result._id,
                     email: result.email,
@@ -64,7 +55,12 @@ const Login = () => {
                 navigate('/');
             })
             .catch((err) => {
+                alert(err.message);
                 navigate('/login');
+                setValues({
+                    email: '',
+                    password: ''
+                });
             });
     };
 

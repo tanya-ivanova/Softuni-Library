@@ -55,7 +55,8 @@ const request = async (method, url, data, mode) => {
         
 
     } catch (err) {
-        alert(err.message);
+        //alert(err.message);
+        console.log(err);
         throw err;
     }
 };

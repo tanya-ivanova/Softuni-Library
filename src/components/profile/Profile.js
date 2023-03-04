@@ -30,6 +30,10 @@ const Profile = () => {
                 setBooks(books);
                 setPages(pages);
                 setIsLoading(false);
+            })
+            .catch(err => {                
+                setBooks([]);
+                setIsLoading(false);
             });
     }, [user._id, page]);
 
@@ -51,8 +55,8 @@ const Profile = () => {
                 <Card className={styles.books}>
                 {books.length > 0
                     ? books.map(x => (
-                        <Card className={styles.bookItem}>
-                            <BookItem key={x._id} book={x} profile={true} />
+                        <Card className={styles.bookItem} key={x._id}>
+                            <BookItem book={x} profile={true} />
                         </Card>
                     ))
                     : <h2 className="message-when-no-data">{languages.noBooksYet[language]}</h2>

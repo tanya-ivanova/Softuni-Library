@@ -42,14 +42,17 @@ const SearchInGoogle = () => {
     }
 
     useEffect(() => {
-        if (query && searchBy) { 
-            console.log(page);           
+        if (query && searchBy) {                    
             bookService.searchInGoogleGetMany(searchBy, query, page)
                 .then(({googleBooks, pages}) => {
                     setSearchResults(googleBooks.items || []);
                     setPages(pages);
+                    setIsLoading(false);                    
+                })
+                .catch(err => { 
+                    alert(err.message);                   
+                    setSearchResults([]);
                     setIsLoading(false);
-                    console.log(googleBooks);
                 });
         }
     }, [searchBy, query, page]);

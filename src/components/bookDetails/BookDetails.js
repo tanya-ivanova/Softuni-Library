@@ -23,7 +23,7 @@ const BookDetails = () => {
 
     const [showModal, setShowModal] = useState();
 
-    const [currentBook, setCurrentBook] = useState([]);
+    const [currentBook, setCurrentBook] = useState({});
     const [totalLikes, setTotalLikes] = useState();
     const [isLiked, setIsLiked] = useState();
     const [comments, setComments] = useState([]);
@@ -34,15 +34,23 @@ const BookDetails = () => {
             likeService.getTotalLikesByBookId(bookId),
             user.accessToken ? likeService.getMyLikeByBookId(bookId, user._id) : 0,
             commentService.getByBookId(bookId)
-        ]).then((values) => {
+        ])
+        .then((values) => {
             setCurrentBook(values[0]);
             setTotalLikes(values[1]);
             setIsLiked(values[2]);
-            setComments(values[3]);
-            
+            setComments(values[3]);            
+            setIsLoading(false);
+        })
+        .catch(err => {
+            alert(err.message);
+            setCurrentBook({});
+            setTotalLikes(0);
+            setIsLiked(0);
+            setComments([]);            
             setIsLoading(false);
         });
-    }, []);
+    }, [bookId, user._id, user.accessToken]);
 
     if(isLoading) {
         return (

@@ -46,6 +46,11 @@ const Search = () => {
                     setSearchResults(books);
                     setPages(pages);
                     setIsLoading(false);
+                })
+                .catch(err => {
+                    alert(err.message);                   
+                    setSearchResults([]);
+                    setIsLoading(false);
                 });
         } 
     }, [page, searchBy, query]);   

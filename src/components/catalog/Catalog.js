@@ -27,6 +27,10 @@ const Catalog = () => {
                 setBooks(books);
                 setPages(pages);
                 setIsLoading(false);
+            })
+            .catch(err => {                
+                setBooks([]);
+                setIsLoading(false);
             });
     }, [page]);
 

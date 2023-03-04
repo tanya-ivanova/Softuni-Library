@@ -44,8 +44,21 @@ const EditBook = () => {
                 });
                 setIsOwner(user._id && user._id === result._ownerId);
                 setIsLoading(false);                
+            })
+            .catch(err => {
+                alert(err.message);
+                setValues({
+                    title: '',
+                    author: '',
+                    genre: '',
+                    imageUrl: '',
+                    year: '',
+                    price: '',
+                    summary: ''
+                });                
+                setIsLoading(false);
             });
-    }, []); 
+    }, [bookId, user._id]); 
     
     if(isLoading) {
         return (
