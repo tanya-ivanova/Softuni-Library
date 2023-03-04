@@ -13,19 +13,19 @@ import styles from './Search.module.css';
 
 const Search = () => {
     const { language } = useContext(LanguageContext);
-    
+
     const navigate = useNavigate();
 
     const [searchResults, setSearchResults] = useState([]);
 
     const [criteria, setCriteria] = useState('title');
-    const [search, setSearch] = useState("");    
+    const [search, setSearch] = useState("");
 
     const [pages, setPages] = useState(1);
 
     const [isLoading, setIsLoading] = useState(false);
 
-    const location = useLocation();    
+    const location = useLocation();
 
     let queryAll = new URLSearchParams(location.search).get("query") || '';
     let page = 1;
@@ -37,14 +37,14 @@ const Search = () => {
         query = queryAll.split('?')[0];
 
         searchBy = queryAll.split('?')[1].split('=')[1];
-        
+
         if (queryAll.split('?')[2]) {
             page = Number(queryAll.split('?')[2].split('=')[1]);
         }
     }
 
     useEffect(() => {
-        if (query && searchBy) {            
+        if (query && searchBy) {
             bookService.search(searchBy, query, page)
                 .then(({ books, pages }) => {
                     setSearchResults(books);
@@ -52,12 +52,12 @@ const Search = () => {
                     setIsLoading(false);
                 })
                 .catch(err => {
-                    alert(err.message);                   
+                    alert(err.message);
                     console.log(err.message)
                 });
-        } 
-    }, [page, searchBy, query]);   
-    
+        }
+    }, [page, searchBy, query]);
+
     if (isLoading) {
         return (
             <div className="spinner">
@@ -82,9 +82,9 @@ const Search = () => {
 
     return (
         <>
-            <section className={styles["search-page"]}>                
+            <section className={styles["search-page"]}>
 
-                <SearchForm 
+                <SearchForm
                     onSearch={onSearch}
                     criteria={criteria}
                     onSearchCriteriaChange={onSearchCriteriaChange}
@@ -93,9 +93,11 @@ const Search = () => {
                     showOptionGenre={true}
                 />
 
-                <section className="pager">
-                    <Pager page={page} pages={pages} query={query} searchBy={searchBy} />
-                </section>
+                {searchResults.length > 0 &&
+                    <section className="pager">
+                        <Pager page={page} pages={pages} query={query} searchBy={searchBy} />
+                    </section>
+                }
 
                 <div className={styles["results-wrapper"]}>
                     {searchResults.length > 0
@@ -105,9 +107,11 @@ const Search = () => {
                 </div>
             </section>
 
-            <section className="pager">
-                <Pager page={page} pages={pages} query={query} searchBy={searchBy} />
-            </section>
+            {searchResults.length > 0 &&
+                <section className="pager">
+                    <Pager page={page} pages={pages} query={query} searchBy={searchBy} />
+                </section>
+            }
         </>
     );
 };

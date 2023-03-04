@@ -4,7 +4,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { LanguageContext } from "../../contexts/LanguageContext";
 import { languages } from '../../languages/languages';
 import * as bookService from '../../services/bookService';
-import BookItem from "../catalog/bookItem/BookItem";
+import BookItemProfile from "../catalog/bookItem/BookItemProfile";
 import Spinner from "../common/spinner/Spinner";
 import Pager from "../common/pager/Pager";
 import Card from "../common/card/Card";
@@ -31,7 +31,8 @@ const Profile = () => {
                 setPages(pages);
                 setIsLoading(false);
             })
-            .catch(err => {                
+            .catch((err) => { 
+                console.log(err);               
                 setBooks([]);
                 setIsLoading(false);
             });
@@ -47,26 +48,30 @@ const Profile = () => {
 
     return (
         <>
-            <section className="pager">
-                <Pager page={page} pages={pages} />
-            </section>
-            <section className={styles["profile-page"]}>
+            {books.length > 0 &&
+                <section className="pager">
+                    <Pager page={page} pages={pages} />
+                </section>
+            }
 
+            <section className={styles["profile-page"]}>
                 <Card className={styles.books}>
                 {books.length > 0
                     ? books.map(x => (
                         <Card className={styles.bookItem} key={x._id}>
-                            <BookItem book={x} profile={true} />
+                            <BookItemProfile book={x} />
                         </Card>
                     ))
                     : <h2 className="message-when-no-data">{languages.noBooksYet[language]}</h2>
                 }
                 </Card>
+            </section>
 
-            </section>
-            <section className="pager">
-                <Pager page={page} pages={pages} />
-            </section>
+            {books.length > 0 &&
+                <section className="pager">
+                    <Pager page={page} pages={pages} />
+                </section>
+            }
         </>
     );
 };

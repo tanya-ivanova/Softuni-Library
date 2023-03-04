@@ -33,15 +33,15 @@ const AddBook = () => {
     useEffect(() => {
         if (googleBookId) {
             bookService.searchInGoogleGetOne(googleBookId)
-                .then(result => {                
+                .then(result => {                                    
                         setValues({
-                        title: result.volumeInfo.title,
-                        author: result.volumeInfo.authors?.join(', '),
-                        genre: result.volumeInfo.categories?.join(', '),
-                        imageUrl: result.volumeInfo.imageLinks?.thumbnail,
-                        year: result.volumeInfo.publishedDate,
+                        title: result.volumeInfo.title || '',
+                        author: result.volumeInfo.authors?.join(', ') || '',
+                        genre: result.volumeInfo.categories?.join(', ') || '',
+                        imageUrl: result.volumeInfo.imageLinks?.thumbnail || '',
+                        year: result.volumeInfo.publishedDate || '',
                         price: '',
-                        summary: result.volumeInfo.description
+                        summary: result.volumeInfo.description || ''
                     });
                 })
                 .catch(err => {
@@ -119,7 +119,7 @@ const AddBook = () => {
             });
     };
 
-    const onCancel = (e) => {
+    const onCancel = () => {
         setValues({
             title: '',
             author: '',

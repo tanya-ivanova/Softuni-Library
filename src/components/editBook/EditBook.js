@@ -127,7 +127,7 @@ const EditBook = () => {
             });
     };
 
-    const onCancel = (e) => {        
+    const onCancel = () => {        
         navigate(`/catalog/${bookId}/details`);
     }
 

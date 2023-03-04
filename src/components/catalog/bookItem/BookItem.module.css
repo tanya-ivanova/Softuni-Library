@@ -1,66 +1,81 @@
 .book-item-wrapper {
-    margin: 50px;
-    display: inline-block;
-    color: #A52D2D;
+  margin: 50px;
+  display: inline-block;
+  color: #a52d2d;  
 }
 
 .book-item-wrapper-my-books {
-    color: #A52D2D;
+  color: #a52d2d;
 }
 
 .book-item-wrapper h1,
 .book-item-wrapper-my-books h1 {
-    color: #29528B;
+  color: #29528b;
 }
 
-.book-item-wrapper h1, h2, h3, p {
-    margin: 30px;    
+.book-item-wrapper h1,
+h2,
+h3,
+p {
+  margin: 10px;
 }
 
 .book-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;    
-    padding: 0.5rem;
-    margin: 1rem 0;  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  margin: 1rem 0;
 }
 
 .book-details-profile {
-    display: flex;
-    flex-direction: column;    
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.book-details p, h1, h2, h3 {
-    width: 300px;
+.title,
+.author,
+.genre,
+.summary {
+    width: 500px;
+    height: 70px;
+}
+
+.google-book-details {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .button {
-    display: flex;
-    flex-direction: column;    
-    align-items: flex-end;
-    flex-flow: column-reverse;
-    justify-content: flex-start;   
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-flow: column-reverse;
+  justify-content: flex-start;
 }
 
 .btn-details,
 .btn-add {
-    color: #5992B7;
-    font-weight: bolder;    
-    background-color: white;    
-    width: auto;
-    padding: 10px;
-    border-style: solid;
-    border-width: 2px;
-    border-color: #895D67;
-    border-radius: 10px;    
+  color: #5992b7;
+  font-weight: bolder;
+  background-color: white;
+  width: auto;
+  padding: 10px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #895d67;
+  border-radius: 10px;
+  margin-top: 20px;
 }
 
 .btn-details:hover,
 .btn-add:hover {
-    cursor: pointer;
-    color: #29528B;
-    background-color: #F2AF81;
-    border-color: #203973;
+  cursor: pointer;
+  color: #29528b;
+  background-color: #f2af81;
+  border-color: #203973;
 }

@@ -32,26 +32,26 @@ const SearchInGoogle = () => {
     let query;
     let searchBy;
 
-    if (queryAll) {        
+    if (queryAll) {
         query = queryAll.split('?')[0];
-       
+
         searchBy = queryAll.split('?')[1].split('=')[1];
-        
+
         if (queryAll.split('?')[2]) {
             page = Number(queryAll.split('?')[2].split('=')[1]);
         }
     }
 
     useEffect(() => {
-        if (query && searchBy) {                    
+        if (query && searchBy) {
             bookService.searchInGoogleGetMany(searchBy, query, page)
-                .then(({googleBooks, pages}) => {
+                .then(({ googleBooks, pages }) => {
                     setSearchResults(googleBooks.items || []);
                     setPages(pages);
-                    setIsLoading(false);                    
+                    setIsLoading(false);
                 })
-                .catch(err => { 
-                    alert(err.message);                   
+                .catch(err => {
+                    alert(err.message);
                     console.log(err.message);
                 });
         }
@@ -76,25 +76,27 @@ const SearchInGoogle = () => {
     const onSearch = (e) => {
         e.preventDefault();
         navigate(`/searchInGoogle?query=${search}?searchBy=${criteria}`);
-        setIsLoading(true);        
+        setIsLoading(true);
     };
 
     return (
         <>
             <section className={styles["search-page"]}>
 
-            <SearchForm 
-                onSearch={onSearch}
-                criteria={criteria}
-                onSearchCriteriaChange={onSearchCriteriaChange}
-                search={search}
-                changeValueHandler={changeValueHandler}
-                showOptionGenre={false}
-            />
+                <SearchForm
+                    onSearch={onSearch}
+                    criteria={criteria}
+                    onSearchCriteriaChange={onSearchCriteriaChange}
+                    search={search}
+                    changeValueHandler={changeValueHandler}
+                    showOptionGenre={false}
+                />
 
-                <section className="pager">
-                    <Pager page={page} pages={pages} query={query} searchBy={searchBy} />
-                </section>
+                {searchResults.length > 0 &&
+                    <section className="pager">
+                        <Pager page={page} pages={pages} query={query} searchBy={searchBy} />
+                    </section>
+                }
 
                 <div className={styles["results-wrapper"]}>
                     {searchResults.length > 0
@@ -104,9 +106,11 @@ const SearchInGoogle = () => {
                 </div>
             </section>
 
-            <section className="pager">
-                <Pager page={page} pages={pages} query={query} searchBy={searchBy} />
-            </section>
+            {searchResults.length > 0 &&
+                <section className="pager">
+                    <Pager page={page} pages={pages} query={query} searchBy={searchBy} />
+                </section>
+            }
         </>
     );
 };

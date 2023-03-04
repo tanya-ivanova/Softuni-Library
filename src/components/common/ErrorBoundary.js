@@ -1,6 +1,5 @@
 import { Component } from "react";
-import { Link } from 'react-router-dom';
-import Home from "../home/Home";
+
 import GetBackToHome from "./GetBackToHome";
 
 class ErrorBoundary extends Component {    
@@ -17,7 +16,7 @@ class ErrorBoundary extends Component {
         return { error: error.message };
     }
 
-    componentDidCatch(error, errorInfo) {
+    componentDidCatch() {
         console.log('componentDidCatch');      
     }
 

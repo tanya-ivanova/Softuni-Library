@@ -51,8 +51,7 @@ const request = async (method, url, data, mode) => {
         } else {
             const result = await response.json();
             return result;            
-        }
-        
+        }        
 
     } catch (err) {        
         throw err;

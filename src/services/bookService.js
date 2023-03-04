@@ -1,7 +1,7 @@
 import * as request from "./requester";
 
 const baseUrl = 'http://localhost:3030/data/books';
-const pageSize = 3;
+const pageSize = 4;
 const pageSizeForGoogleBooks = 12;
 
 export const getAll = async (page) => {
