@@ -199,6 +199,10 @@ export const languages = {
         bulgarian: 'Добави коментар',
         english: 'Add comment'
     },
+    pleaseWriteYourComment: {
+        bulgarian: 'Моля напишете Вашия коментар тук',
+        english: 'Please write your comment here'
+    },
     noBooksYet: {
         bulgarian: 'Все още няма книги',
         english: 'No books yet'

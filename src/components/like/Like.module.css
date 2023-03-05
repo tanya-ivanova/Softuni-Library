@@ -1,6 +1,7 @@
 .likes {
     display: block;
-    font-size: 28px;       
+    font-size: 28px;
+    text-transform: uppercase;       
 }
 
 .likes p {

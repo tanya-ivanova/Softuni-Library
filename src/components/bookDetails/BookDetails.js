@@ -19,7 +19,7 @@ import styles from './BookDetails.module.css';
 const BookDetails = () => {
     const { language } = useContext(LanguageContext);
 
-    const { user } = useContext(AuthContext);
+    const { user } = useContext(AuthContext); 
     const { bookId } = useParams();
     const navigate = useNavigate();
 
@@ -76,13 +76,23 @@ const BookDetails = () => {
         bookService.remove(bookId)
             .then(() => {
                 navigate('/catalog');
+            })
+            .catch(err => {
+                alert(err.message);
+                console.log(err);                
             });
     };
 
     const bookLikeHandler = () => {
         likeService.likeBook(bookId)
             .then(() => {
-                window.location.reload(true);
+                //window.location.reload(true);
+                setTotalLikes(state => state + 1);
+                setIsLiked(1);
+            })
+            .catch(err => {
+                alert(err.message);
+                console.log(err);                
             });
     };
 
@@ -91,12 +101,28 @@ const BookDetails = () => {
 
         const formData = new FormData(e.target);
 
-        const comment = formData.get('comment');
-
+        let comment = formData.get('comment');
+        
         commentService.create(bookId, comment)
             .then(() => {
-                window.location.reload(true);
+                //window.location.reload(true);
+                setComments(state => {
+                    return [
+                        ...state,
+                        {
+                            bookId, 
+                            text: comment,
+                            user
+                        }
+                    ];
+                });
+            })
+            .catch(err => {
+                alert(err.message);
+                console.log(err);                
             });
+
+        e.target.reset();
     };
 
 

@@ -1,7 +1,6 @@
 .search-page {
     background-color: antiquewhite;
-    padding-left: 10px;
-        
+    padding-left: 10px;        
 }
 
 .results-wrapper {
@@ -9,4 +8,5 @@
     flex-wrap: wrap;
     align-items: center;
     text-align: center;
+    justify-content: center;
 }
