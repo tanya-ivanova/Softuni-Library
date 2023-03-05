@@ -14,7 +14,11 @@ const BookItemGoogle = ({ book }) => {
     return (
         <Card>
             <div className={styles["book-item-wrapper"]}>
-                <img width="130" height="180" src={book.volumeInfo.imageLinks?.thumbnail} alt={book.volumeInfo.title} />
+                {book.volumeInfo.imageLinks?.thumbnail 
+                    ? <img width="130" height="180" src={book.volumeInfo.imageLinks?.thumbnail} alt={book.volumeInfo.title} />
+                    : <img src="http://placehold.it/130x180" alt={book.volumeInfo.title} />
+                }
+                
                 <div className={styles["book-item"]}>
                     <div className={styles["google-book-details"]}>
                         <h1 className={styles.title}>{book.volumeInfo.title}</h1>

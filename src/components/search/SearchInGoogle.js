@@ -82,6 +82,7 @@ const SearchInGoogle = () => {
     return (
         <>
             <section className={styles["search-page"]}>
+            <h1 className={styles["search-title"]}>Search in Google and Add Book to your books</h1>
 
                 <SearchForm
                     onSearch={onSearch}

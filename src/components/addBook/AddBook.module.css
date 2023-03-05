@@ -27,7 +27,7 @@
 
 .add-book-form input {
     display: block;
-    width: 300px;
+    width: 368px;
     padding: 0;
     border: none;
     outline: none;
@@ -36,7 +36,7 @@
 }
 
 .add-book-form textarea {
-    width: 300px;
+    width: 366px;
 }
 
 .add-book-form label {
@@ -88,7 +88,7 @@ button:hover {
 .error {
     color: red;
     border: 1px solid red;    
-    padding: 8px;
+    padding: 8px;    
 }
 
 .button-disabled {

@@ -3,6 +3,13 @@
     padding-left: 10px;        
 }
 
+.search-title {
+    margin-top: 0px;
+    padding-top: 20px;
+    padding-left: 20px;
+    color: #203973;
+}
+
 .results-wrapper {
     display: flex;
     flex-wrap: wrap;

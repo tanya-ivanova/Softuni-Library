@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { Link, useParams, useNavigate } from 'react-router-dom';
+import parse from 'html-react-parser';
 
 import { AuthContext } from "../../contexts/AuthContext";
 import { LanguageContext } from "../../contexts/LanguageContext";
@@ -139,7 +140,7 @@ const BookDetails = () => {
                             <h2>{currentBook.author}</h2>
                             <h3>{currentBook.genre}, {currentBook.year}</h3>
                             <h3>{languages.price[language]}: {currentBook.price}$</h3>
-                            <p>{languages.summary[language]}: {currentBook.summary}</p>
+                            <div>{languages.summary[language]}: {parse(currentBook.summary)}</div>
                         </div>
                     </div>
                     

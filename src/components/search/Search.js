@@ -83,6 +83,7 @@ const Search = () => {
     return (
         <>
             <section className={styles["search-page"]}>
+                <h1 className={styles["search-title"]}>Search in the site</h1>
 
                 <SearchForm
                     onSearch={onSearch}
