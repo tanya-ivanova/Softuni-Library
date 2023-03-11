@@ -298,5 +298,9 @@ export const languages = {
     googleSearch: {
         bulgarian: 'Търсене в Google',
         english: 'Search in Google'
-    }    
+    },
+    searchForMoreBooks: {
+        bulgarian: 'Ако искате да потърсите в Google още книги от този автор, моля, натиснете',
+        english: 'If you want to Search in Google for more books by this author, please click'
+    }
 }
