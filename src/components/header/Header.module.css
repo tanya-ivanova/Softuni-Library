@@ -5,6 +5,8 @@ header {
   position: relative;
   padding: 10px;
   padding-left: 20px;
+  display: flex;
+  justify-content: space-between;
 }
 
 header h1 {
@@ -55,8 +57,7 @@ a:active {
   background-color: #29528b;
 }
 
-nav {
-  position: absolute;
+nav {  
   display: inline-block;  
   margin: 27px;  
   font-size: larger;

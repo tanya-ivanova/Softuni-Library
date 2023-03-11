@@ -43,7 +43,13 @@ const SearchInGoogle = () => {
     }
 
     useEffect(() => {
-        setSearch(query || '');
+        let modifiedQueryForForm;
+        if(query.split('-').length > 1) {
+            modifiedQueryForForm = query.split('-').join(' ');
+        } else {
+            modifiedQueryForForm = query;
+        }
+        setSearch(modifiedQueryForForm || '');
         setCriteria(searchBy || 'title');
     }, [query, searchBy]);
 
@@ -71,8 +77,8 @@ const SearchInGoogle = () => {
         )
     }
 
-    const changeValueHandler = (e) => {
-        setSearch(e.target.value)
+    const changeValueHandler = (e) => {        
+        setSearch(e.target.value);
     };
 
     const onSearchCriteriaChange = (e) => {
@@ -81,12 +87,18 @@ const SearchInGoogle = () => {
 
     const onSearch = (e) => {
         e.preventDefault();
-        navigate(`/searchInGoogle?query=${search}?searchBy=${criteria}`);
+        let modifiedSearchForRequest;
+        if(search.split(' ').length > 1) {
+            modifiedSearchForRequest = search.split(' ').join('-');
+        } else {
+            modifiedSearchForRequest = search;
+        }
+        navigate(`/searchInGoogle?query=${modifiedSearchForRequest}?searchBy=${criteria}`);
         if (query) {
             setIsLoading(true);
         }
     };
-
+    
     return (
         <>
             <section className={styles["search-page"]}>

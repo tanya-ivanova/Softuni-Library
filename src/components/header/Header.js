@@ -23,6 +23,7 @@ const Header = () => {
     return (
         <section className={styles["header-section"]}>
             <header>
+                <div>
                 <h1>
                     <Link to="/" className={styles["softuni-library"]}>{languages.softuniLibrary[language]}</Link>
                 </h1>
@@ -31,7 +32,9 @@ const Header = () => {
                 <button className={styles["button-en"]} onClick={setEnglishLanguage}>EN</button>             
 
                 {user.email && <Link className={styles.greeting}>{languages.welcome[language]} {user.email}</Link>}
+                </div>
 
+                <div>
                 <nav>
                     <ul>                        
                         <li><Link to="/catalog">{languages.allBooks[language]}</Link></li>
@@ -57,6 +60,7 @@ const Header = () => {
 
                     </ul>
                 </nav>
+                </div>
             </header>
 
         </section >

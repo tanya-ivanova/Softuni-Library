@@ -1,8 +1,8 @@
 import * as request from "./requester";
 
 const baseUrl = 'http://localhost:3030/data/books';
-const pageSize = 4;
-const pageSizeForGoogleBooks = 4;
+const pageSize = 6;
+const pageSizeForGoogleBooks = 6;
 
 export const getAll = async (page) => {
     //request.get(`${baseUrl}?sortBy=_createdOn%20desc`);
@@ -54,8 +54,8 @@ export const search = async (criteria, query, page) => {
 export const searchInGoogleGetMany = async (criteria, query, page) => {  
     
     const [googleBooks, countResult] = await Promise.all([
-        request.get(`https://www.googleapis.com/books/v1/volumes?q=${query}+in${criteria}:${query}&startIndex=${(page - 1) * pageSizeForGoogleBooks}&maxResults=${pageSizeForGoogleBooks}&key=AIzaSyDWxrFEuVaQZJZvXnBAVE-tWjzrFdMiU3c`, null, 'cors'),
-        request.get(`https://www.googleapis.com/books/v1/volumes?q=${query}+in${criteria}:${query}&key=AIzaSyDWxrFEuVaQZJZvXnBAVE-tWjzrFdMiU3c`, null, 'cors')
+        request.get(`https://www.googleapis.com/books/v1/volumes?q=""+in${criteria}:${query}&startIndex=${(page - 1) * pageSizeForGoogleBooks}&maxResults=${pageSizeForGoogleBooks}&key=AIzaSyDWxrFEuVaQZJZvXnBAVE-tWjzrFdMiU3c`, null, 'cors'),
+        request.get(`https://www.googleapis.com/books/v1/volumes?q=""+in${criteria}:${query}&key=AIzaSyDWxrFEuVaQZJZvXnBAVE-tWjzrFdMiU3c`, null, 'cors')
     ]);
     const count = await countResult.totalItems;    
 
