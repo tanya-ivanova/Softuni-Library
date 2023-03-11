@@ -31,7 +31,7 @@ const BookDetails = () => {
     const [currentBook, setCurrentBook] = useState({});
     const [totalLikes, setTotalLikes] = useState();
     const [isLiked, setIsLiked] = useState();
-    const [comments, setComments] = useState([]);
+    const [comments, setComments] = useState([]);    
 
     useEffect(() => {
         Promise.all([
@@ -124,7 +124,6 @@ const BookDetails = () => {
         e.target.reset();
     };
 
-
     return (
         <section className={styles["details-page"]}>
             <div className={styles["details-wrapper"]}>
@@ -136,11 +135,10 @@ const BookDetails = () => {
                         <div className={styles["book-details"]}>
                             <h1>{currentBook.title}</h1>
                             <div>
-                                <h2 className={styles.author}>{currentBook.author}</h2> 
-                                <span className={styles["toggle-button"]}>... see more</span>                                
+                                <h2>{currentBook.author}</h2> 
+                                <p className={styles["author-paragraph"]}>If you want to Search in Google for more books by this author, please click <Link className={styles["more-books-by-author"]} to={`/searchInGoogle?query=${currentBook.author}?searchBy=author`}>here</Link>.</p>                                
                             </div>
-                            <h3>{currentBook.genre}, {currentBook.year}</h3>
-                            <h3>{languages.price[language]}: {currentBook.price}$</h3>
+                            <h3>{currentBook.genre}, {currentBook.year}</h3>                            
                             <div>{languages.summary[language]}: {parse(currentBook.summary)}</div>
                         </div>
                     </div>

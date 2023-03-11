@@ -25,8 +25,7 @@ const EditBook = () => {
         author: '',
         genre: '',
         imageUrl: '',
-        year: '',
-        price: '',
+        year: '',        
         summary: ''
     });
 
@@ -38,8 +37,7 @@ const EditBook = () => {
                     author: result.author,
                     genre: result.genre,
                     imageUrl: result.imageUrl,
-                    year: result.year,
-                    price: result.price,
+                    year: result.year,                    
                     summary: result.summary
                 });
                 setIsOwner(user._id && user._id === result._ownerId);
@@ -106,13 +104,12 @@ const EditBook = () => {
             author: values.author,
             genre: values.genre,
             imageUrl: values.imageUrl,
-            year: values.year,
-            price: values.price,
+            year: values.year,            
             summary: values.summary,
         };
 
-        if (bookData.title === '' || bookData.author === '' || bookData.genre === '' || bookData.imageUrl === ''
-            || bookData.year === '' || bookData.price === '' || bookData.summary === '') {
+        if (bookData.title === '' || bookData.author === '' || bookData.genre === '' 
+        || bookData.imageUrl === '' || bookData.year === '' || bookData.summary === '') {
             return alert('All fields are required!');
         }
 
@@ -215,23 +212,7 @@ const EditBook = () => {
                         <p className={styles.error}>
                             {languages.yearErrorMessage[language]}
                         </p>
-                    }
-
-                    <label htmlFor="price">{languages.price[language]}</label>
-                    <input
-                        type="text"
-                        id="price"
-                        name="price"
-                        value={values.price}
-                        onChange={changeValueHandler}
-                        onBlur={isPositive}
-                    />
-
-                    {errors.price &&
-                        <p className={styles.error}>
-                             {languages.priceErrorMessage[language]}
-                        </p>
-                    }
+                    }                    
 
                     <label htmlFor="summary">{languages.summary[language]}</label>
                     <textarea

@@ -25,8 +25,7 @@ const AddBook = () => {
         author: '',
         genre: '',
         imageUrl: '',
-        year: '',
-        price: '',
+        year: '',        
         summary: ''
     });
 
@@ -39,8 +38,7 @@ const AddBook = () => {
                         author: result.volumeInfo.authors?.join(', ') || '',
                         genre: result.volumeInfo.categories?.join(', ') || '',
                         imageUrl: result.volumeInfo.imageLinks?.thumbnail || '',
-                        year: result.volumeInfo.publishedDate || '',
-                        price: '',
+                        year: result.volumeInfo.publishedDate || '',                        
                         summary: result.volumeInfo.description || ''
                     });
                 })
@@ -52,13 +50,13 @@ const AddBook = () => {
     }, [googleBookId]);
 
     useEffect(() => {
-        if (values.title === '' || values.author === '' || values.genre === '' || values.imageUrl === ''
-            || values.year === '' || values.price === '' || values.summary === '') {
+        if (values.title === '' || values.author === '' || values.genre === '' 
+        || values.imageUrl === '' || values.year === '' || values.summary === '') {
             setShowNotification(true);
         } else {
             setShowNotification(false);
         }
-    }, [values.title, values.author, values.genre, values.imageUrl, values.year, values.price, values.summary])
+    }, [values.title, values.author, values.genre, values.imageUrl, values.year, values.summary])
 
     const changeValueHandler = (e) => {
         setValues(state => ({
@@ -103,8 +101,7 @@ const AddBook = () => {
             author: values.author,
             genre: values.genre,
             imageUrl: values.imageUrl,
-            year: values.year,
-            price: values.price,
+            year: values.year,            
             summary: values.summary,
         };
 
@@ -125,8 +122,7 @@ const AddBook = () => {
             author: '',
             genre: '',
             imageUrl: '',
-            year: '',
-            price: '',
+            year: '',            
             summary: ''
         });
     }
@@ -216,23 +212,7 @@ const AddBook = () => {
                         <p className={styles.error}>
                             {languages.yearErrorMessage[language]}
                         </p>
-                    }
-
-                    <label htmlFor="price">{languages.price[language]}</label>
-                    <input
-                        type="text"
-                        id="price"
-                        name="price"
-                        value={values.price}
-                        onChange={changeValueHandler}
-                        onBlur={isPositive}
-                    />
-
-                    {errors.price &&
-                        <p className={styles.error}>
-                            {languages.priceErrorMessage[language]}
-                        </p>
-                    }
+                    }                    
 
                     <label htmlFor="summary">{languages.summary[language]}</label>
                     <textarea

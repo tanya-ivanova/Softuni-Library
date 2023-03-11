@@ -34,22 +34,22 @@ const SearchInGoogle = () => {
 
     if (queryAll) {
         query = queryAll.split('?')[0];
-        if(search === '') {
-            setSearch(query);
-        }
-        
+
         searchBy = queryAll.split('?')[1].split('=')[1];
-        if(criteria !== searchBy) {
-            setCriteria(searchBy);
-        }
-        
+
         if (queryAll.split('?')[2]) {
             page = Number(queryAll.split('?')[2].split('=')[1]);
         }
     }
 
     useEffect(() => {
+        setSearch(query || '');
+        setCriteria(searchBy || 'title');
+    }, [query, searchBy]);
+
+    useEffect(() => {
         if (query && searchBy) {
+
             bookService.searchInGoogleGetMany(searchBy, query, page)
                 .then(({ googleBooks, pages }) => {
                     setSearchResults(googleBooks.items || []);
@@ -82,13 +82,15 @@ const SearchInGoogle = () => {
     const onSearch = (e) => {
         e.preventDefault();
         navigate(`/searchInGoogle?query=${search}?searchBy=${criteria}`);
-        setIsLoading(true);
+        if (query) {
+            setIsLoading(true);
+        }
     };
 
     return (
         <>
             <section className={styles["search-page"]}>
-            <h1 className={styles["search-title"]}>{languages.searchInGoogleAndAddBook[language]}</h1>
+                <h1 className={styles["search-title"]}>{languages.searchInGoogleAndAddBook[language]}</h1>
 
                 <SearchForm
                     onSearch={onSearch}
@@ -104,7 +106,7 @@ const SearchInGoogle = () => {
                         <Pager page={page} pages={pages} query={query} searchBy={searchBy} />
                     </section>
                 }
-
+                
                 <div className={styles["results-wrapper"]}>
                     {searchResults.length > 0
                         ? searchResults.map(x => <BookItemGoogle key={x.id} book={x} />)

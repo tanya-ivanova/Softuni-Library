@@ -31,6 +31,14 @@ export const languages = {
         bulgarian: 'Търсене в Google и добавяне на книга към Вашите книги',
         english: 'Search in Google and Add Book to your books'
     },
+    searchResultsFor: {
+        bulgarian: 'Резултати от търсенето за',
+        english: 'Search results for'
+    },
+    by: {
+        bulgarian: 'по',
+        english: 'by'
+    },
     logout: {
         bulgarian: 'Изход',
         english: 'Logout'

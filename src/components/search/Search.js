@@ -34,20 +34,19 @@ const Search = () => {
 
     if (queryAll) {
 
-        query = queryAll.split('?')[0];
-        if(search === '') {
-            setSearch(query);
-        }
+        query = queryAll.split('?')[0];        
 
-        searchBy = queryAll.split('?')[1].split('=')[1];
-        if(criteria !== searchBy) {
-            setCriteria(searchBy);
-        }
+        searchBy = queryAll.split('?')[1].split('=')[1];        
 
         if (queryAll.split('?')[2]) {
             page = Number(queryAll.split('?')[2].split('=')[1]);
         }
     }
+
+    useEffect(() => {
+        setSearch(query || '');
+        setCriteria(searchBy || 'title');
+    }, [query, searchBy]);
 
     useEffect(() => {
         if (query && searchBy) {
@@ -83,7 +82,9 @@ const Search = () => {
     const onSearch = (e) => {
         e.preventDefault();
         navigate(`/search?query=${search}?searchBy=${criteria}`);
-        setIsLoading(true);
+        if(query) {
+            setIsLoading(true);
+        }
     };
 
     return (
