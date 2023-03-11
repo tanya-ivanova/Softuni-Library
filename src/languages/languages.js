@@ -23,6 +23,14 @@ export const languages = {
         bulgarian: 'Търсене',
         english: 'Search'
     },
+    searchInSite: {
+        bulgarian: 'Търсене в сайта',
+        english: 'Search in the site'
+    },
+    searchInGoogleAndAddBook: {
+        bulgarian: 'Търсене в Google и добавяне на книга към Вашите книги',
+        english: 'Search in Google and Add Book to your books'
+    },
     logout: {
         bulgarian: 'Изход',
         english: 'Logout'

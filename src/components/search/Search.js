@@ -35,8 +35,14 @@ const Search = () => {
     if (queryAll) {
 
         query = queryAll.split('?')[0];
+        if(search === '') {
+            setSearch(query);
+        }
 
         searchBy = queryAll.split('?')[1].split('=')[1];
+        if(criteria !== searchBy) {
+            setCriteria(searchBy);
+        }
 
         if (queryAll.split('?')[2]) {
             page = Number(queryAll.split('?')[2].split('=')[1]);
@@ -83,7 +89,7 @@ const Search = () => {
     return (
         <>
             <section className={styles["search-page"]}>
-                <h1 className={styles["search-title"]}>Search in the site</h1>
+                <h1 className={styles["search-title"]}>{languages.searchInSite[language]}</h1>
 
                 <SearchForm
                     onSearch={onSearch}

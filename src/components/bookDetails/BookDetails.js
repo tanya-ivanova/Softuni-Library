@@ -86,8 +86,7 @@ const BookDetails = () => {
 
     const bookLikeHandler = () => {
         likeService.likeBook(bookId)
-            .then(() => {
-                //window.location.reload(true);
+            .then(() => {                
                 setTotalLikes(state => state + 1);
                 setIsLiked(1);
             })
@@ -105,8 +104,7 @@ const BookDetails = () => {
         let comment = formData.get('comment');
         
         commentService.create(bookId, comment)
-            .then(() => {
-                //window.location.reload(true);
+            .then(() => {                
                 setComments(state => {
                     return [
                         ...state,
@@ -137,7 +135,10 @@ const BookDetails = () => {
                         </div>
                         <div className={styles["book-details"]}>
                             <h1>{currentBook.title}</h1>
-                            <h2>{currentBook.author}</h2>
+                            <div>
+                                <h2 className={styles.author}>{currentBook.author}</h2> 
+                                <span className={styles["toggle-button"]}>... see more</span>                                
+                            </div>
                             <h3>{currentBook.genre}, {currentBook.year}</h3>
                             <h3>{languages.price[language]}: {currentBook.price}$</h3>
                             <div>{languages.summary[language]}: {parse(currentBook.summary)}</div>
