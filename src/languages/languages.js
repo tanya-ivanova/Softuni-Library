@@ -300,7 +300,7 @@ export const languages = {
         english: 'Search in Google'
     },
     searchForMoreBooks: {
-        bulgarian: 'Ако искате да потърсите в Google още книги от този автор, моля, натиснете',
-        english: 'If you want to Search in Google for more books by this author, please click'
+        bulgarian: 'За още книги от този автор, моля, натиснете',
+        english: 'For more books by this author, click'
     }
 }
