@@ -10,13 +10,12 @@ import styles from './Header.module.css';
 const Header = () => {
     const { user } = useContext(AuthContext);
     const { setAppLanguage, language } = useContext(LanguageContext);
-
-    const setBulgarianLanguage = () => {
-        setAppLanguage('bulgarian');
-    };
-
-    const setEnglishLanguage = () => {
-        setAppLanguage('english');
+    
+    const setLanguage = (language) => {        
+        if(!Object.keys(languages.softuniLibrary).includes(language)) {
+            language = 'english';
+        }
+        setAppLanguage(language);
     };
 
 
@@ -28,8 +27,8 @@ const Header = () => {
                     <Link to="/" className={styles["softuni-library"]}>{languages.softuniLibrary[language]}</Link>
                 </h1>
 
-                <button className={styles["button-bg"]} onClick={setBulgarianLanguage}>BG</button>
-                <button className={styles["button-en"]} onClick={setEnglishLanguage}>EN</button>             
+                <button className={styles["button-bg"]} onClick={() => setLanguage('bulgarian')}>BG</button>
+                <button className={styles["button-en"]} onClick={() => setLanguage('english')}>EN</button>             
 
                 {user.email && <Link className={styles.greeting}>{languages.welcome[language]} {user.email}</Link>}
                 </div>
@@ -57,7 +56,6 @@ const Header = () => {
                                 <li><Link to="/register">{languages.register[language]}</Link></li>
                             </>
                         }
-
                     </ul>
                 </nav>
                 </div>

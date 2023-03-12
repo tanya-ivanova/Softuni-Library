@@ -44,10 +44,10 @@ const SearchInGoogle = () => {
 
     useEffect(() => {
         let modifiedQueryForForm;
-        if(query.split('-').length > 1) {
+        if(query && query.split('-').length > 1) {
             modifiedQueryForForm = query.split('-').join(' ');
-        } else {
-            modifiedQueryForForm = query;
+        } else if(query && query.split('-').length === 1) {
+            modifiedQueryForForm = query;            
         }
         setSearch(modifiedQueryForForm || '');
         setCriteria(searchBy || 'title');
