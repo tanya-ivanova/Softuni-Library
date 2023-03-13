@@ -2,8 +2,6 @@ import { render, screen, cleanup } from "@testing-library/react";
 import { LanguageContext } from "../../contexts/LanguageContext";
 import Footer from "./Footer";
 
-afterEach(cleanup);
-
 describe('Footer component EN', () => {
     afterEach(cleanup);
 

@@ -11,7 +11,7 @@ const Header = () => {
     const { user } = useContext(AuthContext);
     const { setAppLanguage, language } = useContext(LanguageContext);
     
-    const setLanguage = (language) => {        
+    const setLanguageFromHeaderButtons = (language) => {        
         if(!Object.keys(languages.softuniLibrary).includes(language)) {
             language = 'english';
         }
@@ -27,8 +27,8 @@ const Header = () => {
                     <Link to="/" className={styles["softuni-library"]}>{languages.softuniLibrary[language]}</Link>
                 </h1>
 
-                <button className={styles["button-bg"]} onClick={() => setLanguage('bulgarian')}>BG</button>
-                <button className={styles["button-en"]} onClick={() => setLanguage('english')}>EN</button>             
+                <button className={styles["button-bg"]} onClick={() => setLanguageFromHeaderButtons('bulgarian')}>BG</button>
+                <button className={styles["button-en"]} onClick={() => setLanguageFromHeaderButtons('english')}>EN</button>             
 
                 {user.email && <Link className={styles.greeting}>{languages.welcome[language]} {user.email}</Link>}
                 </div>
@@ -45,7 +45,7 @@ const Header = () => {
                                 <li>
                                     <Link>{languages.search[language]}</Link>
                                     <ul>
-                                        <li><Link to="/search">{languages.search[language]}</Link></li>
+                                        <li><Link to="/search">{languages.searchInSite[language]}</Link></li>
                                         <li><Link to="/searchInGoogle">{languages.googleSearch[language]}</Link></li>
                                     </ul>
                                 </li>
