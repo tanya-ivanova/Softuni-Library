@@ -9,8 +9,10 @@ body {
 }
 
 .message-when-no-data {
-    color: #A52D2D;
-    padding-left: 30px;    
+    color: #A52D2D;     
+    background-color: antiquewhite;
+    margin: 0; 
+    padding: 30px;  
 }
 
 .spinner {

@@ -56,7 +56,7 @@ export const languages = {
         english: 'Created by Tanya Ivanova'
     },
     whyReading: {
-        bulgarian: 'Защо да четем книги',
+        bulgarian: 'Защо да четем книги?',
         english: 'Why Reading Books?'
     },
     strengthensYourBrain: {
