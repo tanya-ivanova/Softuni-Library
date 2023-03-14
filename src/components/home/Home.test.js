@@ -18,19 +18,6 @@ describe('Home component image', () => {
         expect(imageElement).toBeInTheDocument();
         expect(imageElement).toHaveAttribute('src');
     });
-
-    // test('Created by Tanya Ivanova" as English text', () => {
-    //     render(
-    //         <LanguageContext.Provider value={{
-    //             language: 'english',          
-    //             setAppLanguage: () => {}          
-    //         }}>
-    //             <Footer />
-    //         </LanguageContext.Provider>);        
-        
-    //     const creatorElement = screen.getByText('Created by Tanya Ivanova', { exact: true });
-    //     expect(creatorElement).toBeInTheDocument();
-    // });
 });
 
 describe('Home component EN', () => {

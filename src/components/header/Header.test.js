@@ -1,5 +1,4 @@
 import { render, screen, cleanup, fireEvent } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import { AuthContext } from "../../contexts/AuthContext";
 import { LanguageContext } from "../../contexts/LanguageContext";
 import { MemoryRouter } from "react-router-dom";

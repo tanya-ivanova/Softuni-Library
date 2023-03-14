@@ -44,7 +44,6 @@ const Catalog = () => {
         )
     }
 
-
     return (
         <>
             {books.length > 0 &&
