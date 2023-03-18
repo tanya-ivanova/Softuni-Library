@@ -1,4 +1,4 @@
-const request = async (method, url, data, mode) => {
+export const request = async (method, url, data, mode) => {
     try {
         const user = localStorage.getItem('auth');
         const auth = JSON.parse(user || '{}');        
@@ -35,7 +35,7 @@ const request = async (method, url, data, mode) => {
         }
 
         const response = await buildRequest;
-
+        
         if (response.ok === false) {
 
             if (response.status === 403) {
