@@ -15,12 +15,13 @@ import Like from "../like/Like";
 import Comment from "../comment/Comment";
 
 import styles from './BookDetails.module.css';
+import ModalError from "../common/modal/ModalError";
 
 
 const BookDetails = () => {
     const { language } = useContext(LanguageContext);
 
-    const { user } = useContext(AuthContext); 
+    const { user } = useContext(AuthContext);
     const { bookId } = useParams();
     const navigate = useNavigate();
 
@@ -28,10 +29,15 @@ const BookDetails = () => {
 
     const [showModal, setShowModal] = useState();
 
+    const [showModalError, setShowModalError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+
     const [currentBook, setCurrentBook] = useState({});
     const [totalLikes, setTotalLikes] = useState();
     const [isLiked, setIsLiked] = useState();
-    const [comments, setComments] = useState([]);    
+    const [comments, setComments] = useState([]);
+
+    const [commentValue, setCommentValue] = useState('');
 
     useEffect(() => {
         Promise.all([
@@ -49,7 +55,7 @@ const BookDetails = () => {
             })
             .catch(err => {
                 alert(err.message);
-                console.log(err);                
+                console.log(err);
             });
     }, [bookId, user._id, user.accessToken]);
 
@@ -63,7 +69,6 @@ const BookDetails = () => {
 
     const isOwner = user._id && user._id === currentBook._ownerId;
     const showLikeButton = user._id !== undefined && isOwner === false && isLiked === 0;
-   
 
     const showModalHandler = () => {
         setShowModal(true);
@@ -80,52 +85,57 @@ const BookDetails = () => {
             })
             .catch(err => {
                 alert(err.message);
-                console.log(err);                
+                console.log(err);
             });
     };
 
     const bookLikeHandler = () => {
         likeService.likeBook(bookId)
-            .then(() => {                
+            .then(() => {
                 setTotalLikes(state => state + 1);
                 setIsLiked(1);
             })
             .catch(err => {
                 alert(err.message);
-                console.log(err);                
+                console.log(err);
             });
+    };
+
+    const changeCommentValueHandler = (e) => {
+        setCommentValue(e.target.value);
     };
 
     const addCommentHandler = (e) => {
         e.preventDefault();
 
-        const formData = new FormData(e.target);
-
-        let comment = formData.get('comment');
-        
-        commentService.create(bookId, comment)
-            .then(() => {                
+        commentService.create(bookId, commentValue)
+            .then(() => {
                 setComments(state => {
                     return [
                         ...state,
                         {
-                            bookId, 
-                            text: comment,
+                            bookId,
+                            text: commentValue,
                             user
                         }
                     ];
                 });
             })
             .catch(err => {
-                alert(err.message);
-                console.log(err);                
+                setShowModalError(true);
+                setErrorMessage(err.message);
+                console.log(err);
             });
 
-        e.target.reset();
+        setCommentValue('');
     };
 
+    const onClickOk = () => {
+        setShowModalError(false);
+    }
+
     let authorForSearch;
-    if(currentBook.author.split(' ').length > 1) {
+    if (currentBook.author.split(' ').length > 1) {
         authorForSearch = currentBook.author.split(' ').join('-');
     } else {
         authorForSearch = currentBook.author;
@@ -133,6 +143,10 @@ const BookDetails = () => {
 
     return (
         <section className={styles["details-page"]}>
+
+            {showModalError && <Backdrop onClick={onClickOk} />}
+            {showModalError && <ModalError errorMessage={errorMessage} onClickOk={onClickOk} />}
+
             <div className={styles["details-wrapper"]}>
                 <div className={styles["details-part"]}>
                     <div className={styles.container}>
@@ -142,14 +156,14 @@ const BookDetails = () => {
                         <div className={styles["book-details"]}>
                             <h1>{currentBook.title}</h1>
                             <div>
-                                <h2>{currentBook.author}</h2> 
-                                <p className={styles["author-paragraph"]}>{languages.searchForMoreBooks[language]} <Link className={styles["more-books-by-author"]} to={`/searchInGoogle?query=${authorForSearch}?searchBy=author`}>{languages.here[language]}</Link>.</p>                                
+                                <h2>{currentBook.author}</h2>
+                                <p className={styles["author-paragraph"]}>{languages.searchForMoreBooks[language]} <Link className={styles["more-books-by-author"]} to={`/searchInGoogle?query=${authorForSearch}?searchBy=author`}>{languages.here[language]}</Link>.</p>
                             </div>
-                            <h3>{currentBook.genre}, {currentBook.year}</h3>                            
+                            <h3>{currentBook.genre}, {currentBook.year}</h3>
                             <div>{languages.summary[language]}: {parse(currentBook.summary)}</div>
                         </div>
                     </div>
-                    
+
                     <Like totalLikes={totalLikes} isLiked={isLiked} />
 
                     {isOwner
@@ -171,10 +185,12 @@ const BookDetails = () => {
                     }
                 </div>
 
-                <Comment 
+                <Comment
                     comments={comments}
                     isOwner={isOwner}
-                    addCommentHandler={addCommentHandler} 
+                    commentValue={commentValue}
+                    changeCommentValueHandler={changeCommentValueHandler}
+                    addCommentHandler={addCommentHandler}
                 />
             </div>
         </section>

@@ -9,6 +9,8 @@ import styles from './Comment.module.css';
 const Comment = ({
     comments,
     isOwner,
+    commentValue,
+    changeCommentValueHandler,
     addCommentHandler
 }) => {
     const { user } = useContext(AuthContext);
@@ -34,7 +36,12 @@ const Comment = ({
                 ? <div className={styles["add-comment"]}>
                     <h2>{languages.addComment[language]}:</h2>
                     <form onSubmit={addCommentHandler}>
-                        <textarea name="comment" placeholder={languages.pleaseWriteYourComment[language]} />
+                        <textarea 
+                            name="comment" 
+                            placeholder={languages.pleaseWriteYourComment[language]}
+                            value={commentValue}
+                            onChange={changeCommentValueHandler} 
+                        />
                         <input className={styles["btn-add-comment"]} type="submit" value={languages.addComment[language]} />
                     </form>
                 </div>
