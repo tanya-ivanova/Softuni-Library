@@ -9,6 +9,8 @@ import { LanguageContext } from "../../contexts/LanguageContext";
 import {languages} from '../../languages/languages';
 
 import Notification from "../common/notification/Notification";
+import Backdrop from "../common/backdrop/Backdrop";
+import ModalError from "../common/modal/ModalError";
 
 
 const Register = () => {
@@ -20,6 +22,9 @@ const Register = () => {
 
     const [showNotification, setShowNotification] = useState(true);
     const [showPassNotification, setShowPassNotification] = useState(false);
+
+    const [showModalError, setShowModalError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const [errors, setErrors] = useState({});
 
@@ -71,7 +76,10 @@ const Register = () => {
 
     const isFormValid = !Object.values(errors).some(x => x);
 
-
+    const onClickOk = () => {
+        setShowModalError(false);
+    }
+    
     const onSubmit = (e) => {
         e.preventDefault();        
 
@@ -87,7 +95,8 @@ const Register = () => {
                 navigate('/');
             })
             .catch((err) => {
-                alert(err.message);
+                setShowModalError(true);
+                setErrorMessage(err.message);
                 navigate('/register');
                 setValues({
                     email: '',
@@ -102,6 +111,9 @@ const Register = () => {
         <section className={styles.register}>
             { showNotification ? <Notification message={languages.allFieldsRequired[language]} /> : null }
             { showPassNotification ? <Notification message={languages.passwordsDontMatch[language]} /> : null }
+
+            {showModalError && <Backdrop onClick={onClickOk} />}
+            {showModalError && <ModalError errorMessage={errorMessage} onClickOk={onClickOk} />}
 
             <div className={styles["register-wrapper"]}>
                 <form className={styles["register-form"]} onSubmit={onSubmit}>

@@ -1,7 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
-import styles from './Login.module.css';
 
 import { AuthContext } from "../../contexts/AuthContext";
 import { LanguageContext } from "../../contexts/LanguageContext";
@@ -9,7 +8,10 @@ import {languages} from '../../languages/languages';
 import * as authService from "../../services/authService";
 
 import Notification from "../common/notification/Notification";
+import ModalError from "../common/modal/ModalError";
+import Backdrop from "../common/backdrop/Backdrop";
 
+import styles from './Login.module.css';
 
 const Login = () => {
     const {language} = useContext(LanguageContext);
@@ -19,6 +21,9 @@ const Login = () => {
     const navigate = useNavigate();
 
     const [showNotification, setShowNotification] = useState(true);
+    
+    const [showModalError, setShowModalError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const [values, setValues] = useState({
         email: '',
@@ -40,6 +45,10 @@ const Login = () => {
         }))
     };
 
+    const onClickOk = () => {
+        setShowModalError(false);
+    }
+
     const onSubmit = (e) => {
         e.preventDefault();        
 
@@ -55,7 +64,8 @@ const Login = () => {
                 navigate('/');
             })
             .catch((err) => {
-                alert(err.message);
+                setShowModalError(true);
+                setErrorMessage(err.message);
                 navigate('/login');
                 setValues({
                     email: '',
@@ -67,7 +77,10 @@ const Login = () => {
     return (
         <section className={styles.login}>
             {showNotification ? <Notification message={languages.allFieldsRequired[language]} /> : null}
-
+            
+            {showModalError && <Backdrop onClick={onClickOk} />}
+            {showModalError && <ModalError errorMessage={errorMessage} onClickOk={onClickOk} />}
+            
             <div className={styles["login-wrapper"]}>
                 <form className={styles["login-form"]} onSubmit={onSubmit}>
 

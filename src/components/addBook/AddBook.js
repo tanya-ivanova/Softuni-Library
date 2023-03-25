@@ -4,6 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { LanguageContext } from "../../contexts/LanguageContext";
 import { languages } from '../../languages/languages';
 import * as bookService from '../../services/bookService';
+import Backdrop from '../common/backdrop/Backdrop';
+import ModalError from '../common/modal/ModalError';
 import Notification from "../common/notification/Notification";
 
 import styles from './AddBook.module.css';
@@ -15,6 +17,9 @@ const AddBook = () => {
     const { language } = useContext(LanguageContext);
 
     const [showNotification, setShowNotification] = useState(true);
+
+    const [showModalError, setShowModalError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const [errors, setErrors] = useState({});
 
@@ -92,6 +97,9 @@ const AddBook = () => {
 
     const isFormValid = !Object.values(errors).some(x => x);
 
+    const onClickOk = () => {
+        setShowModalError(false);
+    }
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -111,8 +119,9 @@ const AddBook = () => {
                 navigate(`/catalog`);
             })
             .catch(err => {
-                alert(err.message);
-                console.log(err);
+                setShowModalError(true);
+                setErrorMessage(err.message); 
+                console.log(err);               
             });
     };
 
@@ -130,6 +139,9 @@ const AddBook = () => {
     return (
         <section className={styles["add-book-page"]}>
             {showNotification ? <Notification message={languages.allFieldsRequired[language]} /> : null}
+
+            {showModalError && <Backdrop onClick={onClickOk} />}
+            {showModalError && <ModalError errorMessage={errorMessage} onClickOk={onClickOk} />}
 
             <div className={styles["add-book-wrapper"]}>
                 <form className={styles["add-book-form"]} onSubmit={onSubmit} >
