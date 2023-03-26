@@ -4,6 +4,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { LanguageContext } from "../../contexts/LanguageContext";
 import {languages} from '../../languages/languages';
 import * as bookService from '../../services/bookService';
+import { isUserAdmin } from "../../utils/utils";
 import Spinner from "../common/spinner/Spinner";
 import styles from './EditBook.module.css';
 
@@ -19,6 +20,8 @@ const EditBook = () => {
     const [isOwner, setIsOwner] = useState(true);
     
     const [errors, setErrors] = useState({});
+
+    const [ownerEmail, setOwnerEmail] = useState('');
 
     const [values, setValues] = useState({
         title: '',
@@ -41,6 +44,7 @@ const EditBook = () => {
                     summary: result.summary
                 });
                 setIsOwner(user._id && user._id === result._ownerId);
+                setOwnerEmail(result.ownerEmail);
                 setIsLoading(false);                
             })
             .catch(err => {
@@ -57,7 +61,9 @@ const EditBook = () => {
         )
     }
 
-    if(!isOwner) {
+    const isAdmin = isUserAdmin(user);
+
+    if(!isAdmin && !isOwner) {
         throw new Error('You are not authorized');
     }
 
@@ -95,7 +101,6 @@ const EditBook = () => {
 
     const isFormValid = !Object.values(errors).some(x => x);
 
-
     const onSubmit = (e) => {
         e.preventDefault();
 
@@ -106,6 +111,7 @@ const EditBook = () => {
             imageUrl: values.imageUrl,
             year: values.year,            
             summary: values.summary,
+            ownerEmail
         };
 
         if (bookData.title === '' || bookData.author === '' || bookData.genre === '' 
@@ -113,10 +119,10 @@ const EditBook = () => {
             return alert('All fields are required!');
         }
 
-        bookService.edit(bookId, bookData)
+        bookService.edit(bookId, bookData, isAdmin)
             .then(() => {
-                e.target.reset();
-                navigate(`/catalog/${bookId}/details`);
+                e.target.reset();                
+                navigate(`/catalog/${bookId}/details`);                
             })
             .catch(err => {
                 alert(err.message);
