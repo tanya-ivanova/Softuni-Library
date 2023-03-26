@@ -121,12 +121,8 @@ const EditBook = () => {
 
         bookService.edit(bookId, bookData, isAdmin)
             .then(() => {
-                e.target.reset();
-                if(isAdmin) {
-                    navigate('/catalog-admin');
-                } else {
-                    navigate(`/catalog/${bookId}/details`);
-                }
+                e.target.reset();                
+                navigate(`/catalog/${bookId}/details`);                
             })
             .catch(err => {
                 alert(err.message);

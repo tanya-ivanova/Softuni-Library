@@ -69,16 +69,16 @@ const CatalogAdmin = () => {
     return (
         <section className={styles["catalog-admin"]}>
             <div className={styles["table-wrapper"]}>
-                <p className={styles["number-records"]}>{books.length} out of {totalRecords} records</p>
+                <p className={styles["number-records"]}>{books.length} {languages.outOf[language]} {totalRecords} {languages.records[language]}</p>
                 <table>
                     <thead>
                         <tr>                            
-                            <th className={styles["table-title"]}>Title</th>
-                            <th>Author</th>
-                            <th>Year</th>
+                            <th className={styles["table-title"]}>{languages.title[language]}</th>
+                            <th>{languages.author[language]}</th>
+                            <th>{languages.year[language]}</th>
                             <th className={styles["table-id"]}>Id</th>
-                            <th>Owner email</th>
-                            <th>Actions</th>
+                            <th>{languages.ownerEmail[language]}</th>
+                            <th>{languages.actions[language]}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -96,7 +96,7 @@ const CatalogAdmin = () => {
                         )}
                     </tbody>
                 </table>
-                {!booksIsEmpty && <button onClick={moreRecordsHandler} >More records</button>}
+                {!booksIsEmpty && <button onClick={moreRecordsHandler} >{languages.moreRecords[language]}</button>}
                                 
             </div>
         </section>
