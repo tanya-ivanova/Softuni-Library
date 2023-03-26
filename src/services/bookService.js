@@ -4,8 +4,7 @@ const baseUrl = 'http://localhost:3030/data/books';
 const pageSize = 6;
 const pageSizeForGoogleBooks = 6;
 
-export const getAll = async (page) => {
-    //request.get(`${baseUrl}?sortBy=_createdOn%20desc`);
+export const getAll = async (page) => {    
     const [books, count] = await Promise.all([
         request.get(`${baseUrl}?sortBy=_createdOn%20desc&pageSize=${pageSize}&offset=` + (page - 1) * pageSize),
         request.get(`${baseUrl}?count`)
@@ -17,7 +16,17 @@ export const getAll = async (page) => {
     };
 };
 
-export const getAllAdmin = async () => request.get(`${baseUrl}`);
+export const getAllAdmin = async (recordsToBeDisplayed) => {
+    const [books, totalRecords] = await Promise.all([
+        request.get(`${baseUrl}?pageSize=${recordsToBeDisplayed}`),
+        request.get(`${baseUrl}?count`)
+    ]);
+
+    return {
+        books,
+        totalRecords
+    };
+}
 
 export const getByUserId = async (userId, page) => {
 
@@ -36,9 +45,9 @@ export const getOne = (bookId) => request.get(`${baseUrl}/${bookId}`);
 
 export const create = (bookData) => request.post(baseUrl, bookData);
 
-export const edit = (bookId, bookData) => request.put(`${baseUrl}/${bookId}`, bookData);
+export const edit = (bookId, bookData, isAdmin) => request.put(`${baseUrl}/${bookId}`, bookData, false, isAdmin);
 
-export const remove = (bookId) => request.del(`${baseUrl}/${bookId}`);
+export const remove = (bookId, isAdmin) => request.del(`${baseUrl}/${bookId}`, undefined, false, isAdmin);
 
 export const search = async (criteria, query, page) => {
 

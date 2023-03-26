@@ -1,9 +1,9 @@
-export const request = async (method, url, data, mode) => {
+export const request = async (method, url, data, mode, isAdmin) => {
     try {
         const user = localStorage.getItem('auth');
         const auth = JSON.parse(user || '{}');        
 
-        let headers = {};
+        let headers = {};        
 
         if(auth.accessToken && !mode) {
             headers['X-Authorization'] = auth.accessToken;        
@@ -12,6 +12,13 @@ export const request = async (method, url, data, mode) => {
         if(mode) {            
             headers['Content-type'] = 'application/json';
         }
+
+        if(isAdmin) { 
+            headers = {
+                ...headers,
+                'X-Admin': 'X-Admin'
+            }        
+        }        
 
         let buildRequest;
 

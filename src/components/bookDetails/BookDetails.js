@@ -16,7 +16,7 @@ import Comment from "../comment/Comment";
 
 import styles from './BookDetails.module.css';
 import ModalError from "../common/modal/ModalError";
-
+import { isUserAdmin } from "../../utils/utils";
 
 const BookDetails = () => {
     const { language } = useContext(LanguageContext);
@@ -27,7 +27,7 @@ const BookDetails = () => {
 
     const [isLoading, setIsLoading] = useState(true);
 
-    const [showModal, setShowModal] = useState();
+    const [showModal, setShowModal] = useState(false);
 
     const [showModalError, setShowModalError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
@@ -68,7 +68,8 @@ const BookDetails = () => {
     }
 
     const isOwner = user._id && user._id === currentBook._ownerId;
-    const showLikeButton = user._id !== undefined && isOwner === false && isLiked === 0;
+    const isAdmin = isUserAdmin(user);
+    const showLikeButton = user._id !== undefined && isOwner === false && isAdmin === false && isLiked === 0;
 
     const showModalHandler = () => {
         setShowModal(true);
@@ -79,9 +80,13 @@ const BookDetails = () => {
     }
 
     const bookDeleteHandler = () => {
-        bookService.remove(bookId)
+        bookService.remove(bookId, isAdmin)
             .then(() => {
-                navigate('/catalog');
+                if(isAdmin) {
+                    navigate('/catalog-admin');
+                } else {
+                    navigate('/catalog');
+                }
             })
             .catch(err => {
                 alert(err.message);
@@ -166,7 +171,7 @@ const BookDetails = () => {
 
                     <Like totalLikes={totalLikes} isLiked={isLiked} />
 
-                    {isOwner
+                    {isOwner || isAdmin
                         ? <div className={styles.buttons}>
                             <Link className={styles["btn-edit"]} to={`/catalog/${currentBook._id}/edit`}>{languages.edit[language]}</Link>
                             <button onClick={showModalHandler} className={styles["btn-delete"]}>{languages.delete[language]}</button>
@@ -188,6 +193,7 @@ const BookDetails = () => {
                 <Comment
                     comments={comments}
                     isOwner={isOwner}
+                    isAdmin={isAdmin}
                     commentValue={commentValue}
                     changeCommentValueHandler={changeCommentValueHandler}
                     addCommentHandler={addCommentHandler}

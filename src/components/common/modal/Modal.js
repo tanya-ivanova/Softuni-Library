@@ -3,7 +3,12 @@ import { LanguageContext } from "../../../contexts/LanguageContext";
 import { languages } from '../../../languages/languages';
 import styles from './Modal.module.css';
 
-const Modal = ({text, onClose, onConfirm}) => {
+const Modal = ({
+    text, 
+    onClose, 
+    onConfirm,
+    bookId
+}) => {
     const { language } = useContext(LanguageContext);
 
     return (
@@ -12,7 +17,7 @@ const Modal = ({text, onClose, onConfirm}) => {
             <button onClick={onClose}>
                 {languages.cancel[language]}
             </button>
-            <button onClick={onConfirm}>
+            <button onClick={() => onConfirm(bookId)}>
                 {languages.confirm[language]}
             </button>
         </div>

@@ -38,3 +38,12 @@ th,
 td {
   padding: 10px;
 }
+
+.table-title {
+  width: 150px;
+}
+
+.number-records {
+  font-weight: bolder;
+  color: #29528B;
+}

@@ -98,7 +98,6 @@ const EditBook = () => {
 
     const isFormValid = !Object.values(errors).some(x => x);
 
-
     const onSubmit = (e) => {
         e.preventDefault();
 
@@ -109,6 +108,7 @@ const EditBook = () => {
             imageUrl: values.imageUrl,
             year: values.year,            
             summary: values.summary,
+            ownerEmail: user.email
         };
 
         if (bookData.title === '' || bookData.author === '' || bookData.genre === '' 
@@ -116,10 +116,14 @@ const EditBook = () => {
             return alert('All fields are required!');
         }
 
-        bookService.edit(bookId, bookData)
+        bookService.edit(bookId, bookData, isAdmin)
             .then(() => {
                 e.target.reset();
-                navigate(`/catalog/${bookId}/details`);
+                if(isAdmin) {
+                    navigate('/catalog-admin');
+                } else {
+                    navigate(`/catalog/${bookId}/details`);
+                }
             })
             .catch(err => {
                 alert(err.message);
