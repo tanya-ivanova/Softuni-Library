@@ -9,5 +9,5 @@ export const getByBookId = (bookId) => {
     const relations = encodeURIComponent(`user=_ownerId:users`);
     const search = encodeURIComponent(`bookId="${bookId}"`);
     
-    return request.get(`${baseUrl}?where=${search}&load=${relations}`)
+    return request.get(`${baseUrl}?where=${search}&load=${relations}`);
 };

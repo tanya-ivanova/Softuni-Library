@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext';
 
 import { LanguageContext } from "../../contexts/LanguageContext";
 import { languages } from '../../languages/languages';
@@ -13,6 +14,8 @@ import styles from './AddBook.module.css';
 
 const AddBook = () => {
     const navigate = useNavigate();
+
+    const {user} = useContext(AuthContext);
 
     const { language } = useContext(LanguageContext);
 
@@ -111,6 +114,7 @@ const AddBook = () => {
             imageUrl: values.imageUrl,
             year: values.year,            
             summary: values.summary,
+            ownerEmail: user.email
         };
 
         bookService.create(bookData)

@@ -4,6 +4,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { LanguageContext } from "../../contexts/LanguageContext";
 import {languages} from '../../languages/languages';
 import * as bookService from '../../services/bookService';
+import { isUserAdmin } from "../../utils/utils";
 import Spinner from "../common/spinner/Spinner";
 import styles from './EditBook.module.css';
 
@@ -57,7 +58,9 @@ const EditBook = () => {
         )
     }
 
-    if(!isOwner) {
+    const isAdmin = isUserAdmin(user);
+
+    if(!isAdmin && !isOwner) {
         throw new Error('You are not authorized');
     }
 
