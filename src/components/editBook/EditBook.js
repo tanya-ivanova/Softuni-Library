@@ -21,6 +21,8 @@ const EditBook = () => {
     
     const [errors, setErrors] = useState({});
 
+    const [ownerEmail, setOwnerEmail] = useState('');
+
     const [values, setValues] = useState({
         title: '',
         author: '',
@@ -42,6 +44,7 @@ const EditBook = () => {
                     summary: result.summary
                 });
                 setIsOwner(user._id && user._id === result._ownerId);
+                setOwnerEmail(result.ownerEmail);
                 setIsLoading(false);                
             })
             .catch(err => {
@@ -108,7 +111,7 @@ const EditBook = () => {
             imageUrl: values.imageUrl,
             year: values.year,            
             summary: values.summary,
-            ownerEmail: user.email
+            ownerEmail
         };
 
         if (bookData.title === '' || bookData.author === '' || bookData.genre === '' 

@@ -4,8 +4,8 @@ import { languages } from '../../../languages/languages';
 import styles from './Modal.module.css';
 
 const Modal = ({
-    text, 
-    onClose, 
+    text,
+    onClose,
     onConfirm,
     bookId
 }) => {
@@ -14,11 +14,11 @@ const Modal = ({
     return (
         <div className={styles.modal}>
             <p>{text}</p>
-            <button onClick={onClose}>
-                {languages.cancel[language]}
-            </button>
             <button onClick={() => onConfirm(bookId)}>
                 {languages.confirm[language]}
+            </button>
+            <button onClick={onClose}>
+                {languages.cancel[language]}
             </button>
         </div>
     );

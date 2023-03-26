@@ -39,8 +39,12 @@ td {
   padding: 10px;
 }
 
-.table-title {
+.table-id {
   width: 150px;
+}
+
+.table-title {
+  width: 200px;
 }
 
 .number-records {

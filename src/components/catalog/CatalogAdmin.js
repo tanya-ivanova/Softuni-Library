@@ -53,7 +53,8 @@ const CatalogAdmin = () => {
         bookService.remove(bookId, isAdmin)
             .then(() => {
                 setShowModal(false);
-                setBooks(state => state.filter(x => x._id !== bookId));                
+                setBooks(state => state.filter(x => x._id !== bookId));
+                setRecordsToBeDisplayed(state => state - 1);                
             })
             .catch(err => {
                 alert(err.message);
@@ -75,8 +76,8 @@ const CatalogAdmin = () => {
                             <th className={styles["table-title"]}>Title</th>
                             <th>Author</th>
                             <th>Year</th>
-                            <th>Id</th>
-                            <th>Last modified by</th>
+                            <th className={styles["table-id"]}>Id</th>
+                            <th>Owner email</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
