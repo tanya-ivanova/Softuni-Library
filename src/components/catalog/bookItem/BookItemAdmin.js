@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LanguageContext } from '../../../contexts/LanguageContext';
 import { languages } from '../../../languages/languages';
@@ -8,15 +8,14 @@ import styles from './BookItemAdmin.module.css';
 
 const BookItemAdmin = ({
     book,    
-    showModal,
-    showModalHandler,
-    closeModalHandler,
     bookDeleteHandler,
 }) => {
-    const navigate = useNavigate();    
+    const navigate = useNavigate();
 
-    const {language} = useContext(LanguageContext);
-   
+    const { language } = useContext(LanguageContext);
+
+    const [showModal, setShowModal] = useState(false);
+
     const onClickEditIcon = () => {
         navigate(`/catalog/${book._id}/edit`);
     };
@@ -24,6 +23,19 @@ const BookItemAdmin = ({
     const onClickInfoIcon = () => {
         navigate(`/catalog/${book._id}/details`);
     };
+
+    const showModalHandler = () => {
+        setShowModal(true);
+    }
+
+    const closeModalHandler = () => {
+        setShowModal(false);
+    }
+
+    const onConfirm = () => {
+        bookDeleteHandler(book._id);
+        setShowModal(false);
+    }
 
     return (
         <>
@@ -40,12 +52,12 @@ const BookItemAdmin = ({
                 <button className={styles["table-button"]} onClick={showModalHandler} >
                     <i className="fa-regular fa-trash-can"></i>
                 </button>
+
                 {showModal && <Backdrop onClick={closeModalHandler} />}
-                {showModal && <Modal 
-                    text={languages.areYouSure[language]}                    
-                    onClose={closeModalHandler} 
-                    onConfirm={bookDeleteHandler} 
-                    bookId={book._id}
+                {showModal && <Modal
+                    text={languages.areYouSure[language]}
+                    onClose={closeModalHandler}
+                    onConfirm={onConfirm}
                 />}
 
                 <button className={styles["table-button"]} onClick={onClickInfoIcon}>

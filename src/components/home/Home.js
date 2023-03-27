@@ -15,7 +15,7 @@ const Home = ({error}) => {
         <section className={styles["home-page"]}>
             <div className={styles["img-wrapper"]}>
                 <div>{languages.whyReading[language]}</div>
-                <img alt="library" src="https://icons.iconarchive.com/icons/itzikgur/my-seven/128/Books-1-icon.png" width="150" height="150" />                
+                <img alt="library" src="https://icons.iconarchive.com/icons/itzikgur/my-seven/128/Books-1-icon.png" width="150" height="150" />
             </div>
 
             <div className={styles["paragraphs-wrapper"]}>

@@ -7,29 +7,29 @@ import BookItemAdmin from './bookItem/BookItemAdmin';
 import styles from './CatalogAdmin.module.css';
 import { AuthContext } from '../../contexts/AuthContext';
 import { isUserAdmin } from '../../utils/utils';
+import Backdrop from '../common/backdrop/Backdrop';
+import Modal from '../common/modal/Modal';
 
-const CatalogAdmin = () => {     
+const CatalogAdmin = () => {
 
     const { language } = useContext(LanguageContext);
 
-    const {user} = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
 
     const [books, setBooks] = useState([]);
 
     const [recordsToBeDisplayed, setRecordsToBeDisplayed] = useState(6);
     const [totalRecords, setTotalRecords] = useState(0);
-
-    const [showModal, setShowModal] = useState(false);
-
-    const [booksIsEmpty, setBooksIsEmpty] = useState(false);    
+  
+    const [booksIsEmpty, setBooksIsEmpty] = useState(false);
 
     useEffect(() => {
         bookService.getAllAdmin(recordsToBeDisplayed)
-            .then(({books, totalRecords}) => {
+            .then(({ books, totalRecords }) => {
                 setBooks(books);
                 setTotalRecords(totalRecords);
 
-                if(books.length === totalRecords) {
+                if (books.length === totalRecords) {
                     setBooksIsEmpty(true);
                 }
             })
@@ -40,21 +40,12 @@ const CatalogAdmin = () => {
     }, [recordsToBeDisplayed]);
 
     const isAdmin = isUserAdmin(user);
-
-    const showModalHandler = () => {
-        setShowModal(true);
-    }
-
-    const closeModalHandler = () => {
-        setShowModal(false);
-    } 
-
+   
     const bookDeleteHandler = (bookId) => {
         bookService.remove(bookId, isAdmin)
-            .then(() => {
-                setShowModal(false);
+            .then(() => {                
                 setBooks(state => state.filter(x => x._id !== bookId));
-                setRecordsToBeDisplayed(state => state - 1);                
+                setRecordsToBeDisplayed(state => state - 1);
             })
             .catch(err => {
                 alert(err.message);
@@ -65,14 +56,15 @@ const CatalogAdmin = () => {
     const moreRecordsHandler = () => {
         setRecordsToBeDisplayed(state => state * 2);
     };
-    
+
     return (
-        <section className={styles["catalog-admin"]}>
+        <section className={styles["catalog-admin"]}>            
+
             <div className={styles["table-wrapper"]}>
                 <p className={styles["number-records"]}>{books.length} {languages.outOf[language]} {totalRecords} {languages.records[language]}</p>
                 <table>
                     <thead>
-                        <tr>                            
+                        <tr>
                             <th className={styles["table-title"]}>{languages.title[language]}</th>
                             <th>{languages.author[language]}</th>
                             <th>{languages.year[language]}</th>
@@ -85,19 +77,16 @@ const CatalogAdmin = () => {
                         {books.length > 0 && (
                             books.map(x =>
                                 <tr key={x._id}>
-                                    <BookItemAdmin 
-                                    book={x}                                     
-                                    showModal={showModal}
-                                    showModalHandler={showModalHandler} 
-                                    closeModalHandler={closeModalHandler}
-                                    bookDeleteHandler={bookDeleteHandler}
-                                />
+                                    <BookItemAdmin
+                                        book={x}                                        
+                                        bookDeleteHandler={bookDeleteHandler}
+                                    />
                                 </tr>)
                         )}
                     </tbody>
                 </table>
                 {!booksIsEmpty && <button onClick={moreRecordsHandler} >{languages.moreRecords[language]}</button>}
-                                
+
             </div>
         </section>
     );

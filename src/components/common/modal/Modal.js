@@ -6,15 +6,14 @@ import styles from './Modal.module.css';
 const Modal = ({
     text,
     onClose,
-    onConfirm,
-    bookId
-}) => {
+    onConfirm,    
+}) => {  
     const { language } = useContext(LanguageContext);
 
     return (
         <div className={styles.modal}>
             <p>{text}</p>
-            <button onClick={() => onConfirm(bookId)}>
+            <button onClick={onConfirm}>
                 {languages.confirm[language]}
             </button>
             <button onClick={onClose}>
