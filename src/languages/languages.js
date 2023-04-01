@@ -284,8 +284,8 @@ export const languages = {
         english: 'Please select'
     },
     lookingFor: {
-        bulgarian: 'Какво търсите',
-        english: 'What you are looking for?'
+        bulgarian: 'Какво търсите?',
+        english: 'What are you looking for?'
     },
     noResults: {
         bulgarian: 'Няма намерени резултати',

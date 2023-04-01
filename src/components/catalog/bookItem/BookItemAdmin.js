@@ -45,11 +45,11 @@ const BookItemAdmin = ({
             <td>{book._id}</td>
             <td>{book.ownerEmail}</td>
             <td>
-                <button className={styles["table-button"]} onClick={onClickEditIcon} >
+                <button data-testid="edit-button" className={styles["table-button"]} onClick={onClickEditIcon} >
                     <i className="fa-solid fa-pen-to-square"></i>
                 </button>
 
-                <button className={styles["table-button"]} onClick={showModalHandler} >
+                <button data-testid="delete-button" className={styles["table-button"]} onClick={showModalHandler} >
                     <i className="fa-regular fa-trash-can"></i>
                 </button>
 

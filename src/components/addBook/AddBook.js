@@ -151,7 +151,7 @@ const AddBook = () => {
                 <form className={styles["add-book-form"]} onSubmit={onSubmit} >
 
                     <h1>{languages.addBook[language]}</h1>
-                    <label htmlFor="leg-title">{languages.title[language]}</label>
+                    <label htmlFor="title">{languages.title[language]}</label>
                     <input
                         type="text"
                         id="title"
