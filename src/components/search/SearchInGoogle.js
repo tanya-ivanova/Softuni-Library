@@ -55,7 +55,6 @@ const SearchInGoogle = () => {
 
     useEffect(() => {
         if (query && searchBy) {
-
             bookService.searchInGoogleGetMany(searchBy, query, page)
                 .then(({ googleBooks, pages }) => {
                     setSearchResults(googleBooks.items || []);
@@ -66,6 +65,8 @@ const SearchInGoogle = () => {
                     alert(err.message);
                     console.log(err.message);
                 });
+        } else {
+            setSearchResults([]);
         }
     }, [searchBy, query, page]);
 
@@ -94,7 +95,7 @@ const SearchInGoogle = () => {
             modifiedSearchForRequest = search;
         }
         navigate(`/searchInGoogle?query=${modifiedSearchForRequest}?searchBy=${criteria}`);
-        if (query) {
+        if (modifiedSearchForRequest) {
             setIsLoading(true);
         }
     };

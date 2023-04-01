@@ -61,6 +61,10 @@ const Search = () => {
                     console.log(err.message)
                 });
         }
+
+        else {
+            setSearchResults([]);
+        }
     }, [page, searchBy, query]);
 
     if (isLoading) {
@@ -82,7 +86,8 @@ const Search = () => {
     const onSearch = (e) => {
         e.preventDefault();
         navigate(`/search?query=${search}?searchBy=${criteria}`);
-        if(query) {
+        
+        if(search) {
             setIsLoading(true);
         }
     };

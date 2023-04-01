@@ -236,7 +236,7 @@ const AddBook = () => {
                         id="summary"
                         value={values.summary}
                         onChange={changeValueHandler}
-                        onBlur={(e) => minLength(e, 10)}
+                        onKeyUp={(e) => minLength(e, 10)}
                         rows="5"
                     />
 
