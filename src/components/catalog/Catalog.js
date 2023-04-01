@@ -20,7 +20,6 @@ const Catalog = () => {
 
     const page = Number(new URLSearchParams(location.search).get("page")) || 1;
 
-
     useEffect(() => {
         bookService.getAll(page)
             .then(({ books, pages }) => {
@@ -34,7 +33,6 @@ const Catalog = () => {
                 setIsLoading(false);
             });
     }, [page]);
-
 
     if (isLoading) {
         return (
