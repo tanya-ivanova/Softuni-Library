@@ -1,70 +1,39 @@
-# Getting Started with Create React App
+# SoftUni Library App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## SoftUni Library App works with the softuni practice server
 
-## Available Scripts
+The softuni practice server is initialized with three users, which can be used for immediate testing:
 
-In the project directory, you can run:
+peter@abv.bg : 123456
+george@abv.bg : 123456
+admin@abv.bg : admin
 
-### `npm start`
+## SoftUni Library App has two available languages - Bulgarian and English
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+We can switch between languages with the two buttons in the header.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Home page
 
-### `npm test`
+The Home page is a static page containing basic information why reading books is important.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The Home page is accesible for all types of users of the App (guests, regular users, admin).
 
-### `npm run build`
+## Register page
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+You can register with email and password.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The Register page is accesible for all types of users of the App (guests, regular users, admin).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Login page
 
-### `npm run eject`
+You can login with email and password.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+The Login page is accesible for all types of users of the App (guests, regular users, admin).
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## All books page
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+In the All books page all added books in the App are displayed. Every book is displayed with image, title, author, genre, and detials button.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+The All books page has pagination. On each page only 6 books are displayed (or fewer than 6 if the total number of books in the App is less than 6). You are shown the current page and the total number of pages.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The All books page is accesible for all types of users of the App (guests, regular users, admin).
