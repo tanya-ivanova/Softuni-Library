@@ -20,7 +20,9 @@ The Home page is accesible for all types of users of the App (guests, registered
 
 ## Register page
 
-You can register with email and password.
+You can register with email and password. When you register you also have to repeat the password. All fields are required. The email and the password have validation and error messages are displayed if the filled values does not pass the validation.
+
+When you register you are automatically logged in the App and you are taken to the Home page.
 
 The Register page is accesible for all types of users of the App (guests, registered users, admin).
 
@@ -28,19 +30,25 @@ The Register page is accesible for all types of users of the App (guests, regist
 
 You can login with email and password.
 
+After you login, you are taken to the Home page.
+
 The Login page is accesible for all types of users of the App (guests, registered users, admin).
+
+## Logout
+
+Every logged in user can logout of the App by pressing the Logout button in the header.
 
 ## All books page
 
-In the All books page all added books in the App are displayed. Every book is displayed with image, title, author, genre, and detials button.
+In All books page all added books in the App are displayed. Every book is displayed with image, title, author, genre, and detials button.
 
-The All books page has pagination. On each page only 6 books are displayed (or fewer than 6 if the total number of books in the App is less than 6). You are shown the current page and the total number of pages.
+The All books page has pagination. On each page only 6 books are displayed (or fewer than 6 if the total number of books in the App is less than 6). You are shown the current page and the total number of pages. With Next and Prev you can browse through the pages.
 
 The All books page is accesible for all types of users of the App (guests, registered users, admin).
 
 ## Details page
 
-The Details page displays the details about a certain book. The details displayed are: image, title, author, link to other books by the same author, genre, year, summary, likes, comments.
+The Details page displays the details about a certain book. The details displayed are: image, title, author, link to other books by the same author, genre, year, summary, likes, comments, edit and delete buttons only for the owner of the book and admin.
 
 ### Link to other books by the same author
 
@@ -64,5 +72,85 @@ Every registered user who is not the owner of the book, can add comments for thi
 
 The owner of the book and guests can see the comments the book has but they can not add comments.
 
+### Edit and Delete buttons only for the owner of the book and admin
 
+Edit and Delete buttons are available for the owner of the book and the admin.
 
+The owner of the book and the admin are the only ones who can edit and delete a book that has already been added in the App.
+
+## My books page
+
+In My books page all added books by a certain registered user are displayed. Every book is displayed with image, title, author, genre, and detials button.
+
+The My books page has pagination. On each page only 6 books are displayed (or fewer than 6 if the total number of added books by the given user is less than 6). You are shown the current page and the total number of pages. With Next and Prev you can browse through the pages.
+
+The My books page is accesible only for registered users.
+
+## Add book page
+
+Every logged in user can add a book in the App when the Add book button is clicked.
+
+In order to Add a book, you have to give the title, the author, the genre, image url, the year, and a summary of the book - all fields are required. Every field has validation and an error message is displayed if the filled value does not pass the validation.
+
+You can click on the Cancel button if you want to remove everything that you have filled in and start all over again.
+
+After you Add a book, you are taken to the All books page.
+
+### Add book via Search in Google
+
+You can Add a book in the App via the Search in Google functionality. Search in Google gives you the functionality to search for books available in the Google Books API. After you find the book you want, you can Add it in the App by clicking on the Add book button displayed for every found book.
+
+Clicking on the Add book button will take you to the Add book form which is pre-filled with the information stored in Google Books API for this specific book.
+
+## Edit page
+
+If you are the owner of a book or you are admin, you can click on the Edit button in the Details page for that specific book.
+
+The Edit button takes you to the Edit form which is pre-filled with the title, the author, the genre, the image url, the year, and the summary of the book. 
+
+You can make the changes you want and click on the Edit button to save them. After clicking the Edit button you are taken to the Details page where you can see that the changes you made are visible.
+
+Clicking the Cancel button will take you back to the Details page without making any changes. 
+
+## Delete
+
+If you are the owner of a book or you are admin, you can click on the Delete button in the Details page for that specific book.
+
+A modal will open asking you if you are sure that you want to delete this book. Clicking the Cancel button or outside of the modal will take you back to the Details page without deleting the book. Clicking the Confirm button in the modal will delete the book. After the deletion of the book you are taken to the All books page.
+
+## Search
+
+Search functionality is available only for registered users.
+
+## Search in the site
+
+Search in the site gives you the functionality to search amongst the books added in the App by title, or by author, or by genre.
+
+You can select the search criteria, type in the search field what you are searching for and click on the Search button. You can search by partial match as well.
+
+The search results are displayed with pagination. On each page only 6 books are displayed (or fewer than 6 if the total number of found books is less than 6). You are shown the current page and the total number of pages. With Next and Prev you can browse through the pages. 
+
+Every found book is displayed with image, title, author, genre, and Detials button.
+
+## Search in Google
+
+Search in Google gives you the functionality to search amongst the books available in Google Books API by title, or by author.
+
+You can select the search criteria, type in the search field what you are searching for and click on the Search button.
+
+The search results are displayed with pagination. On each page only 6 books are displayed (or fewer than 6 if the total number of found books is less than 6). You are shown the current page and the total number of pages. With Next and Prev you can browse through the pages. 
+
+Every found book is displayed with image, title, author, genre, year, language, summary and Add book button.
+
+### Add book via Search in Google
+
+You can Add a book in the App via the Search in Google functionality. Search in Google gives you the functionality to search for books available in the Google Books API. After you find the book you want, you can Add it in the App by clicking on the Add book button displayed for every found book.
+
+Clicking on the Add book button will take you to the Add book form which is pre-filled with the information stored in Google Books API for this specific book.
+
+## Guests
+
+Guests can:
+- Register/Login
+- view the Home page
+- view the All books page
