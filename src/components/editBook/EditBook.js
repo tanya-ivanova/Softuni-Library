@@ -226,7 +226,7 @@ const EditBook = () => {
                         id="summary"
                         value={values.summary}
                         onChange={changeValueHandler}
-                        onKeyUp={(e) => minLength(e, 10)}
+                        onBlur={(e) => minLength(e, 10)}
                     />
 
                     {errors.summary &&

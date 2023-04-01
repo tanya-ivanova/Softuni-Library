@@ -143,7 +143,7 @@ const Register = () => {
                         id="register-password"
                         value={values.password}
                         onChange={changeValueHandler}
-                        onBlur={(e) => minLength(e, 6)}
+                        onBlur={(e) => minLength(e, 5)}
                     />
 
                     {errors.password &&
