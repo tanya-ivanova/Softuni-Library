@@ -150,7 +150,46 @@ Clicking on the Add book button will take you to the Add book form which is pre-
 
 ## Guests
 
-Guests can:
-- Register/Login
-- view the Home page
-- view the All books page
+Guests:
+- can Register/Login
+- can view the Home page
+- can view the All books page
+- can view the Details page but can not Like, nor Comment. 
+- can not open the link to other books by the same author displayed in the Details page.
+
+## Registered users
+
+Registered users:
+- can Logout
+- can view the Home page
+- can view the All books page
+- can view the My books page
+- can Add a book
+- can view the Details page
+- can open the link to other books by the same author displayed in the Details page
+- can Like (only once) a book if they are not the owner of the book
+- can comment (as many times as they want) on a book if they are not the owner of the book
+- can Edit and Delete a book if they are the owner of the book
+- can use the Search functionality (both Search in the site and Search in Google)
+- can Add a book via the Search in Google functionality
+
+## Admin
+
+- can Login
+- can Logout
+- can view Home page
+- can view All boooks for admin page (see below for more detials)
+- can view the Details page
+- can Edit and Delete books even though not owner of the book
+
+### All boooks for admin page
+
+All books for admin page displays all books added in the App in a table format. Each table row contains information for one book - title, author, year, book id, owner email, and actions (edit, delete, info).
+
+The displayed books in the table are paginated. First you see 6 records (or fewer than 6 if the total number of books in the App is less than 6). When you click on the button More records you see 6 more records (or less than 6 if this is what is left to be shown). When there are no more records to be displayed the button More records disappears. Above the table you see how many records are currently displayed and the total number of records.
+
+Via the action icons (edit, delete, info) the admin can Edit a book, can Delete a book, and can view the Details page (from where he/she can also Edit/Delete the book). 
+
+
+
+

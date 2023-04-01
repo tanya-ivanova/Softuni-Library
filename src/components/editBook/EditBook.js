@@ -131,7 +131,11 @@ const EditBook = () => {
     };
 
     const onCancel = () => {        
-        navigate(`/catalog/${bookId}/details`);
+        if(isAdmin) {
+            navigate('/catalog-admin');
+        } else {
+            navigate(`/catalog/${bookId}/details`);
+        }
     }
 
     return (
