@@ -108,7 +108,7 @@ If you are the owner of a book or you are admin, you can click on the Edit butto
 
 The Edit button takes you to the Edit form which is pre-filled with the title, the author, the genre, the image url, the year, and the summary of the book. 
 
-You can make the changes you want and click on the Edit button to save them. After clicking the Edit button you are taken to the Details page where you can see that the changes you made are visible.
+You can make the changes you want and click on the Edit Book button to save them. After clicking the Edit button you are taken to the Details page where you can see that the changes you made are visible.
 
 Clicking the Cancel button will take you back to the Details page without making any changes. 
 
@@ -190,6 +190,17 @@ The displayed books in the table are paginated. First you see 6 records (or fewe
 
 Via the action icons (edit, delete, info) the admin can Edit a book, can Delete a book, and can view the Details page (from where he/she can also Edit/Delete the book). 
 
+### Edit book by admin
 
+Clicking on the Edit icon takes the admin to the Edit form pre-filled with the book information - title, author, genre, image url, year, and summary of the book. Clicking on the Edit Book button saves the changes and takes the admin to the Details page. Clicking on the Cancel button turns back the admin to the All books for admin page.
+
+### Delete by admin
+
+Clicking on the Delete icon opens a modal asking the admin if he/she is sure that he/she want to delete the book. Clicking the Cancel button or outside of the modal will take the admin back to the All books for admin page without deleting the book. Clicking the Confirm button in the modal will delete the book. After the deletion of the book the admin is taken to the All books for admin page.
+
+### Details page for admin
+
+Clicking on the Info icon takes the admin to the Details page for the given book.
+In the Details page the admin can see the Edit and Delete buttons which he/she can use for editing/deleting the book.
 
 
