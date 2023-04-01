@@ -165,7 +165,7 @@ const BookDetails = () => {
                                 <p className={styles["author-paragraph"]}>{languages.searchForMoreBooks[language]} <Link className={styles["more-books-by-author"]} to={`/searchInGoogle?query=${authorForSearch}?searchBy=author`}>{languages.here[language]}</Link>.</p>
                             </div>
                             <h3>{currentBook.genre}, {currentBook.year}</h3>
-                            <div>{languages.summary[language]}: {parse(currentBook.summary)}</div>
+                            <div><b>{languages.summary[language]}:</b> {parse(currentBook.summary)}</div>
                         </div>
                     </div>
 
