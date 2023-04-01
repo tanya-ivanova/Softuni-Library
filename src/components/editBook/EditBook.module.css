@@ -27,7 +27,7 @@
 
 .edit-book-form input {
     display: block;
-    width: 300px;
+    width: 368px;
     padding: 0;
     border: none;
     outline: none;
@@ -36,7 +36,7 @@
 }
 
 .edit-book-form textarea {
-    width: 300px;
+    width: 366px;
 }
 
 .edit-book-form label {
