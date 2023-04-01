@@ -7,8 +7,6 @@ import BookItemAdmin from './bookItem/BookItemAdmin';
 import styles from './CatalogAdmin.module.css';
 import { AuthContext } from '../../contexts/AuthContext';
 import { isUserAdmin } from '../../utils/utils';
-import Backdrop from '../common/backdrop/Backdrop';
-import Modal from '../common/modal/Modal';
 
 const CatalogAdmin = () => {
 
@@ -20,8 +18,13 @@ const CatalogAdmin = () => {
 
     const [recordsToBeDisplayed, setRecordsToBeDisplayed] = useState(6);
     const [totalRecords, setTotalRecords] = useState(0);
-  
+
     const [booksIsEmpty, setBooksIsEmpty] = useState(false);
+
+    const [showTitleArrowDown, setTitleShowArrowDown] = useState(true);
+    const [showTitleArrowUp, setTitleShowArrowUp] = useState(false);
+    const [showAuthorArrowDown, setAuthorShowArrowDown] = useState(true);
+    const [showAuthorArrowUp, setAuthorShowArrowUp] = useState(false);
 
     useEffect(() => {
         bookService.getAllAdmin(recordsToBeDisplayed)
@@ -40,10 +43,10 @@ const CatalogAdmin = () => {
     }, [recordsToBeDisplayed]);
 
     const isAdmin = isUserAdmin(user);
-   
+
     const bookDeleteHandler = (bookId) => {
         bookService.remove(bookId, isAdmin)
-            .then(() => {                
+            .then(() => {
                 setBooks(state => state.filter(x => x._id !== bookId));
                 setRecordsToBeDisplayed(state => state - 1);
             })
@@ -57,16 +60,73 @@ const CatalogAdmin = () => {
         setRecordsToBeDisplayed(state => state * 2);
     };
 
+    const clickArrowDownHandler = (criteria) => {
+        setBooks(state => {
+            let newState = [...state];
+            newState.sort((a, b) => a[criteria].localeCompare(b[criteria]));
+            return newState;
+        });
+
+        if (criteria === 'title') {
+            setTitleShowArrowDown(false);
+            setTitleShowArrowUp(true);
+        } else if (criteria === 'author') {
+            setAuthorShowArrowDown(false);
+            setAuthorShowArrowUp(true);
+        }
+    }
+
+    const clickArrowUpHandler = (criteria) => {
+        setBooks(state => {
+            let newState = [...state];
+            newState.sort((a, b) => b[criteria].localeCompare(a[criteria]));
+            return newState;
+        });
+
+        if (criteria === 'title') {
+            setTitleShowArrowDown(true);
+            setTitleShowArrowUp(false);
+        } else if (criteria === 'author') {
+            setAuthorShowArrowDown(true);
+            setAuthorShowArrowUp(false);
+        }
+    };
+
     return (
-        <section className={styles["catalog-admin"]}>            
+        <section className={styles["catalog-admin"]}>
 
             <div className={styles["table-wrapper"]}>
                 <p className={styles["number-records"]}>{books.length} {languages.outOf[language]} {totalRecords} {languages.records[language]}</p>
                 <table>
                     <thead>
                         <tr>
-                            <th className={styles["table-title"]}>{languages.title[language]}</th>
-                            <th>{languages.author[language]}</th>
+                            <th className={styles["table-title"]}>
+                                {languages.title[language]}
+                                {showTitleArrowDown &&
+                                    <button className={styles["button-arrow"]} onClick={() => clickArrowDownHandler('title')}>
+                                        <i className="fa-solid fa-arrow-down"></i>
+                                    </button>
+                                }
+                                {showTitleArrowUp &&
+                                    <button className={styles["button-arrow"]} onClick={() => clickArrowUpHandler('title')}>
+                                        <i className="fa-solid fa-arrow-up"></i>
+                                    </button>
+                                }
+                            </th>
+
+                            <th>
+                                {languages.author[language]}
+                                {showAuthorArrowDown &&
+                                    <button className={styles["button-arrow"]} onClick={() => clickArrowDownHandler('author')}>
+                                        <i className="fa-solid fa-arrow-down"></i>
+                                    </button>
+                                }
+                                {showAuthorArrowUp &&
+                                    <button className={styles["button-arrow"]} onClick={() => clickArrowUpHandler('author')}>
+                                        <i className="fa-solid fa-arrow-up"></i>
+                                    </button>
+                                }
+                            </th>
                             <th>{languages.year[language]}</th>
                             <th className={styles["table-id"]}>Id</th>
                             <th>{languages.ownerEmail[language]}</th>
@@ -78,7 +138,7 @@ const CatalogAdmin = () => {
                             books.map(x =>
                                 <tr key={x._id}>
                                     <BookItemAdmin
-                                        book={x}                                        
+                                        book={x}
                                         bookDeleteHandler={bookDeleteHandler}
                                     />
                                 </tr>)
