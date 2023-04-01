@@ -12,6 +12,7 @@ import Register from './components/register/Register';
 import Login from './components/login/Login';
 import Logout from './components/logout/Logout';
 import AddBook from './components/addBook/AddBook';
+import AddBookExcel from './components/addBook/AddBookExcel';
 import Catalog from './components/catalog/Catalog';
 import CatalogAdmin from './components/catalog/CatalogAdmin';
 import Profile from './components/profile/Profile';
@@ -44,6 +45,7 @@ function App() {
                                     <Route path="/catalog-admin" element={<CatalogAdmin />} /> 
                                     <Route path='/logout' element={<Logout />} />
                                     <Route path="/create" element={<AddBook />} />
+                                    <Route path="/create-from-excel" element={<AddBookExcel />} />
                                     <Route path="/:googleBookId/create" element={<AddBook />} />
                                     <Route path="/catalog/:bookId/edit" element={<EditBook />} />
                                     <Route path="/profile" element={<Profile />} />
