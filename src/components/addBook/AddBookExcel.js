@@ -97,13 +97,13 @@ const AddBookExcel = () => {
             .then(({ rows, errors }) => {    
 
                 if (errors.length > 0) {
-                    setErrorMessage(state => [...state, 'No books were added because the following errors occurred while trying to add the books from the excel file:']);
+                    setErrorMessage(state => [...state, languages.noBooksAdded[language]]);
 
                     errors.forEach(error => {
-                        setErrorMessage(state => [...state, `column ${error.column}, row ${error.row} - error: ${error.error}`]);
+                        setErrorMessage(state => [...state, `${languages.column[language]} ${error.column}, ${languages.row[language]} ${error.row} - ${languages.error[language]}: ${error.error}`]);
                     });
 
-                    setErrorMessage(state => [...state, 'Please fix these errors before sending the file again.']);
+                    setErrorMessage(state => [...state, languages.fixErrors[language]]);
                     setShowModalError(true); 
                     e.target.value = '';                   
                 } else {

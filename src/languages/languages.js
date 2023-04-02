@@ -351,4 +351,24 @@ export const languages = {
         bulgarian: 'Още записи',
         english: 'More records'
     },
+    noBooksAdded: {
+        bulgarian: 'Няма добавени книги, тъй като при опит за добавяне на книгите от excel файла възникнаха следните грешки:',
+        english: 'No books were added because the following errors occurred while trying to add the books from the excel file:'
+    },
+    column: {
+        bulgarian: 'колона',
+        english: 'column'
+    },
+    row: {
+        bulgarian: 'ред',
+        english: 'row'
+    },
+    error: {
+        bulgarian: 'грешка',
+        english: 'error'
+    },
+    fixErrors: {
+        bulgarian: 'Моля, коригирайте тези грешки, преди да изпратите файла отново.',
+        english: 'Please fix these errors before sending the file again.'
+    }
 }

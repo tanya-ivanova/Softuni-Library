@@ -8,6 +8,8 @@ import BookItemAdmin from './bookItem/BookItemAdmin';
 
 import styles from './CatalogAdmin.module.css';
 
+const pageSize = 6;
+
 const CatalogAdmin = () => {
 
     const { language } = useContext(LanguageContext);
@@ -16,7 +18,7 @@ const CatalogAdmin = () => {
 
     const [books, setBooks] = useState([]);
 
-    const [recordsToBeDisplayed, setRecordsToBeDisplayed] = useState(6);
+    const [page, setPage] = useState(1);
     const [totalRecords, setTotalRecords] = useState(0);
 
     const [booksIsEmpty, setBooksIsEmpty] = useState(false);
@@ -26,21 +28,19 @@ const CatalogAdmin = () => {
     const [showAuthorArrowDown, setAuthorShowArrowDown] = useState(true);
     const [showAuthorArrowUp, setAuthorShowArrowUp] = useState(false);
 
-    useEffect(() => {
-        bookService.getAllAdmin(recordsToBeDisplayed)
-            .then(({ books, totalRecords }) => {
-                setBooks(books);
-                setTotalRecords(totalRecords);
+    useEffect(() => {        
+        let offset = (page - 1) * pageSize;        
 
-                if (books.length === totalRecords) {
-                    setBooksIsEmpty(true);
-                }
+        bookService.getAllAdmin(pageSize, offset)
+            .then(({ books, totalRecords }) => {
+                setBooks(state => [...state, ...books]);
+                setTotalRecords(totalRecords);
             })
             .catch(err => {
                 console.log(err);
                 setBooks([]);
             });
-    }, [recordsToBeDisplayed]);
+    }, [page]);
 
     const isAdmin = isUserAdmin(user);
 
@@ -48,16 +48,34 @@ const CatalogAdmin = () => {
         bookService.remove(bookId, isAdmin)
             .then(() => {
                 setBooks(state => state.filter(x => x._id !== bookId));
-                setRecordsToBeDisplayed(state => state - 1);
+                setTotalRecords(state => state - 1);
             })
             .catch(err => {
                 alert(err.message);
                 console.log(err);
             });
+        
+        const deleteOffset = ((page - 1) * pageSize) + pageSize - 1;
+        
+        const deletePageSize = 1;
+
+        bookService.getAllAdmin(deletePageSize, deleteOffset)
+            .then(({ books, totalRecords }) => {
+                setBooks(state => [...state, ...books]);
+                setTotalRecords(totalRecords);
+            })
+            .catch(err => {
+                console.log(err);
+                setBooks([]);
+            });
     };
 
     const moreRecordsHandler = () => {
-        setRecordsToBeDisplayed(state => state * 2);
+        setPage(state => state + 1);
+
+        if (books.length + pageSize >= totalRecords) {
+            setBooksIsEmpty(true);
+        }
     };
 
     const clickArrowDownHandler = (criteria) => {
