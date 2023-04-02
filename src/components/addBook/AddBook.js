@@ -118,7 +118,15 @@ const AddBook = () => {
 
         bookService.create(bookData)
             .then(() => {
-                e.target.reset();
+                setValues({
+                    title: '',
+                    author: '',
+                    genre: '',
+                    imageUrl: '',
+                    year: '',            
+                    summary: ''
+                });
+
                 navigate(`/catalog`);
             })
             .catch(err => {
@@ -141,7 +149,7 @@ const AddBook = () => {
 
     return (
         <section className={styles["add-book-page"]}>
-            {showNotification ? <Notification message={languages.allFieldsRequired[language]} /> : null}
+            {showNotification && <Notification message={languages.allFieldsRequired[language]} />}
 
             {showModalError && <Backdrop onClick={onClickOk} />}
             {showModalError && <ModalError errorMessage={errorMessage} onClickOk={onClickOk} />}

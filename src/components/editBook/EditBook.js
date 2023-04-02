@@ -2,15 +2,18 @@ import { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from "../../contexts/AuthContext";
 import { LanguageContext } from "../../contexts/LanguageContext";
-import {languages} from '../../languages/languages';
+import { languages } from '../../languages/languages';
 import * as bookService from '../../services/bookService';
 import { isUserAdmin } from "../../utils/utils";
+import Backdrop from "../common/backdrop/Backdrop";
+import ModalError from "../common/modal/ModalError";
+import Notification from "../common/notification/Notification";
 import Spinner from "../common/spinner/Spinner";
 
 import styles from './EditBook.module.css';
 
 const EditBook = () => {
-    const {language} = useContext(LanguageContext);
+    const { language } = useContext(LanguageContext);
 
     const { bookId } = useParams();
     const { user } = useContext(AuthContext);
@@ -19,8 +22,13 @@ const EditBook = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     const [isOwner, setIsOwner] = useState(true);
-    
+
     const [errors, setErrors] = useState({});
+
+    const [showModalError, setShowModalError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState([]);
+
+    const [showNotification, setShowNotification] = useState(true);
 
     const [ownerEmail, setOwnerEmail] = useState('');
 
@@ -29,32 +37,41 @@ const EditBook = () => {
         author: '',
         genre: '',
         imageUrl: '',
-        year: '',        
+        year: '',
         summary: ''
     });
 
     useEffect(() => {
         bookService.getOne(bookId)
-            .then(result => {                
+            .then(result => {
                 setValues({
                     title: result.title,
                     author: result.author,
                     genre: result.genre,
                     imageUrl: result.imageUrl,
-                    year: result.year,                    
+                    year: result.year,
                     summary: result.summary
                 });
                 setIsOwner(user._id && user._id === result._ownerId);
                 setOwnerEmail(result.ownerEmail);
-                setIsLoading(false);                
+                setIsLoading(false);
             })
             .catch(err => {
                 alert(err.message);
-                console.log(err); 
+                console.log(err);
             });
-    }, [bookId, user._id]); 
-    
-    if(isLoading) {
+    }, [bookId, user._id]);
+
+    useEffect(() => {
+        if (values.title === '' || values.author === '' || values.genre === '' 
+        || values.imageUrl === '' || values.year === '' || values.summary === '') {
+            setShowNotification(true);
+        } else {
+            setShowNotification(false);
+        }
+    }, [values.title, values.author, values.genre, values.imageUrl, values.year, values.summary])
+
+    if (isLoading) {
         return (
             <div className="spinner">
                 <Spinner />
@@ -64,7 +81,7 @@ const EditBook = () => {
 
     const isAdmin = isUserAdmin(user);
 
-    if(!isAdmin && !isOwner) {
+    if (!isAdmin && !isOwner) {
         throw new Error('You are not authorized');
     }
 
@@ -102,6 +119,10 @@ const EditBook = () => {
 
     const isFormValid = !Object.values(errors).some(x => x);
 
+    const onClickOk = () => {
+        setShowModalError(false);
+    }
+
     const onSubmit = (e) => {
         e.preventDefault();
 
@@ -110,29 +131,33 @@ const EditBook = () => {
             author: values.author,
             genre: values.genre,
             imageUrl: values.imageUrl,
-            year: values.year,            
+            year: values.year,
             summary: values.summary,
             ownerEmail
-        };
-
-        if (bookData.title === '' || bookData.author === '' || bookData.genre === '' 
-        || bookData.imageUrl === '' || bookData.year === '' || bookData.summary === '') {
-            return alert('All fields are required!');
-        }
+        };        
 
         bookService.edit(bookId, bookData, isAdmin)
-            .then(() => {
-                e.target.reset();                
-                navigate(`/catalog/${bookId}/details`);                
+            .then(() => { 
+                setValues({
+                    title: '',
+                    author: '',
+                    genre: '',
+                    imageUrl: '',
+                    year: '',            
+                    summary: ''
+                });
+
+                navigate(`/catalog/${bookId}/details`);
             })
             .catch(err => {
-                alert(err.message);
-                console.log(err); 
+                setShowModalError(true);
+                setErrorMessage(state => [...state, err.message]);
+                console.log(err);
             });
     };
 
-    const onCancel = () => {        
-        if(isAdmin) {
+    const onCancel = () => {
+        if (isAdmin) {
             navigate('/catalog-admin');
         } else {
             navigate(`/catalog/${bookId}/details`);
@@ -141,6 +166,11 @@ const EditBook = () => {
 
     return (
         <section className={styles["edit-book-page"]}>
+            {showNotification && <Notification message={languages.allFieldsRequired[language]} />}
+
+            {showModalError && <Backdrop onClick={onClickOk} />}
+            {showModalError && <ModalError errorMessage={errorMessage} onClickOk={onClickOk} />}
+
             <div className={styles["edit-book-wrapper"]}>
                 <form className={styles["edit-book-form"]} onSubmit={onSubmit} >
 
@@ -223,7 +253,7 @@ const EditBook = () => {
                         <p className={styles.error}>
                             {languages.yearErrorMessage[language]}
                         </p>
-                    }                    
+                    }
 
                     <label htmlFor="summary">{languages.summary[language]}</label>
                     <textarea
@@ -240,7 +270,7 @@ const EditBook = () => {
                         </p>
                     }
 
-                    <div className={styles["btn-edit-book"]}>                        
+                    <div className={styles["btn-edit-book"]}>
                         <button type="submit" disabled={!isFormValid} className={styles[`${!isFormValid ? 'button-disabled' : ''}`]} >{languages.editBook[language]}</button>
                         <button type="button" onClick={onCancel} >{languages.cancel[language]}</button>
                     </div>
