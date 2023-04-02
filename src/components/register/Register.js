@@ -24,7 +24,7 @@ const Register = () => {
     const [showPassNotification, setShowPassNotification] = useState(false);
 
     const [showModalError, setShowModalError] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState([]);
 
     const [errors, setErrors] = useState({});
 
@@ -96,7 +96,7 @@ const Register = () => {
             })
             .catch((err) => {
                 setShowModalError(true);
-                setErrorMessage(err.message);
+                setErrorMessage(state => [...state, err.message]);
                 navigate('/register');
                 setValues({
                     email: '',

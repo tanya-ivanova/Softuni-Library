@@ -7,7 +7,6 @@ import Card from "../../common/card/Card";
 
 import styles from './BookItem.module.css';
 
-
 const BookItemGoogle = ({ book }) => {
     const { language } = useContext(LanguageContext);
 

@@ -8,15 +8,15 @@ import { languages } from '../../languages/languages';
 import * as bookService from '../../services/bookService';
 import * as likeService from '../../services/likeService';
 import * as commentService from '../../services/commentService';
+import { isUserAdmin } from "../../utils/utils";
 import Spinner from "../common/spinner/Spinner";
 import Backdrop from "../common/backdrop/Backdrop";
 import Modal from "../common/modal/Modal";
+import ModalError from "../common/modal/ModalError";
 import Like from "../like/Like";
 import Comment from "../comment/Comment";
 
 import styles from './BookDetails.module.css';
-import ModalError from "../common/modal/ModalError";
-import { isUserAdmin } from "../../utils/utils";
 
 const BookDetails = () => {
     const { language } = useContext(LanguageContext);
@@ -30,7 +30,7 @@ const BookDetails = () => {
     const [showModal, setShowModal] = useState(false);
 
     const [showModalError, setShowModalError] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState([]);
 
     const [currentBook, setCurrentBook] = useState({});
     const [totalLikes, setTotalLikes] = useState();
@@ -128,7 +128,7 @@ const BookDetails = () => {
             })
             .catch(err => {
                 setShowModalError(true);
-                setErrorMessage(err.message);
+                setErrorMessage(state => [...state, err.message]);
                 console.log(err);
             });
 

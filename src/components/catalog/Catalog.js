@@ -3,10 +3,10 @@ import { useLocation } from 'react-router-dom';
 import { LanguageContext } from "../../contexts/LanguageContext";
 import { languages } from '../../languages/languages';
 import * as bookService from '../../services/bookService';
+import BookItem from "./bookItem/BookItem";
 import Pager from "../common/pager/Pager";
 import Spinner from "../common/spinner/Spinner";
 
-import BookItem from "./bookItem/BookItem";
 import styles from './Catalog.module.css';
 
 const Catalog = () => {

@@ -11,7 +11,6 @@ import Notification from "../common/notification/Notification";
 
 import styles from './AddBook.module.css';
 
-
 const AddBook = () => {
     const navigate = useNavigate();
 
@@ -22,7 +21,7 @@ const AddBook = () => {
     const [showNotification, setShowNotification] = useState(true);
 
     const [showModalError, setShowModalError] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState([]);
 
     const [errors, setErrors] = useState({});
 
@@ -124,7 +123,7 @@ const AddBook = () => {
             })
             .catch(err => {
                 setShowModalError(true);
-                setErrorMessage(err.message); 
+                setErrorMessage(state => [...state, err.message]); 
                 console.log(err);               
             });
     };
