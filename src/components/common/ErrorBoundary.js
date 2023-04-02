@@ -25,9 +25,9 @@ class ErrorBoundary extends Component {
         clearTimeout(this.timer);
     }
 
-    // static getDerivedStateFromError(error) {
-    //     return { error: error.message };
-    // }
+    static getDerivedStateFromError(error) {
+        return { error: error.message };
+    }
 
     // componentDidCatch() {
     //     console.log('componentDidCatch');
