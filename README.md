@@ -86,7 +86,9 @@ The My books page has pagination. On each page only 6 books are displayed (or fe
 
 The My books page is accesible only for registered users.
 
-## Add book page
+## Add book
+
+### Add single book
 
 Every logged in user can add a book in the App when the Add book button is clicked.
 
@@ -95,6 +97,16 @@ In order to Add a book, you have to give the title, the author, the genre, image
 You can click on the Cancel button if you want to remove everything that you have filled in and start all over again.
 
 After you Add a book, you are taken to the All books page.
+
+### Add books from Excel
+
+You can add books in the App from an Excel file which is very convinient if you want to add multiple books at the same time.
+
+The Excel spreadsheet has to be pre-filled with the required book information. The Excel spreadsheet must have the following columns: Title, Author, Genre, Image URL, Year, Summary. All columns must be filled. 
+
+Adding books from Excel file also has validation and if the validation fails an error message will be shown on the screen listing all the errors that have to be corrected before sending the file again.
+
+After successful addition of the books you are taken to the All books page.
 
 ### Add book via Search in Google
 
@@ -187,6 +199,8 @@ Registered users:
 All books for admin page displays all books added in the App in a table format. Each table row contains information for one book - title, author, year, book id, owner email, and actions (edit, delete, info).
 
 The displayed books in the table are paginated. First you see 6 records (or fewer than 6 if the total number of books in the App is less than 6). When you click on the button More records you see 6 more records (or less than 6 if this is what is left to be shown). When there are no more records to be displayed the button More records disappears. Above the table you see how many records are currently displayed and the total number of records.
+
+The displayed books in the table can be sorted alphabetically by title or author in descending or ascending order.
 
 Via the action icons (edit, delete, info) the admin can Edit a book, can Delete a book, and can view the Details page (from where he/she can also Edit/Delete the book). 
 
