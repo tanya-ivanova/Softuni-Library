@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 
 import { LanguageContext } from "../../contexts/LanguageContext";
+import { useValidateForm } from '../../hooks/useValidateForm';
 import { languages } from '../../languages/languages';
 import * as bookService from '../../services/bookService';
 import Backdrop from '../common/backdrop/Backdrop';
@@ -22,8 +23,6 @@ const AddBook = () => {
 
     const [showModalError, setShowModalError] = useState(false);
     const [errorMessage, setErrorMessage] = useState([]);
-
-    const [errors, setErrors] = useState({});
 
     const { googleBookId } = useParams();    
 
@@ -65,39 +64,14 @@ const AddBook = () => {
         }
     }, [values.title, values.author, values.genre, values.imageUrl, values.year, values.summary])
 
+    const {minLength, isPositive, isValidUrl, isFormValid, errors} = useValidateForm(values);
+
     const changeValueHandler = (e) => {
         setValues(state => ({
             ...state,
             [e.target.name]: e.target.value
         }))
-    };
-
-    const minLength = (e, bound) => {
-        setErrors(state => ({
-            ...state,
-            [e.target.name]: values[e.target.name].length < bound
-        }));
-    };
-
-    const isPositive = (e) => {
-        let number = Number(e.target.value);
-
-        setErrors(state => ({
-            ...state,
-            [e.target.name]: number < 0 || isNaN(number)
-        }));
-    };
-
-    const IMAGE_URL_PATTERN = /^https?:\/\/.+$/i;
-
-    const isValidUrl = (e) => {
-        setErrors(state => ({
-            ...state,
-            [e.target.name]: !IMAGE_URL_PATTERN.test(e.target.value)
-        }));
-    };
-
-    const isFormValid = !Object.values(errors).some(x => x);
+    };    
 
     const onClickOk = () => {
         setShowModalError(false);
