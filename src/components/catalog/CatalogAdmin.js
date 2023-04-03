@@ -55,11 +55,11 @@ const CatalogAdmin = () => {
                 console.log(err);
             });
         
-        const deleteOffset = ((page - 1) * pageSize) + pageSize - 1;
+        const offsetAfterDelete = ((page - 1) * pageSize) + pageSize - 1;
         
-        const deletePageSize = 1;
+        const pageSizeAfterDelete = 1;
 
-        bookService.getAllAdmin(deletePageSize, deleteOffset)
+        bookService.getAllAdmin(pageSizeAfterDelete, offsetAfterDelete)
             .then(({ books, totalRecords }) => {
                 setBooks(state => [...state, ...books]);
                 setTotalRecords(totalRecords);
