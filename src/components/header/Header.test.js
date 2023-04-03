@@ -287,7 +287,7 @@ describe('Header component in English when there is а logged in user', () => {
         expect(myBooksElement.getAttribute('href')).toBe('/profile');
     });
 
-    test('renders "Add book"', () => {
+    test('renders "Single book"', () => {
         render(
             <AuthContext.Provider value={{
                 user: {
@@ -306,7 +306,7 @@ describe('Header component in English when there is а logged in user', () => {
             </AuthContext.Provider>
         );
 
-        const addBookElement = screen.getByRole('link', {name: 'Add book'});
+        const addBookElement = screen.getByRole('link', {name: 'Single book'});
         expect(addBookElement).toBeInTheDocument();
         expect(addBookElement.getAttribute('href')).toBe('/create');
     });
@@ -434,7 +434,7 @@ describe('Header component in Bulgarian when there is а logged in user', () => 
         expect(myBooksElement.getAttribute('href')).toBe('/profile');
     });
 
-    test('renders "Добави книга"', () => {
+    test('renders "Една книга"', () => {
         render(
             <AuthContext.Provider value={{
                 user: {
@@ -453,7 +453,7 @@ describe('Header component in Bulgarian when there is а logged in user', () => 
             </AuthContext.Provider>
         );
 
-        const addBookElement = screen.getByRole('link', {name: 'Добави книга'});
+        const addBookElement = screen.getByRole('link', {name: 'Една книга'});
         expect(addBookElement).toBeInTheDocument();
         expect(addBookElement.getAttribute('href')).toBe('/create');
     });
