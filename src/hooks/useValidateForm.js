@@ -1,6 +1,5 @@
 import { useState } from "react";
-
-const IMAGE_URL_PATTERN = /^https?:\/\/.+$/i;
+import { IMAGE_URL_PATTERN } from "../constants";
 
 export const useValidateForm = (values) => {
     const [errors, setErrors] = useState({});

@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import { Link } from 'react-router-dom';
-
 import { AuthContext } from "../../contexts/AuthContext";
 import { LanguageContext } from "../../contexts/LanguageContext";
 import { languages } from '../../languages/languages';

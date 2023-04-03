@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
-
 import { LanguageContext } from "../../contexts/LanguageContext";
 import { languages } from '../../languages/languages';
 import * as bookService from '../../services/bookService';
@@ -33,7 +32,6 @@ const Search = () => {
     let searchBy;
 
     if (queryAll) {
-
         query = queryAll.split('?')[0];        
 
         searchBy = queryAll.split('?')[1].split('=')[1];        

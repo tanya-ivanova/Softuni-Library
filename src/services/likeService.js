@@ -1,6 +1,7 @@
 import * as request from "./requester";
+import { host } from "../constants";
 
-const baseUrl = 'http://localhost:3030/data/likes';
+const baseUrl = `${host}/data/likes`;
 
 export async function likeBook(bookId) {
     return request.post(baseUrl, {bookId});

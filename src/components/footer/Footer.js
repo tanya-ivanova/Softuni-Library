@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { LanguageContext } from "../../contexts/LanguageContext";
 import {languages} from '../../languages/languages';
+
 import styles from './Footer.module.css';
 
 const Footer = () => {

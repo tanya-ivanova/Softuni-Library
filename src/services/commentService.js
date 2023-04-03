@@ -1,6 +1,7 @@
 import * as request from "./requester";
+import { host } from "../constants";
 
-const baseUrl = 'http://localhost:3030/data/comments';
+const baseUrl = `${host}/data/comments`;
 
 export const create = (bookId, comment) => 
     request.post(baseUrl, {bookId, text: comment});

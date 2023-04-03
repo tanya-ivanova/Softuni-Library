@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { LanguageContext } from "../../contexts/LanguageContext";
 import {languages} from '../../languages/languages';
-import styles from './Home.module.css';
 
+import styles from './Home.module.css';
 
 const Home = ({error}) => {
     const {language} = useContext(LanguageContext);

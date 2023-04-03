@@ -7,6 +7,7 @@ import * as bookService from '../../services/bookService';
 import BookItem from "../catalog/bookItem/BookItem";
 import Spinner from "../common/spinner/Spinner";
 import Pager from "../common/pager/Pager";
+
 import styles from './Profile.module.css';
 
 const Profile = () => {

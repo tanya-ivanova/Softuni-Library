@@ -1,17 +1,15 @@
 import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import readXlsxFile from 'read-excel-file';
 import * as bookService from '../../services/bookService';
 import { AuthContext } from '../../contexts/AuthContext';
 import { LanguageContext } from '../../contexts/LanguageContext';
-import { useNavigate } from 'react-router-dom';
-
 import { languages } from '../../languages/languages';
-
-import styles from './AddBookExcel.module.css';
 import Backdrop from '../common/backdrop/Backdrop';
 import ModalError from '../common/modal/ModalError';
 
-const IMAGE_URL_PATTERN = /^https?:\/\/.+$/i;
+import styles from './AddBookExcel.module.css';
+import {IMAGE_URL_PATTERN} from '../../constants';
 
 const schema = {
     'Title': {

@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { AuthContext } from '../../contexts/AuthContext';
 
+import { AuthContext } from '../../contexts/AuthContext';
 import { LanguageContext } from "../../contexts/LanguageContext";
 import { useValidateForm } from '../../hooks/useValidateForm';
 import { languages } from '../../languages/languages';

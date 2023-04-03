@@ -8,7 +8,7 @@ import BookItemAdmin from './bookItem/BookItemAdmin';
 
 import styles from './CatalogAdmin.module.css';
 
-const pageSize = 6;
+import { pageSize } from '../../constants';
 
 const CatalogAdmin = () => {
 

@@ -1,6 +1,7 @@
 import * as request from "./requester";
+import { host } from "../constants";
 
-const baseUrl = 'http://localhost:3030/data/books';
+const baseUrl = `${host}/data/books`;
 const pageSize = 6;
 const pageSizeForGoogleBooks = 6;
 
