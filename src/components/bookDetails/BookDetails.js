@@ -135,6 +135,20 @@ const BookDetails = () => {
         setCommentValue('');
     };
 
+    const deleteCommentHandler = (commentId) => {
+        if(!isAdmin) {
+            throw new Error('You are not authorized!');
+        }
+        
+        commentService.remove(commentId, isAdmin)
+            .then(() => {
+                setComments(state => state.filter(x => x._id !== commentId));
+            })
+            .catch(err => {                
+                console.log(err);
+            });
+    };
+
     const onClickOk = () => {
         setShowModalError(false);
     }
@@ -197,6 +211,7 @@ const BookDetails = () => {
                     commentValue={commentValue}
                     changeCommentValueHandler={changeCommentValueHandler}
                     addCommentHandler={addCommentHandler}
+                    deleteCommentHandler={deleteCommentHandler}
                 />
             </div>
         </section>
