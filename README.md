@@ -195,6 +195,7 @@ Registered users:
 - can view All boooks for admin page (see below for more detials)
 - can view the Details page
 - can Edit and Delete books even though not owner of the book
+- can Delete Comments (only the admin is authorized to do this)
 
 ### All boooks for admin page
 
@@ -220,5 +221,7 @@ Clicking on the Delete icon opens a modal asking the admin if he/she is sure tha
 
 Clicking on the Info icon takes the admin to the Details page for the given book.
 In the Details page the admin can see the Edit and Delete buttons which he/she can use for editing/deleting the book.
+
+In the Details page if there are comments the admin can see Delete comment button for each comment. Only the admin can delete comments. 
 
 

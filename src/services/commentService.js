@@ -12,3 +12,5 @@ export const getByBookId = (bookId) => {
     
     return request.get(`${baseUrl}?where=${search}&load=${relations}`);
 };
+
+export const remove = (commentId, isAdmin) => request.del(`${baseUrl}/${commentId}`, undefined, false, isAdmin);

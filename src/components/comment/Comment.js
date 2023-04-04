@@ -11,7 +11,8 @@ const Comment = ({
     isAdmin,
     commentValue,
     changeCommentValueHandler,
-    addCommentHandler
+    addCommentHandler,
+    deleteCommentHandler
 }) => {
     const { user } = useContext(AuthContext);
     const { language } = useContext(LanguageContext);
@@ -24,6 +25,7 @@ const Comment = ({
                     <div key={x._id || `${x.text} ${x.user.email}`} className={styles["comment-item"]} >
                         <p className={styles["comment-text"]}>{x.text}</p>
                         <p className={styles["comment-userEmail"]}>by {x.user.email}</p>
+                        {isAdmin && <button className={styles["btn-delete-comment"]} onClick={() => deleteCommentHandler(x._id)}>Delete comment</button>}
                     </div>
                 )}
 
