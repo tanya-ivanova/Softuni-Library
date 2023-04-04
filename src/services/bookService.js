@@ -19,7 +19,7 @@ export const getAll = async (page) => {
 
 export const getAllAdmin = async (currentPageSize, offset) => {    
     const [books, totalRecords] = await Promise.all([
-        request.get(`${baseUrl}?pageSize=${currentPageSize}&offset=${offset}`),
+        request.get(`${baseUrl}?sortBy=_createdOn%20desc&pageSize=${currentPageSize}&offset=${offset}`),
         request.get(`${baseUrl}?count`)
     ]);
 

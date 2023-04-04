@@ -59,7 +59,7 @@ describe('bookService functions', () => {
 
             expect(request.get).toHaveBeenCalledTimes(2);
             expect(request.get).toHaveBeenCalledWith(
-                `http://localhost:3030/data/books?pageSize=6&offset=0`
+                `http://localhost:3030/data/books?sortBy=_createdOn%20desc&pageSize=6&offset=0`
             );
             expect(request.get).toHaveBeenCalledWith(`http://localhost:3030/data/books?count`);
             expect(result.books).toBeDefined();
