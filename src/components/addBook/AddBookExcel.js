@@ -107,7 +107,11 @@ const AddBookExcel = () => {
                 } else {
                     rows.forEach(book => {
                         book.ownerEmail = user.email;
-                        bookService.create(book);
+                        bookService.create(book)
+                            .then(() => {})
+                            .catch((err) => {
+                                console.log(err);
+                            });
                     });
                     setErrorMessage([]);
                     e.target.value = '';
