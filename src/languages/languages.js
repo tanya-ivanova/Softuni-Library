@@ -288,8 +288,8 @@ export const languages = {
         english: 'Invalid email!'
     },
     passwordErrorMessage: {
-        bulgarian: 'Паролата трябва да е дълга поне 6 символа',
-        english: "Password should be at least 6 characters long!"
+        bulgarian: 'Паролата трябва да е дълга поне 5 символа',
+        english: "Password should be at least 5 characters long!"
     },
     reEnterPassword: {
         bulgarian: 'Въведи отново паролата',

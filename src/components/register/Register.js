@@ -129,7 +129,7 @@ const Register = () => {
                     />
 
                     {errors.email &&
-                        <p className={styles.error}>
+                        <p className="error">
                             {languages.emailErrorMessage[language]}
                         </p>
                     }
@@ -145,7 +145,7 @@ const Register = () => {
                     />
 
                     {errors.password &&
-                        <p className={styles.error}>
+                        <p className="error">
                             {languages.passwordErrorMessage[language]}
                         </p>
                     }

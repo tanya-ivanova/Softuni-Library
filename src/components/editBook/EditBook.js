@@ -160,7 +160,7 @@ const EditBook = () => {
                     />
 
                     {errors.title &&
-                        <p className={styles.error}>
+                        <p className="error">
                             {languages.titleErrorMessage[language]}
                         </p>
                     }
@@ -176,7 +176,7 @@ const EditBook = () => {
                     />
 
                     {errors.author &&
-                        <p className={styles.error}>
+                        <p className="error">
                             {languages.authorErrorMessage[language]}
                         </p>
                     }
@@ -192,7 +192,7 @@ const EditBook = () => {
                     />
 
                     {errors.genre &&
-                        <p className={styles.error}>
+                        <p className="error">
                             {languages.genreErrorMessage[language]}
                         </p>
                     }
@@ -208,7 +208,7 @@ const EditBook = () => {
                     />
 
                     {errors.imageUrl &&
-                        <p className={styles.error}>
+                        <p className="error">
                             {languages.imageUrlErrorMessage[language]}
                         </p>
                     }
@@ -224,7 +224,7 @@ const EditBook = () => {
                     />
 
                     {errors.year &&
-                        <p className={styles.error}>
+                        <p className="error">
                             {languages.yearErrorMessage[language]}
                         </p>
                     }
@@ -239,7 +239,7 @@ const EditBook = () => {
                     />
 
                     {errors.summary &&
-                        <p className={styles.error}>
+                        <p className="error">
                             {languages.summaryErrorMessage[language]}
                         </p>
                     }

@@ -55,3 +55,9 @@ textarea {
     resize: none;
     font-size: 18px;
 }
+
+.error {
+    color: red;
+    border: 1px solid red;    
+    padding: 8px;    
+}

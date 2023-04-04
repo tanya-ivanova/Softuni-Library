@@ -142,7 +142,7 @@ const AddBook = () => {
                         onBlur={(e) => minLength(e, 3)}
                     />
                     {errors.title &&
-                        <p className={styles.error}>
+                        <p className="error">
                             {languages.titleErrorMessage[language]}
                         </p>
                     }
@@ -158,7 +158,7 @@ const AddBook = () => {
                     />
 
                     {errors.author &&
-                        <p className={styles.error}>
+                        <p className="error">
                             {languages.authorErrorMessage[language]}
                         </p>
                     }
@@ -174,7 +174,7 @@ const AddBook = () => {
                     />
 
                     {errors.genre &&
-                        <p className={styles.error}>
+                        <p className="error">
                             {languages.genreErrorMessage[language]}
                         </p>
                     }
@@ -190,7 +190,7 @@ const AddBook = () => {
                     />
 
                     {errors.imageUrl &&
-                        <p className={styles.error}>
+                        <p className="error">
                             {languages.imageUrlErrorMessage[language]}
                         </p>
                     }
@@ -206,7 +206,7 @@ const AddBook = () => {
                     />
 
                     {errors.year &&
-                        <p className={styles.error}>
+                        <p className="error">
                             {languages.yearErrorMessage[language]}
                         </p>
                     }                    
@@ -222,7 +222,7 @@ const AddBook = () => {
                     />
 
                     {errors.summary &&
-                        <p className={styles.error}>
+                        <p className="error">
                             {languages.summaryErrorMessage[language]}
                         </p>
                     }

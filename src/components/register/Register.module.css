@@ -79,12 +79,6 @@ button:hover {
     text-align: center;
 }
 
-.error {
-    color: red;
-    border: 1px solid red;    
-    padding: 8px;
-}
-
 .button-disabled {
     background-color: #d4d4d4;
 }
