@@ -16,7 +16,7 @@ You can switch between languages with the two buttons in the header.
 
 The Home page is a static page containing basic information why reading books is important.
 
-The Home page is accesible for all types of users of the App (guests, registered users, admin).
+The Home page is accessible for all types of users of the App (guests, registered users, admin).
 
 ## Register page
 
@@ -24,7 +24,7 @@ You can register with email and password. When you register you also have to rep
 
 When you register you are automatically logged in the App and you are taken to the Home page.
 
-The Register page is accesible for all types of users of the App (guests, registered users, admin).
+The Register page is accessible for all types of users of the App (guests, registered users, admin).
 
 ## Login page
 
@@ -32,7 +32,7 @@ You can login with email and password.
 
 After you login, you are taken to the Home page.
 
-The Login page is accesible for all types of users of the App (guests, registered users, admin).
+The Login page is accessible for all types of users of the App (guests, registered users, admin).
 
 ## Logout
 
@@ -42,9 +42,11 @@ Every logged in user can logout of the App by pressing the Logout button in the 
 
 In All books page all added books in the App are displayed. Every book is displayed with image, title, author, genre, and detials button.
 
+The books in the All books page are sorted by default in the order they were added in the App - the newest added book appear first, etc. 
+
 The All books page has pagination. On each page only 6 books are displayed (or fewer than 6 if the total number of books in the App is less than 6). You are shown the current page and the total number of pages. With Next and Prev you can browse through the pages.
 
-The All books page is accesible for all types of users of the App (guests, registered users, admin).
+The All books page is accessible for all types of users of the App (guests, registered users, admin).
 
 ## Details page
 
@@ -84,7 +86,7 @@ In My books page all added books by a certain registered user are displayed. Eve
 
 The My books page has pagination. On each page only 6 books are displayed (or fewer than 6 if the total number of added books by the given user is less than 6). You are shown the current page and the total number of pages. With Next and Prev you can browse through the pages.
 
-The My books page is accesible only for registered users.
+The My books page is accessible only for registered users.
 
 ## Add book
 
@@ -198,9 +200,11 @@ Registered users:
 
 All books for admin page displays all books added in the App in a table format. Each table row contains information for one book - title, author, year, book id, owner email, and actions (edit, delete, info).
 
+The displayed books in the table are sorted by default in the order they were added in the App - the newest added book appear first, etc.
+
 The displayed books in the table are paginated. First you see 6 records (or fewer than 6 if the total number of books in the App is less than 6). When you click on the button More records you see 6 more records (or less than 6 if this is what is left to be shown). When there are no more records to be displayed the button More records disappears. Above the table you see how many records are currently displayed and the total number of records.
 
-The displayed books in the table can be sorted alphabetically by title or author in descending or ascending order.
+The displayed books in the table can be sorted alphabetically by title or author in descending or ascending order by clicking on the arrows next to Title and Author.
 
 Via the action icons (edit, delete, info) the admin can Edit a book, can Delete a book, and can view the Details page (from where he/she can also Edit/Delete the book). 
 
