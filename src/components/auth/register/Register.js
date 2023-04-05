@@ -1,14 +1,14 @@
 import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
-import { AuthContext } from "../../contexts/AuthContext";
-import * as authService from "../../services/authService";
-import { LanguageContext } from "../../contexts/LanguageContext";
-import {languages} from '../../languages/languages';
-import { useValidateForm } from "../../hooks/useValidateForm";
-import Notification from "../common/notification/Notification";
-import Backdrop from "../common/backdrop/Backdrop";
-import ModalError from "../common/modal/ModalError";
+import { AuthContext } from "../../../contexts/AuthContext";
+import * as authService from "../../../services/authService";
+import { LanguageContext } from "../../../contexts/LanguageContext";
+import {languages} from '../../../languages/languages';
+import { useValidateForm } from "../../../hooks/useValidateForm";
+import Notification from "../../common/notification/Notification";
+import Backdrop from "../../common/backdrop/Backdrop";
+import ModalError from "../../common/modal/ModalError";
 
 import styles from './Register.module.css';
 

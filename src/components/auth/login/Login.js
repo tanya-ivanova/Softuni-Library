@@ -1,13 +1,13 @@
 import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
-import { AuthContext } from "../../contexts/AuthContext";
-import { LanguageContext } from "../../contexts/LanguageContext";
-import {languages} from '../../languages/languages';
-import * as authService from "../../services/authService";
-import Notification from "../common/notification/Notification";
-import ModalError from "../common/modal/ModalError";
-import Backdrop from "../common/backdrop/Backdrop";
+import { AuthContext } from "../../../contexts/AuthContext";
+import { LanguageContext } from "../../../contexts/LanguageContext";
+import {languages} from '../../../languages/languages';
+import * as authService from "../../../services/authService";
+import Notification from "../../common/notification/Notification";
+import ModalError from "../../common/modal/ModalError";
+import Backdrop from "../../common/backdrop/Backdrop";
 
 import styles from './Login.module.css';
 

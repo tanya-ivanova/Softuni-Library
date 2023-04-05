@@ -1,18 +1,17 @@
 import { useState, useEffect, useContext } from "react";
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import parse from 'html-react-parser';
-
-import { AuthContext } from "../../contexts/AuthContext";
-import { LanguageContext } from "../../contexts/LanguageContext";
-import { languages } from '../../languages/languages';
-import * as bookService from '../../services/bookService';
-import * as likeService from '../../services/likeService';
-import * as commentService from '../../services/commentService';
-import { isUserAdmin, modifySearchForRequest } from "../../utils/utils";
-import Spinner from "../common/spinner/Spinner";
-import Backdrop from "../common/backdrop/Backdrop";
-import Modal from "../common/modal/Modal";
-import ModalError from "../common/modal/ModalError";
+import { AuthContext } from "../../../contexts/AuthContext";
+import { LanguageContext } from "../../../contexts/LanguageContext";
+import { languages } from '../../../languages/languages';
+import * as bookService from '../../../services/bookService';
+import * as likeService from '../../../services/likeService';
+import * as commentService from '../../../services/commentService';
+import { isUserAdmin, modifySearchForRequest } from "../../../utils/utils";
+import Spinner from "../../common/spinner/Spinner";
+import Backdrop from "../../common/backdrop/Backdrop";
+import Modal from "../../common/modal/Modal";
+import ModalError from "../../common/modal/ModalError";
 import Like from "../like/Like";
 import Comment from "../comment/Comment";
 

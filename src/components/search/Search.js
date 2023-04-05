@@ -4,7 +4,7 @@ import { LanguageContext } from "../../contexts/LanguageContext";
 import { languages } from '../../languages/languages';
 import * as bookService from '../../services/bookService';
 import { parseQueryAll } from '../../utils/utils';
-import BookItem from "../catalog/bookItem/BookItem";
+import BookItem from "../book/catalog/bookItem/BookItem";
 import Pager from "../common/pager/Pager";
 import Spinner from "../common/spinner/Spinner";
 import SearchForm from './SearchForm';

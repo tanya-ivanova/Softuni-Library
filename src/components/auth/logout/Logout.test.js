@@ -1,7 +1,7 @@
 import { render, act } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import { AuthContext } from '../../contexts/AuthContext';
-import * as authService from '../../services/authService';
+import { AuthContext } from '../../../contexts/AuthContext';
+import * as authService from '../../../services/authService';
 import Logout from './Logout';
 
 jest.mock('../../services/authService');
