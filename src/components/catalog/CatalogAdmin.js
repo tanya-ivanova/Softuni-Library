@@ -8,7 +8,7 @@ import BookItemAdmin from './bookItem/BookItemAdmin';
 
 import styles from './CatalogAdmin.module.css';
 
-import { pageSize } from '../../constants';
+import { PAGE_SIZE } from '../../constants';
 
 const CatalogAdmin = () => {
 
@@ -29,9 +29,9 @@ const CatalogAdmin = () => {
     const [showAuthorArrowUp, setAuthorShowArrowUp] = useState(false);
 
     useEffect(() => {        
-        let offset = (page - 1) * pageSize;        
+        let offset = (page - 1) * PAGE_SIZE;        
 
-        bookService.getAllAdmin(pageSize, offset)
+        bookService.getAllAdmin(PAGE_SIZE, offset)
             .then(({ books, totalRecords }) => {
                 setBooks(state => [...state, ...books]);
                 setTotalRecords(totalRecords);
@@ -55,7 +55,7 @@ const CatalogAdmin = () => {
                 console.log(err);
             });
         
-        const offsetAfterDelete = ((page - 1) * pageSize) + pageSize - 1;
+        const offsetAfterDelete = ((page - 1) * PAGE_SIZE) + PAGE_SIZE - 1;
         
         const pageSizeAfterDelete = 1;
 
@@ -73,7 +73,7 @@ const CatalogAdmin = () => {
     const moreRecordsHandler = () => {
         setPage(state => state + 1);
 
-        if (books.length + pageSize >= totalRecords) {
+        if (books.length + PAGE_SIZE >= totalRecords) {
             setBooksIsEmpty(true);
         }
     };

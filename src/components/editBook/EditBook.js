@@ -245,7 +245,13 @@ const EditBook = () => {
                     }
 
                     <div className={styles["btn-edit-book"]}>
-                        <button type="submit" disabled={!isFormValid} className={styles[`${!isFormValid ? 'button-disabled' : ''}`]} >{languages.editBook[language]}</button>
+                        <button 
+                            type="submit" 
+                            disabled={!isFormValid || showNotification} 
+                            className={`${!isFormValid || showNotification ? 'button-disabled' : ''}`}
+                        >
+                            {languages.editBook[language]}
+                        </button>
                         <button type="button" onClick={onCancel} >{languages.cancel[language]}</button>
                     </div>
 

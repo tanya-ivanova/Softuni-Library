@@ -1,6 +1,8 @@
+import { AUTH_LOCAL_STORAGE } from "../constants";
+
 export const request = async (method, url, data, mode, isAdmin) => {
     try {
-        const user = localStorage.getItem('auth');
+        const user = localStorage.getItem(AUTH_LOCAL_STORAGE);
         const auth = JSON.parse(user || '{}');        
 
         let headers = {};        

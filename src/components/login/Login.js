@@ -106,7 +106,7 @@ const Login = () => {
                         <button
                             type="submit"
                             disabled={showNotification}
-                            className={styles[`${showNotification ? 'button-disabled' : ''}`]}
+                            className={`${showNotification ? 'button-disabled' : ''}`}
                         >
                             {languages.login[language]}
                         </button>

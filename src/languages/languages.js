@@ -203,6 +203,10 @@ export const languages = {
         bulgarian: 'Резюмето трябва да е дълго поне 10 символа!',
         english: 'Summary should be at least 10 characters long!'
     },
+    commentErrorMessage: {
+        bulgarian: 'Коментарът трябва да е дълъг поне 3 символа!',
+        english: 'Comment should be at least 3 characters long!'
+    },
     cancel: {
         bulgarian: 'Отмени',
         english: 'Cancel'

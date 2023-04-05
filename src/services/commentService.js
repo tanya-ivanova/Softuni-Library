@@ -1,10 +1,9 @@
 import * as request from "./requester";
-import { host } from "../constants";
+import { HOST } from "../constants";
 
-const baseUrl = `${host}/data/comments`;
+const baseUrl = `${HOST}/data/comments`;
 
-export const create = (bookId, comment) => 
-    request.post(baseUrl, {bookId, text: comment});
+export const create = (bookId, comment) => request.post(baseUrl, {bookId, text: comment});
 
 export const getByBookId = (bookId) => {
     const relations = encodeURIComponent(`user=_ownerId:users`);

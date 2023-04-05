@@ -27,9 +27,9 @@ const Search = () => {
     const location = useLocation();
 
     let queryAll = new URLSearchParams(location.search).get("query") || '';
-    let page = 1;
     let query;
     let searchBy;
+    let page = 1;
 
     if (queryAll) {
         query = queryAll.split('?')[0];        

@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { LanguageContext } from "../../contexts/LanguageContext";
+import { useValidateForm } from "../../hooks/useValidateForm";
 import { languages } from '../../languages/languages';
 
 import styles from './Comment.module.css';
@@ -9,15 +10,18 @@ const Comment = ({
     comments,
     isOwner,
     isAdmin,
-    commentValue,
+    values,
     changeCommentValueHandler,
     addCommentHandler,
     deleteCommentHandler
 }) => {
     const { user } = useContext(AuthContext);
     const { language } = useContext(LanguageContext);
-    
-    return (        
+
+    const { minLength, isFormValid, errors } = useValidateForm(values);
+    const isCommentEmpty = !values.comment;    
+
+    return (
         <div className={styles["comments-part"]}>
             <div className={styles.comments}>
                 <h1>{languages.comments[language]}:</h1>
@@ -38,13 +42,28 @@ const Comment = ({
                 ? <div className={styles["add-comment"]}>
                     <h2>{languages.addComment[language]}:</h2>
                     <form onSubmit={addCommentHandler}>
-                        <textarea 
-                            name="comment" 
-                            placeholder={languages.pleaseWriteYourComment[language]}
-                            value={commentValue}
-                            onChange={changeCommentValueHandler} 
-                        />
-                        <input className={styles["btn-add-comment"]} type="submit" value={languages.addComment[language]} />
+                        <div>
+                            <textarea
+                                name="comment"
+                                placeholder={languages.pleaseWriteYourComment[language]}
+                                value={values.comment}
+                                onChange={changeCommentValueHandler}
+                                onKeyUp={(e) => minLength(e, 3)}
+                            />
+                            {errors.comment &&
+                                <p className="error">
+                                    {languages.commentErrorMessage[language]}
+                                </p>
+                            }
+                        </div>
+
+                        <button
+                            type="submit"  
+                            className={styles[`${!isFormValid || isCommentEmpty ? 'button-disabled' : ''}`]}                                                          
+                            disabled={!isFormValid || isCommentEmpty}
+                        >
+                            {languages.addComment[language]}
+                        </button>
                     </form>
                 </div>
                 : <></>}

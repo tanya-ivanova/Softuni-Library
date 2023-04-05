@@ -5,13 +5,12 @@ import { AuthContext } from "../../contexts/AuthContext";
 import * as authService from "../../services/authService";
 import { LanguageContext } from "../../contexts/LanguageContext";
 import {languages} from '../../languages/languages';
+import { useValidateForm } from "../../hooks/useValidateForm";
 import Notification from "../common/notification/Notification";
 import Backdrop from "../common/backdrop/Backdrop";
 import ModalError from "../common/modal/ModalError";
 
 import styles from './Register.module.css';
-
-import {EMAIL_PATTERN} from '../../constants';
 
 const Register = () => {
     const {language} = useContext(LanguageContext);
@@ -25,9 +24,7 @@ const Register = () => {
 
     const [showModalError, setShowModalError] = useState(false);
     const [errorMessage, setErrorMessage] = useState([]);
-
-    const [errors, setErrors] = useState({});
-
+    
     const [values, setValues] = useState({
         email: '',
         password: '',
@@ -50,30 +47,15 @@ const Register = () => {
         }
       }, [values.password, values.confirmPassword])  
 
+    const {minLength, isValidEmail, isFormValid, errors} = useValidateForm(values);  
 
     const changeValueHandler = (e) => {
         setValues(state => ({
             ...state,
             [e.target.name]: e.target.value
         }))
-    };
-
-    const minLength = (e, bound) => {
-        setErrors(state => ({
-            ...state,
-            [e.target.name]: values[e.target.name].length < bound
-        }));
-    };
-
-    const isValidEmail = (e) => {
-        setErrors(state => ({
-            ...state,
-            [e.target.name]: !EMAIL_PATTERN.test(e.target.value)
-        }));
-    };
-
-    const isFormValid = !Object.values(errors).some(x => x);
-
+    }; 
+  
     const onClickOk = () => {
         setShowModalError(false);
     }
@@ -163,7 +145,7 @@ const Register = () => {
                         <button 
                             type="submit" 
                             disabled={!isFormValid || showNotification || showPassNotification} 
-                            className={styles[`${!isFormValid || showNotification || showPassNotification ? 'button-disabled' : ''}`]} 
+                            className={`${!isFormValid || showNotification || showPassNotification ? 'button-disabled' : ''}`} 
                         >
                             {languages.register[language]}
                         </button>

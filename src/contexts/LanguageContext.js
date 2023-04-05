@@ -1,12 +1,12 @@
 import { createContext, useState } from "react";
-import {englishLanguage} from '../constants';
+import {ENGLISH_LANGUAGE} from '../constants';
 
 export const LanguageContext = createContext();
 
 export const LanguageProvider = ({
     children
 }) => {
-    const [language, setLanguage] = useState(englishLanguage);
+    const [language, setLanguage] = useState(ENGLISH_LANGUAGE);
 
     const setAppLanguage = (lang) => {
         setLanguage(lang);

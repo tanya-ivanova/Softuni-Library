@@ -1,7 +1,7 @@
 import * as request from "./requester";
-import { host } from "../constants";
+import { HOST } from "../constants";
 
-const baseUrl = `${host}/data/likes`;
+const baseUrl = `${HOST}/data/likes`;
 
 export async function likeBook(bookId) {
     return request.post(baseUrl, {bookId});

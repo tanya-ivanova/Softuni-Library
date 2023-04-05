@@ -37,7 +37,9 @@ const BookDetails = () => {
     const [isLiked, setIsLiked] = useState();
     const [comments, setComments] = useState([]);
 
-    const [commentValue, setCommentValue] = useState('');
+    const [values, setValues] = useState({
+        comment: '',        
+    });
 
     useEffect(() => {
         Promise.all([
@@ -107,20 +109,20 @@ const BookDetails = () => {
     };
 
     const changeCommentValueHandler = (e) => {
-        setCommentValue(e.target.value);
+        setValues({comment: e.target.value});
     };
 
     const addCommentHandler = (e) => {
         e.preventDefault();
 
-        commentService.create(bookId, commentValue)
+        commentService.create(bookId, values.comment)
             .then(() => {
                 setComments(state => {
                     return [
                         ...state,
                         {
                             bookId,
-                            text: commentValue,
+                            text: values.comment,
                             user
                         }
                     ];
@@ -132,7 +134,7 @@ const BookDetails = () => {
                 console.log(err);
             });
 
-        setCommentValue('');
+        setValues({comment: ''});
     };
 
     const deleteCommentHandler = (commentId) => {
@@ -208,7 +210,7 @@ const BookDetails = () => {
                     comments={comments}
                     isOwner={isOwner}
                     isAdmin={isAdmin}
-                    commentValue={commentValue}
+                    values={values}
                     changeCommentValueHandler={changeCommentValueHandler}
                     addCommentHandler={addCommentHandler}
                     deleteCommentHandler={deleteCommentHandler}

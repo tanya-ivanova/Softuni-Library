@@ -1,7 +1,7 @@
 .add-comment textarea {
-    display: block;
-    width: 35%;
+    display: block;    
     min-height: 100px; 
+    width: 354px;
 }
 
 .add-comment input {
@@ -36,7 +36,7 @@
     margin-top: 50px;
 }
 
-.btn-add-comment {
+/* .btn-add-comment {
     color: #5992B7;
     font-weight: bolder;    
     background-color: white;    
@@ -56,8 +56,18 @@
     color: #29528B;
     background-color: #F2AF81;
     border-color: #203973;
-}
+} */
 
 .btn-delete-comment {
     margin: 10px;
+}
+
+.button-disabled {
+    background-color: #ABABAB;
+}
+
+.button-disabled:hover {
+    background-color: #ABABAB;
+    color: #5992B7;
+    cursor: default;
 }

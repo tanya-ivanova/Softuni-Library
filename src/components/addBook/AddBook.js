@@ -70,7 +70,7 @@ const AddBook = () => {
         setValues(state => ({
             ...state,
             [e.target.name]: e.target.value
-        }))
+        }));
     };    
 
     const onClickOk = () => {
@@ -231,7 +231,7 @@ const AddBook = () => {
                         <button
                             type="submit"
                             disabled={!isFormValid || showNotification}
-                            className={styles[`${!isFormValid || showNotification ? 'button-disabled' : ''}`]}
+                            className={`${!isFormValid || showNotification ? 'button-disabled' : ''}`}
                         >
                             {languages.addBook[language]}
                         </button>

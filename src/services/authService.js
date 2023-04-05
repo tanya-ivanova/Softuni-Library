@@ -1,10 +1,9 @@
 import * as request from "./requester";
-import { host } from "../constants";
+import { HOST } from "../constants";
 
-const baseUrl = `${host}/users`;
+const baseUrl = `${HOST}/users`;
 
-export const login = (email, password) => 
-    request.post(`${baseUrl}/login`, {email, password});
+export const login = (email, password) => request.post(`${baseUrl}/login`, {email, password});
 
 export const logout = async (accessToken) => {
     try {
@@ -21,6 +20,5 @@ export const logout = async (accessToken) => {
     }
 }
 
-export const register = (email, password) => 
-    request.post(`${baseUrl}/register`, {email, password});
+export const register = (email, password) => request.post(`${baseUrl}/register`, {email, password});
     
