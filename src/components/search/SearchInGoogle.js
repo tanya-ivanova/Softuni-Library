@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { LanguageContext } from "../../contexts/LanguageContext";
 import { languages } from '../../languages/languages';
 import * as bookService from '../../services/bookService';
-import { parseQueryAll } from '../../utils/utils';
+import { modifyQueryForForm, modifySearchForRequest, parseQueryAll } from '../../utils/utils';
 import BookItemGoogle from '../catalog/bookItem/BookItemGoogle';
 import Pager from "../common/pager/Pager";
 import Spinner from "../common/spinner/Spinner";
@@ -37,12 +37,8 @@ const SearchInGoogle = () => {
     }
 
     useEffect(() => {
-        let modifiedQueryForForm;
-        if(query && query.split('-').length > 1) {
-            modifiedQueryForForm = query.split('-').join(' ');
-        } else if(query && query.split('-').length === 1) {
-            modifiedQueryForForm = query;            
-        }
+        let modifiedQueryForForm = modifyQueryForForm(query);
+        
         setSearch(modifiedQueryForForm || '');
         setCriteria(searchBy || 'title');
     }, [query, searchBy]);
@@ -82,12 +78,9 @@ const SearchInGoogle = () => {
 
     const onSearch = (e) => {
         e.preventDefault();
-        let modifiedSearchForRequest;
-        if(search.split(' ').length > 1) {
-            modifiedSearchForRequest = search.split(' ').join('-');
-        } else {
-            modifiedSearchForRequest = search;
-        }
+
+        let modifiedSearchForRequest = modifySearchForRequest(search);
+        
         navigate(`/searchInGoogle?query=${modifiedSearchForRequest}?searchBy=${criteria}`);
         if (modifiedSearchForRequest) {
             setIsLoading(true);

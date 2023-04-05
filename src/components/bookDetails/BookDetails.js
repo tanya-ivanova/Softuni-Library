@@ -8,7 +8,7 @@ import { languages } from '../../languages/languages';
 import * as bookService from '../../services/bookService';
 import * as likeService from '../../services/likeService';
 import * as commentService from '../../services/commentService';
-import { isUserAdmin } from "../../utils/utils";
+import { isUserAdmin, modifySearchForRequest } from "../../utils/utils";
 import Spinner from "../common/spinner/Spinner";
 import Backdrop from "../common/backdrop/Backdrop";
 import Modal from "../common/modal/Modal";
@@ -155,12 +155,7 @@ const BookDetails = () => {
         setShowModalError(false);
     }
 
-    let authorForSearch;
-    if (currentBook.author.split(' ').length > 1) {
-        authorForSearch = currentBook.author.split(' ').join('-');
-    } else {
-        authorForSearch = currentBook.author;
-    }
+    let authorForSearch = modifySearchForRequest(currentBook.author);    
 
     return (
         <section className={styles["details-page"]}>
