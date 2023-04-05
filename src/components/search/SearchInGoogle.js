@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { LanguageContext } from "../../contexts/LanguageContext";
 import { languages } from '../../languages/languages';
 import * as bookService from '../../services/bookService';
+import { parseQueryAll } from '../../utils/utils';
 import BookItemGoogle from '../catalog/bookItem/BookItemGoogle';
 import Pager from "../common/pager/Pager";
 import Spinner from "../common/spinner/Spinner";
@@ -27,18 +28,12 @@ const SearchInGoogle = () => {
     const location = useLocation();
 
     let queryAll = new URLSearchParams(location.search).get("query") || '';
-    let page = 1;
     let query;
     let searchBy;
+    let page = 1; 
 
-    if (queryAll) {
-        query = queryAll.split('?')[0];
-
-        searchBy = queryAll.split('?')[1].split('=')[1];
-
-        if (queryAll.split('?')[2]) {
-            page = Number(queryAll.split('?')[2].split('=')[1]);
-        }
+    if(queryAll) {
+        ({query, searchBy, page} = parseQueryAll(queryAll, query, searchBy, page));
     }
 
     useEffect(() => {

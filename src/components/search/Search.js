@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { LanguageContext } from "../../contexts/LanguageContext";
 import { languages } from '../../languages/languages';
 import * as bookService from '../../services/bookService';
+import { parseQueryAll } from '../../utils/utils';
 import BookItem from "../catalog/bookItem/BookItem";
 import Pager from "../common/pager/Pager";
 import Spinner from "../common/spinner/Spinner";
@@ -29,16 +30,10 @@ const Search = () => {
     let queryAll = new URLSearchParams(location.search).get("query") || '';
     let query;
     let searchBy;
-    let page = 1;
+    let page = 1;    
 
-    if (queryAll) {
-        query = queryAll.split('?')[0];        
-
-        searchBy = queryAll.split('?')[1].split('=')[1];        
-
-        if (queryAll.split('?')[2]) {
-            page = Number(queryAll.split('?')[2].split('=')[1]);
-        }
+    if(queryAll) {
+        ({query, searchBy, page} = parseQueryAll(queryAll, query, searchBy, page));
     }
 
     useEffect(() => {
