@@ -21,9 +21,7 @@
     margin-bottom: 20px;
 }
 
-.buttons a,
-.btn-delete,
-.btn-like {
+.buttons a {
     color: #5992B7;
     font-weight: bolder;    
     background-color: white;    
@@ -38,13 +36,10 @@
     font-size: 16px;    
 }
 
-.buttons a:hover,
-.btn-delete:hover,
-.btn-like:hover {
+.buttons a:hover {
     cursor: pointer;
     color: #29528B;
-    background-color: #F2AF81;
-    border-color: #203973;
+    background-color: #F2AF81;    
 }
 
 .image {

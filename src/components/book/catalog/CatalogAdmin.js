@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
+
 import { LanguageContext } from '../../../contexts/LanguageContext';
 import { AuthContext } from '../../../contexts/AuthContext';
 import * as bookService from '../../../services/bookService';
@@ -6,12 +7,11 @@ import { isUserAdmin } from '../../../utils/utils';
 import { languages } from '../../../languages/languages';
 import BookItemAdmin from './bookItem/BookItemAdmin';
 
-import styles from './CatalogAdmin.module.css';
-
 import { PAGE_SIZE } from '../../../constants';
 
-const CatalogAdmin = () => {
+import styles from './CatalogAdmin.module.css';
 
+const CatalogAdmin = () => {
     const { language } = useContext(LanguageContext);
 
     const { user } = useContext(AuthContext);
@@ -36,8 +36,8 @@ const CatalogAdmin = () => {
                 setBooks(state => [...state, ...books]);
                 setTotalRecords(totalRecords);
             })
-            .catch(err => {
-                console.log(err);
+            .catch(error => {
+                console.log(error);
                 setBooks([]);
             });
     }, [page]);
@@ -50,9 +50,9 @@ const CatalogAdmin = () => {
                 setBooks(state => state.filter(x => x._id !== bookId));
                 setTotalRecords(state => state - 1);
             })
-            .catch(err => {
-                alert(err.message);
-                console.log(err);
+            .catch(error => {
+                alert(error.message);
+                console.log(error);
             });
         
         const offsetAfterDelete = ((page - 1) * PAGE_SIZE) + PAGE_SIZE - 1;
@@ -64,8 +64,8 @@ const CatalogAdmin = () => {
                 setBooks(state => [...state, ...books]);
                 setTotalRecords(totalRecords);
             })
-            .catch(err => {
-                console.log(err);
+            .catch(error => {
+                console.log(error);
                 setBooks([]);
             });
     };
@@ -112,7 +112,6 @@ const CatalogAdmin = () => {
 
     return (
         <section className={styles["catalog-admin"]}>
-
             <div className={styles["table-wrapper"]}>
                 <p className={styles["number-records"]}>{books.length} {languages.outOf[language]} {totalRecords} {languages.records[language]}</p>
                 <table>

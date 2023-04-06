@@ -48,9 +48,9 @@ const AddBook = () => {
                         summary: result.volumeInfo.description || ''
                     });
                 })
-                .catch(err => {
-                    alert(err.message);
-                    console.log(err);                    
+                .catch(error => {
+                    alert(error.message);
+                    console.log(error);                    
                 });
         }
     }, [googleBookId]);
@@ -103,10 +103,10 @@ const AddBook = () => {
 
                 navigate(`/catalog`);
             })
-            .catch(err => {
+            .catch(error => {
                 setShowModalError(true);
-                setErrorMessage(state => [...state, err.message]); 
-                console.log(err);               
+                setErrorMessage(state => [...state, error.message]); 
+                console.log(error);               
             });
     };
 

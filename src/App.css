@@ -54,7 +54,7 @@ body {
 button {
     color: #5992B7;
     font-weight: bolder;
-    margin-top: 30px;
+    margin: 30px 20px;
     background-color: white;    
     width: auto;
     padding: 10px;
@@ -62,6 +62,8 @@ button {
     border-width: 2px;
     border-color: #895D67;
     border-radius: 10px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 16px;
 }
 
 button:hover {

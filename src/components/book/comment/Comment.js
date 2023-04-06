@@ -1,4 +1,5 @@
 import { useContext } from "react";
+
 import { AuthContext } from "../../../contexts/AuthContext";
 import { LanguageContext } from "../../../contexts/LanguageContext";
 import { useValidateForm } from "../../../hooks/useValidateForm";
@@ -59,7 +60,7 @@ const Comment = ({
 
                         <button
                             type="submit"  
-                            className={styles[`${!isFormValid || isCommentEmpty ? 'button-disabled' : ''}`]}                                                          
+                            className={`${!isFormValid || isCommentEmpty ? 'button-disabled' : ''}`}                                                          
                             disabled={!isFormValid || isCommentEmpty}
                         >
                             {languages.addComment[language]}

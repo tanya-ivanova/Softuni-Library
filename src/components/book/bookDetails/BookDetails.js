@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import parse from 'html-react-parser';
+
 import { AuthContext } from "../../../contexts/AuthContext";
 import { LanguageContext } from "../../../contexts/LanguageContext";
 import { languages } from '../../../languages/languages';
@@ -89,9 +90,9 @@ const BookDetails = () => {
                     navigate('/catalog');
                 }
             })
-            .catch(err => {
-                alert(err.message);
-                console.log(err);
+            .catch(error => {
+                alert(error.message);
+                console.log(error);
             });
     };
 
@@ -101,9 +102,9 @@ const BookDetails = () => {
                 setTotalLikes(state => state + 1);
                 setIsLiked(1);
             })
-            .catch(err => {
-                alert(err.message);
-                console.log(err);
+            .catch(error => {
+                alert(error.message);
+                console.log(error);
             });
     };
 
@@ -127,10 +128,10 @@ const BookDetails = () => {
                     ];
                 });
             })
-            .catch(err => {
+            .catch(error => {
                 setShowModalError(true);
-                setErrorMessage(state => [...state, err.message]);
-                console.log(err);
+                setErrorMessage(state => [...state, error.message]);
+                console.log(error);
             });
 
         setValues({comment: ''});
@@ -145,8 +146,9 @@ const BookDetails = () => {
             .then(() => {
                 setComments(state => state.filter(x => x._id !== commentId));
             })
-            .catch(err => {                
-                console.log(err);
+            .catch(error => {
+                alert(error);                
+                console.log(error);
             });
     };
 

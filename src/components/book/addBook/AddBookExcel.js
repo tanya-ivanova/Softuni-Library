@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import readXlsxFile from 'read-excel-file';
+
 import * as bookService from '../../../services/bookService';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { LanguageContext } from '../../../contexts/LanguageContext';
@@ -8,9 +9,9 @@ import { languages } from '../../../languages/languages';
 import Backdrop from '../../common/backdrop/Backdrop';
 import ModalError from '../../common/modal/ModalError';
 
-import styles from './AddBookExcel.module.css';
-
 import {IMAGE_URL_PATTERN} from '../../../constants';
+
+import styles from './AddBookExcel.module.css';
 
 const schema = {
     'Title': {
@@ -93,8 +94,7 @@ const AddBookExcel = () => {
 
     const getFile = (e) => {
         readXlsxFile(e.target.files[0], { schema })
-            .then(({ rows, errors }) => {    
-
+            .then(({ rows, errors }) => {  
                 if (errors.length > 0) {
                     setErrorMessage(state => [...state, languages.noBooksAdded[language]]);
 
@@ -103,17 +103,20 @@ const AddBookExcel = () => {
                     });
 
                     setErrorMessage(state => [...state, languages.fixErrors[language]]);
-                    setShowModalError(true); 
+                    setShowModalError(true);
+
                     e.target.value = '';                   
                 } else {
                     rows.forEach(book => {
                         book.ownerEmail = user.email;
+
                         bookService.create(book)
                             .then(() => {})
-                            .catch((err) => {
-                                console.log(err);
+                            .catch((error) => {
+                                console.log(error);
                             });
                     });
+                    
                     setErrorMessage([]);
                     e.target.value = '';
                     navigate(`/catalog`);

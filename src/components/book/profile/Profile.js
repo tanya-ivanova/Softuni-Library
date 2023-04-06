@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { useLocation } from 'react-router-dom';
+
 import { AuthContext } from "../../../contexts/AuthContext";
 import { LanguageContext } from "../../../contexts/LanguageContext";
 import { languages } from '../../../languages/languages';
@@ -31,8 +32,8 @@ const Profile = () => {
                 setPages(pages);
                 setIsLoading(false);
             })
-            .catch((err) => { 
-                console.log(err);               
+            .catch((error) => { 
+                console.log(error);               
                 setBooks([]);
                 setIsLoading(false);
             });

@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
+
 import { AuthContext } from "../../../contexts/AuthContext";
 import { LanguageContext } from "../../../contexts/LanguageContext";
 import { useValidateForm } from "../../../hooks/useValidateForm";
@@ -55,9 +56,9 @@ const EditBook = () => {
                 setOwnerEmail(result.ownerEmail);
                 setIsLoading(false);
             })
-            .catch(err => {
-                alert(err.message);
-                console.log(err);
+            .catch(error => {
+                alert(error.message);
+                console.log(error);
             });
     }, [bookId, user._id]);
 
@@ -123,10 +124,10 @@ const EditBook = () => {
 
                 navigate(`/catalog/${bookId}/details`);
             })
-            .catch(err => {
+            .catch(error => {
                 setShowModalError(true);
-                setErrorMessage(state => [...state, err.message]);
-                console.log(err);
+                setErrorMessage(state => [...state, error.message]);
+                console.log(error);
             });
     };
 
