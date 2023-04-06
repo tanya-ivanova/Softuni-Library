@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
+
 import { AuthContext } from "../../../contexts/AuthContext";
 import * as authService from "../../../services/authService";
 import { LanguageContext } from "../../../contexts/LanguageContext";
@@ -40,7 +41,7 @@ const Register = () => {
       }, [values.email, values.password, values.confirmPassword])
 
       useEffect(() => {
-        if (values.password !== values.confirmPassword && values.confirmPassword) {
+        if (values.confirmPassword && values.password !== values.confirmPassword) {
             setShowPassNotification(true);
         } else {
             setShowPassNotification(false);
@@ -76,8 +77,7 @@ const Register = () => {
             })
             .catch((err) => {
                 setShowModalError(true);
-                setErrorMessage(state => [...state, err.message]);
-                navigate('/register');
+                setErrorMessage(state => [...state, err.message]);                
                 setValues({
                     email: '',
                     password: '',
@@ -86,11 +86,10 @@ const Register = () => {
             });
     };
 
-    return (       
-
+    return (    
         <section className={styles.register}>
-            { showNotification ? <Notification message={languages.allFieldsRequired[language]} /> : null }
-            { showPassNotification ? <Notification message={languages.passwordsDontMatch[language]} /> : null }
+            { showNotification && <Notification message={languages.allFieldsRequired[language]} />}
+            { showPassNotification && <Notification message={languages.passwordsDontMatch[language]} />}
 
             {showModalError && <Backdrop onClick={onClickOk} />}
             {showModalError && <ModalError errorMessage={errorMessage} onClickOk={onClickOk} />}
@@ -151,8 +150,9 @@ const Register = () => {
                         </button>
                     </div>
 
-                    <p className={styles["account-message"]}>{languages.alreadyHaveAccount[language]}<Link to="/login">{languages.here[language]}</Link></p>
-
+                    <p className={styles["account-message"]}>
+                        {languages.alreadyHaveAccount[language]}<Link to="/login">{languages.here[language]}</Link>
+                    </p>
                 </form>
             </div>
         </section>

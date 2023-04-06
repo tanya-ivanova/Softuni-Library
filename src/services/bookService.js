@@ -28,7 +28,6 @@ export const getAllAdmin = async (currentPageSize, offset) => {
 }
 
 export const getByUserId = async (userId, page) => {
-
     const [books, count] = await Promise.all([
         request.get(`${baseUrl}?where=_ownerId%3D%22${userId}%22&sortBy=_createdOn%20desc&pageSize=${PAGE_SIZE}&offset=` + (page - 1) * PAGE_SIZE),
         request.get(`${baseUrl}?where=_ownerId%3D%22${userId}%22&count`)
@@ -49,7 +48,6 @@ export const edit = (bookId, bookData, isAdmin) => request.put(`${baseUrl}/${boo
 export const remove = (bookId, isAdmin) => request.del(`${baseUrl}/${bookId}`, undefined, false, isAdmin);
 
 export const search = async (criteria, query, page) => {
-
     const [books, count] = await Promise.all([
         request.get(`${baseUrl}?where=${criteria}%20LIKE%20%22${query}%22&pageSize=${PAGE_SIZE}&offset=` + (page - 1) * PAGE_SIZE),
         request.get(`${baseUrl}?where=${criteria}%20LIKE%20%22${query}%22&count`)
@@ -62,7 +60,6 @@ export const search = async (criteria, query, page) => {
 }
 
 export const searchInGoogleGetMany = async (criteria, query, page) => {
-
     const [googleBooks, countResult] = await Promise.all([
         request.get(`${GOOGLE_API}?q=""+in${criteria}:${query}&startIndex=${(page - 1) * PAGE_SIZE}&maxResults=${PAGE_SIZE}&key=AIzaSyDWxrFEuVaQZJZvXnBAVE-tWjzrFdMiU3c`, null, 'cors'),
         request.get(`${GOOGLE_API}?q=""+in${criteria}:${query}&key=AIzaSyDWxrFEuVaQZJZvXnBAVE-tWjzrFdMiU3c`, null, 'cors')

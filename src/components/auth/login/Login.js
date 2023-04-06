@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
+
 import { AuthContext } from "../../../contexts/AuthContext";
 import { LanguageContext } from "../../../contexts/LanguageContext";
 import {languages} from '../../../languages/languages';
@@ -61,10 +62,9 @@ const Login = () => {
                 userLogin(authData);
                 navigate('/');
             })
-            .catch((err) => {
+            .catch((error) => {
                 setShowModalError(true);
-                setErrorMessage(state => [...state, err.message]);
-                navigate('/login');
+                setErrorMessage(state => [...state, error.message]);                
                 setValues({
                     email: '',
                     password: ''
@@ -74,7 +74,7 @@ const Login = () => {
 
     return (
         <section className={styles.login}>
-            {showNotification ? <Notification message={languages.allFieldsRequired[language]} /> : null}
+            {showNotification && <Notification message={languages.allFieldsRequired[language]} />}
             
             {showModalError && <Backdrop onClick={onClickOk} />}
             {showModalError && <ModalError errorMessage={errorMessage} onClickOk={onClickOk} />}
@@ -111,8 +111,9 @@ const Login = () => {
                             {languages.login[language]}
                         </button>
                     </div>
-                    <p className={styles["account-message"]}>{languages.dontHaveAccount[language]}<Link to="/register">{languages.here[language]}</Link></p>
-
+                    <p className={styles["account-message"]}>
+                        {languages.dontHaveAccount[language]}<Link to="/register">{languages.here[language]}</Link>
+                    </p>
                 </form>
             </div>
         </section>

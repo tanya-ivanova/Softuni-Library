@@ -1,10 +1,12 @@
 import { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+
 import { AuthContext } from "../../../contexts/AuthContext";
 import * as authService from '../../../services/authService';
 
 const Logout = () => {
     const navigate = useNavigate();
+
     const { user, userLogout } = useContext(AuthContext);
 
     useEffect(() => {
@@ -13,8 +15,9 @@ const Logout = () => {
                 userLogout();
                 navigate('/');
             })
-            .catch(() => {
+            .catch((error) => {
                 navigate('/');
+                console.log(error);
             });
     }, [user.accessToken, navigate, userLogout]);
 

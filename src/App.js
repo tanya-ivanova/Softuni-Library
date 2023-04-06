@@ -26,13 +26,11 @@ import './App.css';
 
 function App() {
     return (
-
         <AuthProvider>
             <LanguageProvider>
                 <div className='site-wrapper'>
-                    <Header />
-
                     <ErrorBoundary>
+                        <Header />
                         <main>
                             <Routes>
                                 <Route path="/" element={<Home />} />
@@ -42,8 +40,8 @@ function App() {
                                 <Route path="/catalog/:bookId/details" element={<BookDetails />} />
 
                                 <Route element={<PrivateRoute />}>
-                                    <Route path="/catalog-admin" element={<CatalogAdmin />} /> 
                                     <Route path='/logout' element={<Logout />} />
+                                    <Route path="/catalog-admin" element={<CatalogAdmin />} />
                                     <Route path="/create" element={<AddBook />} />
                                     <Route path="/create-from-excel" element={<AddBookExcel />} />
                                     <Route path="/:googleBookId/create" element={<AddBook />} />
@@ -51,18 +49,16 @@ function App() {
                                     <Route path="/profile" element={<Profile />} />
                                     <Route path="/search" element={<Search />} />
                                     <Route path="/searchInGoogle" element={<SearchInGoogle />} />
-                                </Route>                                
+                                </Route>
 
                                 <Route path="*" element={<NotFound />} />
                             </Routes>
                         </main>
+                        <Footer />
                     </ErrorBoundary>
-
-                    <Footer />
                 </div>
             </LanguageProvider>
         </AuthProvider>
-
     );
 }
 

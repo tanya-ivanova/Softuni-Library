@@ -46,9 +46,8 @@ export const request = async (method, url, data, mode, isAdmin) => {
         const response = await buildRequest;
         
         if (response.ok === false) {
-
             if (response.status === 403) {
-                localStorage.removeItem('auth');;
+                localStorage.removeItem(AUTH_LOCAL_STORAGE);
             }
 
             const error = await response.json();
@@ -70,5 +69,4 @@ export const request = async (method, url, data, mode, isAdmin) => {
 export const get = request.bind(null, 'GET');
 export const post = request.bind(null, 'POST');
 export const put = request.bind(null, 'PUT');
-export const patch = request.bind(null, 'PATCH');
 export const del = request.bind(null, 'DELETE');
