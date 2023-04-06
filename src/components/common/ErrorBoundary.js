@@ -3,7 +3,6 @@ import { Component } from "react";
 import GetBackToHome from "./GetBackToHome";
 
 class ErrorBoundary extends Component {
-
     constructor(props) {
         super(props);
 

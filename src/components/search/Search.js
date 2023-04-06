@@ -1,13 +1,14 @@
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
+
 import { LanguageContext } from "../../contexts/LanguageContext";
 import { languages } from '../../languages/languages';
 import * as bookService from '../../services/bookService';
 import { parseQueryAll } from '../../utils/utils';
 import BookItem from "../book/catalog/bookItem/BookItem";
+import SearchForm from './SearchForm';
 import Pager from "../common/pager/Pager";
 import Spinner from "../common/spinner/Spinner";
-import SearchForm from './SearchForm';
 
 import styles from './Search.module.css';
 
@@ -49,12 +50,11 @@ const Search = () => {
                     setPages(pages);
                     setIsLoading(false);
                 })
-                .catch(err => {
-                    alert(err.message);
-                    console.log(err.message)
+                .catch(error => {
+                    alert(error.message);
+                    console.log(error.message)
                 });
         }
-
         else {
             setSearchResults([]);
         }
@@ -101,7 +101,12 @@ const Search = () => {
 
                 {searchResults.length > 0 &&
                     <section className="pager">
-                        <Pager page={page} pages={pages} query={query} searchBy={searchBy} />
+                        <Pager 
+                            page={page} 
+                            pages={pages} 
+                            query={query} 
+                            searchBy={searchBy}
+                        />
                     </section>
                 }
 
@@ -115,7 +120,12 @@ const Search = () => {
 
             {searchResults.length > 0 &&
                 <section className="pager">
-                    <Pager page={page} pages={pages} query={query} searchBy={searchBy} />
+                    <Pager 
+                        page={page} 
+                        pages={pages} 
+                        query={query} 
+                        searchBy={searchBy}
+                    />
                 </section>
             }
         </>

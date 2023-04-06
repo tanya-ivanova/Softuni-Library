@@ -1,13 +1,14 @@
 import { useState, useContext, useEffect } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
+
 import { LanguageContext } from "../../contexts/LanguageContext";
 import { languages } from '../../languages/languages';
 import * as bookService from '../../services/bookService';
 import { modifyQueryForForm, modifySearchForRequest, parseQueryAll } from '../../utils/utils';
 import BookItemGoogle from '../book/catalog/bookItem/BookItemGoogle';
+import SearchForm from './SearchForm';
 import Pager from "../common/pager/Pager";
 import Spinner from "../common/spinner/Spinner";
-import SearchForm from './SearchForm';
 
 import styles from './Search.module.css';
 
@@ -51,9 +52,9 @@ const SearchInGoogle = () => {
                     setPages(pages);
                     setIsLoading(false);
                 })
-                .catch(err => {
-                    alert(err.message);
-                    console.log(err.message);
+                .catch(error => {
+                    alert(error.message);
+                    console.log(error.message);
                 });
         } else {
             setSearchResults([]);
@@ -82,6 +83,7 @@ const SearchInGoogle = () => {
         let modifiedSearchForRequest = modifySearchForRequest(search);
         
         navigate(`/searchInGoogle?query=${modifiedSearchForRequest}?searchBy=${criteria}`);
+        
         if (modifiedSearchForRequest) {
             setIsLoading(true);
         }
@@ -103,7 +105,12 @@ const SearchInGoogle = () => {
 
                 {searchResults.length > 0 &&
                     <section className="pager">
-                        <Pager page={page} pages={pages} query={query} searchBy={searchBy} />
+                        <Pager 
+                            page={page} 
+                            pages={pages} 
+                            query={query} 
+                            searchBy={searchBy}
+                        />
                     </section>
                 }
                 
@@ -117,7 +124,12 @@ const SearchInGoogle = () => {
 
             {searchResults.length > 0 &&
                 <section className="pager">
-                    <Pager page={page} pages={pages} query={query} searchBy={searchBy} />
+                    <Pager 
+                        page={page} 
+                        pages={pages} 
+                        query={query} 
+                        searchBy={searchBy}
+                    />
                 </section>
             }
         </>

@@ -1,4 +1,5 @@
 import { useContext } from "react";
+
 import { LanguageContext } from "../../../contexts/LanguageContext";
 import { languages } from '../../../languages/languages';
 
@@ -14,9 +15,11 @@ const Modal = ({
     return (
         <div className={styles.modal}>
             <p>{text}</p>
+
             <button onClick={onConfirm}>
                 {languages.confirm[language]}
             </button>
+            
             <button onClick={onClose}>
                 {languages.cancel[language]}
             </button>

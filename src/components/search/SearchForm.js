@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+
 import { LanguageContext } from "../../contexts/LanguageContext";
 import { languages } from '../../languages/languages';
 
@@ -13,8 +14,9 @@ const SearchForm = ({
     showOptionGenre
 }) => {
     const { language } = useContext(LanguageContext);
+    
     return (
-        <div className={styles["form-wrapper"]}>
+        <div className={styles["search-form-wrapper"]}>
 
             <form onSubmit={onSearch} className={styles["search-form"]}>
                 <div className={styles["criteria-wrapper"]}>
