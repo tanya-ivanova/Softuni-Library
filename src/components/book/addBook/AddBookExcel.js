@@ -12,6 +12,7 @@ import ModalError from '../../common/modal/ModalError';
 import {IMAGE_URL_PATTERN} from '../../../constants';
 
 import styles from './AddBookExcel.module.css';
+import Spinner from '../../common/spinner/Spinner';
 
 const schema = {
     'Title': {
@@ -92,7 +93,11 @@ const AddBookExcel = () => {
     const [showModalError, setShowModalError] = useState(false);
     const [errorMessage, setErrorMessage] = useState([]);
 
+    const [isLoading, setIsLoading] = useState(false);
+
     const getFile = (e) => {
+        setIsLoading(true);
+
         readXlsxFile(e.target.files[0], { schema })
             .then(({ rows, errors }) => {  
                 if (errors.length > 0) {
@@ -103,6 +108,7 @@ const AddBookExcel = () => {
                     });
 
                     setErrorMessage(state => [...state, languages.fixErrors[language]]);
+                    setIsLoading(false);
                     setShowModalError(true);
 
                     e.target.value = '';                   
@@ -111,7 +117,9 @@ const AddBookExcel = () => {
                         book.ownerEmail = user.email;
 
                         bookService.create(book)
-                            .then(() => {})
+                            .then(() => {
+                                setIsLoading(false);
+                            })
                             .catch((error) => {
                                 console.log(error);
                             });
@@ -127,6 +135,14 @@ const AddBookExcel = () => {
     const onClickOk = () => {
         setShowModalError(false);
         setErrorMessage([]);
+    }
+
+    if (isLoading) {
+        return (
+            <div className="spinner">
+                <Spinner />
+            </div>
+        )
     }
 
     return (
