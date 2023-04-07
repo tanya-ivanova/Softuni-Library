@@ -1,5 +1,5 @@
 import { render, screen, cleanup } from "@testing-library/react";
-import { LanguageContext } from "../../contexts/LanguageContext";
+import { LanguageContext } from "../../../contexts/LanguageContext";
 import Like from "./Like";
 
 describe('Like component EN', () => {

@@ -1,10 +1,10 @@
 /* eslint-disable testing-library/no-unnecessary-act */
 import { render, screen, cleanup, waitFor, act } from "@testing-library/react";
-import { AuthContext } from "../../contexts/AuthContext";
-import { LanguageContext } from "../../contexts/LanguageContext";
+import { AuthContext } from "../../../contexts/AuthContext";
+import { LanguageContext } from "../../../contexts/LanguageContext";
 import { BrowserRouter } from "react-router-dom";
 import EditBook from "./EditBook";
-import * as bookService from '../../services/bookService';
+import * as bookService from '../../../services/bookService';
 
 describe('EditBook component', () => {
     const mockBook = {

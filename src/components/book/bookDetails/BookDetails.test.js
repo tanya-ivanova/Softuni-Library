@@ -1,12 +1,12 @@
 /* eslint-disable testing-library/no-unnecessary-act */
-import { render, screen, cleanup, fireEvent, waitFor, act } from "@testing-library/react";
-import { AuthContext } from "../../contexts/AuthContext";
-import { LanguageContext } from "../../contexts/LanguageContext";
+import { render, screen, cleanup, waitFor, act } from "@testing-library/react";
+import { AuthContext } from "../../../contexts/AuthContext";
+import { LanguageContext } from "../../../contexts/LanguageContext";
 import { MemoryRouter, BrowserRouter } from "react-router-dom";
 import BookDetails from "./BookDetails";
-import * as bookService from '../../services/bookService';
-import * as likeService from '../../services/likeService';
-import * as commentService from '../../services/commentService';
+import * as bookService from '../../../services/bookService';
+import * as likeService from '../../../services/likeService';
+import * as commentService from '../../../services/commentService';
 
 describe('BookDetails component', () => {
     const mockBook = {

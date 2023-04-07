@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { LanguageContext } from "../../contexts/LanguageContext";
+import { LanguageContext } from "../../../contexts/LanguageContext";
 import { MemoryRouter } from "react-router-dom";
 import Catalog from "./Catalog";
 

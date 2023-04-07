@@ -1,10 +1,10 @@
 import { render, act } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import { AuthContext } from '../../../contexts/AuthContext';
+import { AuthContext } from "../../../contexts/AuthContext";
 import * as authService from '../../../services/authService';
 import Logout from './Logout';
 
-jest.mock('../../services/authService');
+jest.mock('../../../services/authService');
 
 describe('Logout', () => {
     const user = {

@@ -1,6 +1,6 @@
 import { render, screen, cleanup } from "@testing-library/react";
-import { AuthContext } from "../../contexts/AuthContext";
-import { LanguageContext } from "../../contexts/LanguageContext";
+import { AuthContext } from "../../../contexts/AuthContext";
+import { LanguageContext } from "../../../contexts/LanguageContext";
 import Comment from "./Comment";
 
 describe('Comment component when there are comments', () => {
@@ -16,6 +16,9 @@ describe('Comment component when there are comments', () => {
                 }
             }
         ];
+        let values = {
+            comment: ''
+        };
 
         render(
             <AuthContext.Provider value={{
@@ -25,7 +28,7 @@ describe('Comment component when there are comments', () => {
                     language: 'english',
                     setAppLanguage: () => { }
                 }}>
-                    <Comment comments={comments} />
+                    <Comment comments={comments} values={values} />
                 </LanguageContext.Provider>
             </AuthContext.Provider>
         );
@@ -52,6 +55,9 @@ describe('Comment component when there are comments', () => {
                 }
             }
         ];
+        let values = {
+            comment: ''
+        };
 
         render(
             <AuthContext.Provider value={{
@@ -61,7 +67,7 @@ describe('Comment component when there are comments', () => {
                     language: 'english',
                     setAppLanguage: () => { }
                 }}>
-                    <Comment comments={comments} />
+                    <Comment comments={comments} values={values} />
                 </LanguageContext.Provider>
             </AuthContext.Provider>
         );
@@ -76,6 +82,9 @@ describe('Comment component when there are no comments', () => {
 
     test('renders "No comments" in English', () => {
         let comments = [];
+        let values = {
+            comment: ''
+        };
 
         render(
             <AuthContext.Provider value={{
@@ -85,7 +94,7 @@ describe('Comment component when there are no comments', () => {
                     language: 'english',
                     setAppLanguage: () => { }
                 }}>
-                    <Comment comments={comments} />
+                    <Comment comments={comments} values={values} />
                 </LanguageContext.Provider>
             </AuthContext.Provider>
         );
@@ -96,6 +105,9 @@ describe('Comment component when there are no comments', () => {
 
     test('renders "No comments" in Bulgarian', () => {
         let comments = [];
+        let values = {
+            comment: ''
+        };
 
         render(
             <AuthContext.Provider value={{
@@ -105,7 +117,7 @@ describe('Comment component when there are no comments', () => {
                     language: 'bulgarian',
                     setAppLanguage: () => { }
                 }}>
-                    <Comment comments={comments} />
+                    <Comment comments={comments} values={values} />
                 </LanguageContext.Provider>
             </AuthContext.Provider>
         );
@@ -120,6 +132,9 @@ describe('Comment component when there is no logged in user', () => {
 
     test('does not render the comment form (EN)', () => {
         let comments = [];
+        let values = {
+            comment: ''
+        };
 
         render(
             <AuthContext.Provider value={{
@@ -129,7 +144,7 @@ describe('Comment component when there is no logged in user', () => {
                     language: 'english',
                     setAppLanguage: () => { }
                 }}>
-                    <Comment comments={comments} />
+                    <Comment comments={comments} values={values} />
                 </LanguageContext.Provider>
             </AuthContext.Provider>
         );
@@ -140,6 +155,9 @@ describe('Comment component when there is no logged in user', () => {
 
     test('does not render the comment form (BG)', () => {
         let comments = [];
+        let values = {
+            comment: ''
+        };
 
         render(
             <AuthContext.Provider value={{
@@ -149,7 +167,7 @@ describe('Comment component when there is no logged in user', () => {
                     language: 'bulgarian',
                     setAppLanguage: () => { }
                 }}>
-                    <Comment comments={comments} />
+                    <Comment comments={comments} values={values} />
                 </LanguageContext.Provider>
             </AuthContext.Provider>
         );
@@ -164,6 +182,9 @@ describe('Comment component when there is a logged in user who is the author', (
 
     test('does not render the comment form (EN)', () => {
         let comments = [];
+        let values = {
+            comment: ''
+        };
 
         render(
             <AuthContext.Provider value={{
@@ -176,7 +197,7 @@ describe('Comment component when there is a logged in user who is the author', (
                     language: 'english',
                     setAppLanguage: () => { }
                 }}>
-                    <Comment comments={comments} isOwner={true} />
+                    <Comment comments={comments} isOwner={true} values={values} />
                 </LanguageContext.Provider>
             </AuthContext.Provider>
         );
@@ -187,6 +208,9 @@ describe('Comment component when there is a logged in user who is the author', (
 
     test('does not render the comment form (BG)', () => {
         let comments = [];
+        let values = {
+            comment: ''
+        };
 
         render(
             <AuthContext.Provider value={{
@@ -199,7 +223,7 @@ describe('Comment component when there is a logged in user who is the author', (
                     language: 'bulgarian',
                     setAppLanguage: () => { }
                 }}>
-                    <Comment comments={comments} isOwner={true} />
+                    <Comment comments={comments} isOwner={true} values={values} />
                 </LanguageContext.Provider>
             </AuthContext.Provider>
         );
@@ -214,6 +238,9 @@ describe('Comment component when there is a logged in user who is not the author
 
     test('renders the comment form (EN)', () => {
         let comments = [];
+        let values = {
+            comment: ''
+        };
 
         render(
             <AuthContext.Provider value={{
@@ -226,7 +253,7 @@ describe('Comment component when there is a logged in user who is not the author
                     language: 'english',
                     setAppLanguage: () => { }
                 }}>
-                    <Comment comments={comments} />
+                    <Comment comments={comments} values={values} />
                 </LanguageContext.Provider>
             </AuthContext.Provider>
         );
@@ -235,8 +262,11 @@ describe('Comment component when there is a logged in user who is not the author
         expect(commentFormElement).toBeInTheDocument();
     });
 
-    test('does not render the comment form (BG)', () => {
+    test('renders the comment form (BG)', () => {
         let comments = [];
+        let values = {
+            comment: ''
+        };
 
         render(
             <AuthContext.Provider value={{
@@ -249,7 +279,7 @@ describe('Comment component when there is a logged in user who is not the author
                     language: 'bulgarian',
                     setAppLanguage: () => { }
                 }}>
-                    <Comment comments={comments} />
+                    <Comment comments={comments} values={values} />
                 </LanguageContext.Provider>
             </AuthContext.Provider>
         );
