@@ -97,6 +97,10 @@ const BookDetails = () => {
     };
 
     const bookLikeHandler = () => {
+        if(isLiked === 1) {
+            throw new Error("You can't like a book twice!");
+        }
+
         likeService.likeBook(bookId)
             .then(() => {
                 setTotalLikes(state => state + 1);
