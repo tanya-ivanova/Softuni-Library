@@ -111,14 +111,18 @@ const AddBook = () => {
     };
 
     const onCancel = () => {
-        setValues({
-            title: '',
-            author: '',
-            genre: '',
-            imageUrl: '',
-            year: '',            
-            summary: ''
-        });
+        if(googleBookId) {
+            navigate(`/searchInGoogle`);
+        } else {
+            setValues({
+                title: '',
+                author: '',
+                genre: '',
+                imageUrl: '',
+                year: '',            
+                summary: ''
+            });
+        }        
     }
 
     return (

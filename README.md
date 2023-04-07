@@ -116,6 +116,8 @@ You can Add a book in the App via the Search in Google functionality. Search in 
 
 Clicking on the Add book button will take you to the Add book form which is pre-filled with the information stored in Google Books API for this specific book.
 
+Then click on Add book to save the book in the App or click on Cancel to get back to Search in Google.
+
 ## Edit page
 
 If you are the owner of a book or you are admin, you can click on the Edit button in the Details page for that specific book.
@@ -161,6 +163,8 @@ Every found book is displayed with image, title, author, genre, year, language, 
 You can Add a book in the App via the Search in Google functionality. Search in Google gives you the functionality to search for books available in the Google Books API. After you find the book you want, you can Add it in the App by clicking on the Add book button displayed for every found book.
 
 Clicking on the Add book button will take you to the Add book form which is pre-filled with the information stored in Google Books API for this specific book.
+
+Then click on Add book to save the book in the App or click on Cancel to get back to Search in Google.
 
 ## Guests
 

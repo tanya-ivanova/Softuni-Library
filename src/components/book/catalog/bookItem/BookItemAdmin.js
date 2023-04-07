@@ -44,7 +44,7 @@ const BookItemAdmin = ({
             <td>{book.title}</td>
             <td>{book.author}</td>
             <td>{book.year}</td>
-            <td>{book._id}</td>
+            <td className={styles["table-id"]}>{book._id}</td>
             <td>{book.ownerEmail}</td>
             <td>
                 <button data-testid="edit-button" className={styles["table-button"]} onClick={onClickEditIcon} >

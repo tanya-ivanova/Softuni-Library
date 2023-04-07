@@ -117,7 +117,7 @@ const CatalogAdmin = () => {
                 <table>
                     <thead>
                         <tr>
-                            <th className={styles["table-title"]}>
+                            <th>
                                 {languages.title[language]}
                                 {showTitleArrowDown &&
                                     <button className={styles["button-arrow"]} onClick={() => clickArrowDownHandler('title')}>
@@ -145,9 +145,9 @@ const CatalogAdmin = () => {
                                 }
                             </th>
                             <th>{languages.year[language]}</th>
-                            <th className={styles["table-id"]}>Id</th>
+                            <th>Id</th>
                             <th>{languages.ownerEmail[language]}</th>
-                            <th>{languages.actions[language]}</th>
+                            <th className={styles["table-actions"]}>{languages.actions[language]}</th>
                         </tr>
                     </thead>
                     <tbody>
