@@ -1,18 +1,22 @@
+.add-comment {
+    margin-top: 30px;
+}
+
 .add-comment textarea {
     display: block;    
     min-height: 100px; 
     width: 354px;
 }
 
-.add-comment input {
-    display: block;
-}
-
-.add-comment form {
+.add-comment-form {
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;   
+}
+
+.add-comment input {
+    display: block;
 }
 
 .comment-item {

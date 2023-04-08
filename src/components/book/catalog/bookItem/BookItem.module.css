@@ -35,10 +35,10 @@ p {
   justify-content: center;
 }
 
-.title,
-.author,
-.genre,
-.summary {
+.book-item-title,
+.book-item-author,
+.book-item-genre,
+.book-item-summary {
     width: 500px;
     height: 100px;
 }
@@ -48,14 +48,6 @@ p {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-}
-
-.button {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  flex-flow: column-reverse;
-  justify-content: flex-start;
 }
 
 .btn-details,

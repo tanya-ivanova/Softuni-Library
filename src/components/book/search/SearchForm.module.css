@@ -9,25 +9,26 @@
     text-align: center;
 }
 
-.criteria-wrapper {
+.search-criteria-wrapper {
     color: #A52D2D;
     font-weight: bolder;
     font-size: 18px;
     margin-right: 20px;
 }
 
-.criteria-wrapper select {
+.search-criteria-wrapper select {
     height: 30px;
     font-size: 16px;
     color: #29528B;
 }
 
-.input-wrapper input[name="search"] {
+.search-input-wrapper input[name="search"] {
     height: 27px;
     width: 350px;
+    font-size: 16px;
 }
 
-.input-wrapper button {
+.search-input-wrapper button {
     padding: 6px;
     border-radius: 5px;
 }

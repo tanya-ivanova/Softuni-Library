@@ -245,7 +245,7 @@ const EditBook = () => {
                         </p>
                     }
 
-                    <div className={styles["btn-edit-book"]}>
+                    <div className={styles["edit-book-buttons"]}>
                         <button 
                             type="submit" 
                             disabled={!isFormValid || showNotification} 

@@ -111,7 +111,7 @@ const CatalogAdmin = () => {
     };
 
     return (
-        <section className={styles["catalog-admin"]}>
+        <section className={styles["catalog-admin-page"]}>
             <div className={styles["table-wrapper"]}>
                 <p className={styles["number-records"]}>{books.length} {languages.outOf[language]} {totalRecords} {languages.records[language]}</p>
                 <table>

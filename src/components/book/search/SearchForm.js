@@ -19,7 +19,7 @@ const SearchForm = ({
         <div className={styles["search-form-wrapper"]}>
 
             <form onSubmit={onSearch} className={styles["search-form"]}>
-                <div className={styles["criteria-wrapper"]}>
+                <div className={styles["search-criteria-wrapper"]}>
                     <span>{languages.searchBy[language]}: </span>
                     <select name="criteria" value={criteria} onChange={onSearchCriteriaChange} >
                         <option value="title">{languages.title[language]}</option>
@@ -28,7 +28,7 @@ const SearchForm = ({
                     </select>
                 </div>
 
-                <div className={styles["input-wrapper"]}>
+                <div className={styles["search-input-wrapper"]}>
                     <input
                         type="text"
                         name="search"

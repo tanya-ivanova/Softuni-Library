@@ -20,10 +20,10 @@ const BookItemGoogle = ({ book }) => {
                 
                 <div className={styles["book-item"]}>
                     <div className={styles["google-book-details"]}>
-                        <h1 className={styles.title}>{book.volumeInfo.title}</h1>
-                        <h2 className={styles.author}>{book.volumeInfo.authors?.join(', ')}</h2>
-                        <h3 className={styles.genre}>{book.volumeInfo.categories?.join(', ')} {book.volumeInfo.publishedDate} {book.volumeInfo.language.toUpperCase()}</h3>
-                        <p className={styles.summary}>{book.volumeInfo.description?.substring(0, 200).concat('...')}</p>
+                        <h1 className={styles["book-item-title"]}>{book.volumeInfo.title}</h1>
+                        <h2 className={styles["book-item-author"]}>{book.volumeInfo.authors?.join(', ')}</h2>
+                        <h3 className={styles["book-item-genre"]}>{book.volumeInfo.categories?.join(', ')} {book.volumeInfo.publishedDate} {book.volumeInfo.language.toUpperCase()}</h3>
+                        <p className={styles["book-item-summary"]}>{book.volumeInfo.description?.substring(0, 200).concat('...')}</p>
                         <Link className={styles["btn-add"]} to={`/${book.id}/create`}>{languages.addBook[language]}</Link>
                     </div>
                 </div>

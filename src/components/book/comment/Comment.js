@@ -42,7 +42,7 @@ const Comment = ({
             {user._id && !isOwner && !isAdmin
                 ? <div className={styles["add-comment"]}>
                     <h2>{languages.addComment[language]}:</h2>
-                    <form onSubmit={addCommentHandler}>
+                    <form className={styles["add-comment-form"]} onSubmit={addCommentHandler}>
                         <div>
                             <textarea
                                 name="comment"

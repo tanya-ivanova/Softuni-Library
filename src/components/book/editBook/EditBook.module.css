@@ -56,7 +56,7 @@
     color: #A52D2D;    
 }
 
-.btn-edit-book {
+.edit-book-buttons {
     display: flex;
     justify-content: center;
     align-items: center;

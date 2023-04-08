@@ -170,7 +170,7 @@ const BookDetails = () => {
 
             <div className={styles["details-wrapper"]}>
                 <div className={styles["details-part"]}>
-                    <div className={styles.container}>
+                    <div className={styles["details-container"]}>
                         <div>
                             <img width="200" height="250" className={styles.image} src={currentBook.imageUrl} alt={currentBook.title} />
                         </div>
@@ -178,7 +178,7 @@ const BookDetails = () => {
                             <h1>{currentBook.title}</h1>
                             <div>
                                 <h2>{currentBook.author}</h2>
-                                <p className={styles["author-paragraph"]}>{languages.searchForMoreBooks[language]} <Link className={styles["more-books-by-author"]} to={`/searchInGoogle?query=${authorForSearch}?searchBy=author`}>{languages.here[language]}</Link>.</p>
+                                <p className={styles["details-author-paragraph"]}>{languages.searchForMoreBooks[language]} <Link className={styles["more-books-by-author"]} to={`/searchInGoogle?query=${authorForSearch}?searchBy=author`}>{languages.here[language]}</Link>.</p>
                             </div>
                             <h3>{currentBook.genre}, {currentBook.year}</h3>
                             <div><b>{languages.summary[language]}:</b> {parse(currentBook.summary)}</div>

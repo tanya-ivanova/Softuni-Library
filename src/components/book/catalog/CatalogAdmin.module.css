@@ -1,4 +1,4 @@
-.catalog-admin {
+.catalog-admin-page {
     background-color: antiquewhite;
     color: #A52D2D;
     display: flex;
@@ -25,18 +25,13 @@ table {
 table,
 th,
 td {
-  border: 2px solid #895D67;;
+  border: 2px solid #895D67;
+  padding: 10px;
 }
 
 table.center {
   margin-left: auto;
   margin-right: auto;
-}
-
-table,
-th,
-td {
-  padding: 10px;
 }
 
 .table-actions {

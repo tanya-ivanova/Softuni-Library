@@ -47,13 +47,13 @@
     margin-right: 30px;
 }
 
-.container {
+.details-container {
     display: flex;
     align-items: center;
     justify-content: center
 }
 
-.author-paragraph {
+.details-author-paragraph {
   margin-bottom: 20px;
 }
 
