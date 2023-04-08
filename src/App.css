@@ -72,6 +72,11 @@ button:hover {
     background-color: #F2AF81;
 }
 
+.account-message {
+    font-size: 18px;
+    color: #A52D2D;
+}
+
 textarea {
     resize: none;
     font-size: 18px;

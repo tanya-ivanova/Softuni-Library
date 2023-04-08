@@ -87,7 +87,7 @@ const Register = () => {
     };
 
     return (    
-        <section className={styles.register}>
+        <section className={styles["register-page"]}>
             { showNotification && <Notification message={languages.allFieldsRequired[language]} />}
             { showPassNotification && <Notification message={languages.passwordsDontMatch[language]} />}
 
@@ -150,7 +150,7 @@ const Register = () => {
                         </button>
                     </div>
 
-                    <p className={styles["account-message"]}>
+                    <p className="account-message">
                         {languages.alreadyHaveAccount[language]}<Link to="/login">{languages.here[language]}</Link>
                     </p>
                 </form>

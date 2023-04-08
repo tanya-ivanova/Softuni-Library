@@ -73,7 +73,7 @@ const Login = () => {
     };
 
     return (
-        <section className={styles.login}>
+        <section className={styles["login-page"]}>
             {showNotification && <Notification message={languages.allFieldsRequired[language]} />}
             
             {showModalError && <Backdrop onClick={onClickOk} />}
@@ -111,7 +111,7 @@ const Login = () => {
                             {languages.login[language]}
                         </button>
                     </div>
-                    <p className={styles["account-message"]}>
+                    <p className="account-message">
                         {languages.dontHaveAccount[language]}<Link to="/register">{languages.here[language]}</Link>
                     </p>
                 </form>

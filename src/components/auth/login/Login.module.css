@@ -1,4 +1,4 @@
-.login {
+.login-page {
     background-color: antiquewhite;
 }
 
@@ -20,17 +20,12 @@
     margin: 40px;
 }
 
-.login h1 {
+.login-page h1 {
     color: #29528B;
     font-size: 32px;
 }
 
-.account-message {
-    font-size: 18px;
-    color: #A52D2D;
-}
-
-.login input {
+.login-page input {
     display: block;
     width: 100%;
     padding: 0;
@@ -40,7 +35,7 @@
     font-size: 18px;    
 }
 
-.login label {
+.login-page label {
     display: block;
     width: 100%;
     padding: 0;
