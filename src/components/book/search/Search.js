@@ -44,6 +44,8 @@ const Search = () => {
 
     useEffect(() => {
         if (query && searchBy) {
+            setIsLoading(true);
+
             bookService.search(searchBy, query, page)
                 .then(({ books, pages }) => {
                     setSearchResults(books);
@@ -75,14 +77,10 @@ const Search = () => {
     const onSearchCriteriaChange = (e) => {
         setCriteria(e.target.value);
     }
-
+    
     const onSearch = (e) => {
-        e.preventDefault();
+        e.preventDefault();        
         navigate(`/search?query=${search}?searchBy=${criteria}`);
-        
-        if(search) {
-            setIsLoading(true);
-        }
     };
 
     return (
