@@ -1,14 +1,14 @@
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
 
-import { LanguageContext } from "../../contexts/LanguageContext";
-import { languages } from '../../languages/languages';
-import * as bookService from '../../services/bookService';
-import { parseQueryAll } from '../../utils/utils';
-import BookItem from "../book/catalog/bookItem/BookItem";
+import { LanguageContext } from "../../../contexts/LanguageContext";
+import { languages } from '../../../languages/languages';
+import * as bookService from '../../../services/bookService';
+import { parseQueryAll } from '../../../utils/utils';
+import BookItem from "../catalog/bookItem/BookItem";
 import SearchForm from './SearchForm';
-import Pager from "../common/pager/Pager";
-import Spinner from "../common/spinner/Spinner";
+import Pager from "../../common/pager/Pager";
+import Spinner from "../../common/spinner/Spinner";
 
 import styles from './Search.module.css';
 
